@@ -29,7 +29,7 @@ print out a bunch of crap including `pip 8.1.1`
   for our project, it won't conflict with your FooBar installations 
   with your other projects.
 2. `virtualenv --version` to check out if virtual env was installed
-successfully. Should print out `12.0.7`
+successfully. Should print out something like `15.0.1`
 2. Make sure you're currently in the `41Inc` directory. Your current path
 should look like `~/Projects/41Inc`.
 3. `virtualenv venv`
@@ -47,8 +47,8 @@ should look like `~/Projects/41Inc`.
 
 ### Trying Out Django
 
-1. `cd` to the `fourtyone` folder under `41Inc`. So your current directory
-should be `$ ~/../41Inc/fourtyone`
+1. `cd` to the `41Inc` if you aren't there already. So your current directory
+should be `$ ~/../41Inc`
 2. `python manage.py runserver`
 3. Visit `http://127.0.0.1:8000/` in your browser.
   * A success page should pop up
