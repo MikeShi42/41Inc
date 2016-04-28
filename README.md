@@ -1,8 +1,7 @@
 # CSE 110 - 41 Inc.
 We're all about that simple maths.
 
-## Installed Packages
-* [django-user-accounts](https://github.com/pinax/django-user-accounts)
+Project boilerplate generated using [Pinax](http://pinaxproject.com).
 
 ## How To Install (Mac)
 
@@ -11,6 +10,25 @@ We're all about that simple maths.
 2. `cd` to whatever folder you want to put this repo in ex. `cd ~/Projects`
 3. `git clone https://github.com/MikeShi42/41Inc.git`
 4. Log into your GitHub account if neccessary
+
+### Install Node.js and npm
+We need npm to install our frontend build tools. Likewise, we need node to run the tools.
+1. `brew install node`
+  * `Node` is JavaScript for backend
+  * `npm` is the package manager, it'll help you install more Node things on your system.
+2. `node -v` to test that Node was installed successfully. It should print out something like `v5.0.0`
+3. `npm -v` to test that npm was installed successfully. It should print out something like `3.3.6`.
+
+### Install Gulp - IMPORTANT EVEN IF YOU'VE USED THIS BEFORE
+Pinax uses Gulp 4.0!
+
+1. ```npm install gulpjs/gulp#4.0 -g```
+  * This installs Gulp 4.0 globally for you. Don't forget the `-g` flag!
+2. `gulp -v` to test that Gulp 4.0 was installed successfully. Should show something like:
+```
+[22:35:08] CLI version 1.2.1
+[22:35:08] Local version 4.0.0-alpha.2
+```
 
 ### Install Python and Pip
 
@@ -44,9 +62,18 @@ should look like `~/Projects/41Inc`.
   * Now all Python commands being run will be using this virtual environment. 
   You can leave the environment by using `deactivate` 
   (don't do this yet though)
-5. `pip install -r requirements.txt`
+
+### Installing the Project
+1. `pip install -r requirements.txt`
   * This will tell `pip` to install all the packages specified in 
   `requirements.txt`
+2. Set up the database
+```
+./manage.py migrate
+./manage.py loaddata sites
+```
+3. `npm install`
+  * This will install the frontend dependencies.
 
 ### Trying Out Django
 
@@ -55,6 +82,16 @@ should be `$ ~/../41Inc`
 2. `python manage.py runserver`
 3. Visit `http://127.0.0.1:8000/` in your browser.
   * A success page should pop up
+
+### Generating the frontend assets
+1. To watch: `gulp`
+  * This is basically a magical command that will build everything. In other words, it'll convert all the SCSS into CSS,
+   minimize everything, concatenate everything, and make sure it's in the right place.
+  * If you just run `gulp`, then it'll "watch" the frontend assets in `/static`. This means that it'll automatically build everything when it notices a change.
+2. To build only: `gulp build`
+  * This only builds the assets and places them in the correct folders.
+
+
 
 
 ## General Resources
