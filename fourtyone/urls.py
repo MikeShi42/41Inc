@@ -5,10 +5,12 @@ from django.views.generic import TemplateView
 
 from django.contrib import admin
 
+from users.views import LoginView
 
 urlpatterns = [
     url(r"^$", TemplateView.as_view(template_name="homepage.html"), name="home"),
     url(r"^admin/", include(admin.site.urls)),
+    url(r"^account/login/$", LoginView.as_view(), name="account_login"),  # Overriding the accounts login form
     url(r"^account/", include("account.urls")),
 ]
 
