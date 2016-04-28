@@ -11,12 +11,15 @@ Project boilerplate generated using [Pinax](http://pinaxproject.com).
 3. `git clone https://github.com/MikeShi42/41Inc.git`
 4. Log into your GitHub account if neccessary
 
-### Install Node.js and npm
-We need npm to install our frontend build tools. Likewise, we need node to run the tools.
-1. `brew install node`
-  * `Node` is JavaScript for backend
+### Install NVM, Node.js and npm
+We need npm to install our frontend build tools. Likewise, we need node to run the tools. We'll need to use nvm (node version manager) to install an older version of node while the new one is bork.
+
+1. `brew install nvm`
+  * `nvm` is the Node Version Manager to help install Node.
+2. `nvm install 5.3`
+  * This will install Node 5.3 onto your system instead of Node 6 (which breaks our build).
   * `npm` is the package manager, it'll help you install more Node things on your system.
-2. `node -v` to test that Node was installed successfully. It should print out something like `v5.0.0`
+2. `node -v` to test that Node was installed successfully. It should print out `v5.3.0`
 3. `npm -v` to test that npm was installed successfully. It should print out something like `3.3.6`.
 
 ### Install Gulp - IMPORTANT EVEN IF YOU'VE USED THIS BEFORE
