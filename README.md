@@ -1,6 +1,9 @@
 # CSE 110 - 41 Inc.
 We're all about that simple maths.
 
+## Installed Packages
+* [django-user-accounts](https://github.com/pinax/django-user-accounts)
+
 ## How To Install (Mac)
 
 ### Grab this Repo
