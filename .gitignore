@@ -1,5 +1,12 @@
+*.pyc
+node_modules/
+_build/
+dev.db
+site_media/
+
 # Stupid shit only mike woudl include
 *.sqlite3
+*.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
