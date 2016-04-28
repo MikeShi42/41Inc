@@ -84,11 +84,11 @@ should be `$ ~/../41Inc`
   * A success page should pop up
 
 ### Generating the frontend assets
-1. To watch: `gulp`
+1. To watch: `npm run watch`
   * This is basically a magical command that will build everything. In other words, it'll convert all the SCSS into CSS,
    minimize everything, concatenate everything, and make sure it's in the right place.
   * If you just run `gulp`, then it'll "watch" the frontend assets in `/static`. This means that it'll automatically build everything when it notices a change.
-2. To build only: `gulp build`
+2. To build only: `npm run build`
   * This only builds the assets and places them in the correct folders.
 
 
