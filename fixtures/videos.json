@@ -5,7 +5,6 @@
         "fields": {
             "site": 1,
             "creator": 1,
-            "series": 1,
             "title": "first series title",
             "description": "description of first series",
             "url": "http://static.domain.com/url",
@@ -18,7 +17,6 @@
         "fields": {
             "site": 1,
             "creator": 2,
-            "series": 2,
             "title": "second series title",
             "description": "description of second series",
             "url": "http://static.domain.com/url",

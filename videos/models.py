@@ -8,11 +8,11 @@ from series.models import Series
 
 
 class Video(models.Model):
-    series = models.ForeignKey(Series, on_delete=models.CASCADE, related_name='videos')
     site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='videos')
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='videos')
 
-    ratings = models.ManyToManyField(User, through='Rating', related_name='ratings')
+    series = models.ManyToManyField(Series, related_name='videos')
+    ratings = models.ManyToManyField(User, through='Rating')
 
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -20,7 +20,7 @@ class Video(models.Model):
     thumbnail_url = models.CharField(max_length=255)
 
     def __str__(self):
-        return "%s %s" % (self.title, self.description)
+        return "%s: %s" % (self.title, self.description)
 
 
 class Rating(models.Model):
@@ -30,4 +30,4 @@ class Rating(models.Model):
     rating = models.IntegerField()
 
     def __str__(self):
-        return "%s"
+        return str(self.rating)
