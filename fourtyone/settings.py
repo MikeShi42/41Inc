@@ -136,6 +136,7 @@ INSTALLED_APPS = [
 
     # project
     "fourtyone",
+    "users",
 ]
 
 # A sample logging configuration. The only tangible logging
@@ -182,5 +183,5 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
 ACCOUNT_USE_AUTH_AUTHENTICATE = True
 
 AUTHENTICATION_BACKENDS = [
-    "account.auth_backends.UsernameAuthenticationBackend",
+    "account.auth_backends.EmailAuthenticationBackend",
 ]
