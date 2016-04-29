@@ -137,6 +137,7 @@ INSTALLED_APPS = [
     # project
     "fourtyone",
     "users",
+    "websites",
 ]
 
 # A sample logging configuration. The only tangible logging
