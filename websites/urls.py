@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
-from websites.views import WebsiteView
+from websites.views import WebsiteCreate
 
 urlpatterns = [
-    url(r"^create/$", WebsiteView.as_view(), name="websites_create"),
+    url(r"^create/$", WebsiteCreate.as_view(), name="websites_create"),
 ]
