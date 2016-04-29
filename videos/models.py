@@ -8,9 +8,9 @@ from series.models import Series
 
 
 class Video(models.Model):
-    series = models.ForeignKey(Series, on_delete=models.CASCADE)
-    site = models.ForeignKey(Site, on_delete=models.CASCADE)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='creator')
+    series = models.ForeignKey(Series, on_delete=models.CASCADE, related_name='videos')
+    site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='videos')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='videos')
 
     ratings = models.ManyToManyField(User, through='Rating', related_name='ratings')
 

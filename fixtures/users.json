@@ -1,0 +1,32 @@
+[
+    {
+        "pk": 1,
+        "model": "auth.user",
+        "fields": {
+            "first_name": "Test",
+            "last_name": "User 1",
+            "username": "testuser1",
+            "password": "pbkdf2_sha256$24000$4h0o67lLujdu$rYNGsXw8rt/Pq7tIOVoJVbXcPyT+E2l4fL5BIOj1Cyg="
+        }
+    },
+    {
+        "pk": 2,
+        "model": "auth.user",
+        "fields": {
+            "first_name": "Test",
+            "last_name": "User 2",
+            "username": "testuser2",
+            "password": "pbkdf2_sha256$24000$4h0o67lLujdu$rYNGsXw8rt/Pq7tIOVoJVbXcPyT+E2l4fL5BIOj1Cyg="
+        }
+    },
+    {
+        "pk": 3,
+        "model": "auth.user",
+        "fields": {
+            "first_name": "Test",
+            "last_name": "User 3",
+            "username": "testuser3",
+            "password": "pbkdf2_sha256$24000$4h0o67lLujdu$rYNGsXw8rt/Pq7tIOVoJVbXcPyT+E2l4fL5BIOj1Cyg="
+        }
+    }
+]

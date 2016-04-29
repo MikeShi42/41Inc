@@ -6,8 +6,8 @@ from django.db import models
 
 
 class Series(models.Model):
-    site = models.ForeignKey(Site, on_delete=models.CASCADE)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='series')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='series')
 
     title = models.CharField(max_length=255)
     description = models.TextField()
