@@ -1,4 +1,5 @@
 # Create your views here.
+from account.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.models import Site
 from django.views.generic import FormView
@@ -7,7 +8,7 @@ from websites.forms import WebsiteForm
 from websites.models import Info
 
 
-class WebsiteCreate(SuccessMessageMixin, FormView):
+class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
     template_name = 'websites/create.html'
     form_class = WebsiteForm
     success_message = "%(name)s was created successfully"
