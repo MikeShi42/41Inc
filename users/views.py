@@ -2,6 +2,7 @@ from django.shortcuts import render
 import account.forms
 import account.views
 import users.forms
+from django.contrib.sites.shortcuts import get_current_site
 
 
 class LoginView(account.views.LoginView):
@@ -25,4 +26,5 @@ class SignupView(account.views.SignupView):
     def create_profile(self, form):
         profile = self.created_user.profile
         profile.company = form.cleaned_data["company"]
+        profile.site = get_current_site(self.request)
         profile.save()

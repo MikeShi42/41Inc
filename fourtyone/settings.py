@@ -16,6 +16,9 @@ DATABASES = {
 
 ALLOWED_HOSTS = []
 
+# Host that represents FourtyOne Inc App, equal to domain in sites table
+ROOT_HOST = "localhost:8000"
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -28,8 +31,6 @@ TIME_ZONE = "UTC"
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = "en-us"
-
-SITE_ID = int(os.environ.get("SITE_ID", 1))
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -86,7 +87,6 @@ TEMPLATES = [
         "OPTIONS": {
             "debug": DEBUG,
             "context_processors": [
-                "django.contrib.auth.context_processors.auth",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.i18n",
                 "django.template.context_processors.media",
@@ -95,6 +95,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.messages.context_processors.messages",
                 "account.context_processors.account",
+                "django.contrib.auth.context_processors.auth",
                 "pinax_theme_bootstrap.context_processors.theme",
             ],
         },
@@ -183,5 +184,5 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
 ACCOUNT_USE_AUTH_AUTHENTICATE = True
 
 AUTHENTICATION_BACKENDS = [
-    "account.auth_backends.EmailAuthenticationBackend",
+    "account.auth_backends.UsernameAuthenticationBackend",
 ]
