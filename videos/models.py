@@ -30,4 +30,4 @@ class Rating(models.Model):
     rating = models.IntegerField()
 
     def __str__(self):
-        return str(self.rating)
+        return "%s by <User: %s> on <Video: %s>" % (str(self.rating), self.user.username, self.video.title)
