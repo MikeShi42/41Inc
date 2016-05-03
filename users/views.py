@@ -5,10 +5,6 @@ import users.forms
 from django.contrib.sites.shortcuts import get_current_site
 
 
-class LoginView(account.views.LoginView):
-    form_class = account.forms.LoginEmailForm
-
-
 class SignupView(account.views.SignupView):
     form_class = users.forms.SignupForm
 
