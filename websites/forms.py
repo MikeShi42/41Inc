@@ -8,7 +8,7 @@ import fourtyone.validators as f_validators
 class WebsiteForm(forms.Form):
     name = forms.CharField()
     domain = forms.CharField(validators=[f_validators.validate_domain_name])
-    description = forms.CharField()
+    description = forms.CharField(widget=forms.Textarea())
 
     def clean_domain(self):
         domain = self.cleaned_data['domain']
