@@ -71,3 +71,6 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+# IDE config
+.idea/

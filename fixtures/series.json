@@ -1,0 +1,24 @@
+[
+    {
+        "pk": 1,
+        "model": "series.series",
+        "fields": {
+            "site": 1,
+            "creator": 1,
+            "title": "first series title",
+            "description": "description of first series",
+            "thumbnail_url": "http://static.domain.com/url"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "series.series",
+        "fields": {
+            "site": 1,
+            "creator": 2,
+            "title": "second series title",
+            "description": "description of second series",
+            "thumbnail_url": "http://static.domain.com/url"
+        }
+    }
+]

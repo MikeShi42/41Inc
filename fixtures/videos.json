@@ -1,0 +1,26 @@
+[
+    {
+        "pk": 1,
+        "model": "videos.video",
+        "fields": {
+            "site": 1,
+            "creator": 1,
+            "title": "first series title",
+            "description": "description of first series",
+            "url": "http://static.domain.com/url",
+            "thumbnail_url": "http://static.domain.com/url"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "videos.video",
+        "fields": {
+            "site": 1,
+            "creator": 2,
+            "title": "second series title",
+            "description": "description of second series",
+            "url": "http://static.domain.com/url",
+            "thumbnail_url": "http://static.domain.com/url"
+        }
+    }
+]

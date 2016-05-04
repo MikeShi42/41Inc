@@ -94,8 +94,18 @@ should be `$ ~/../41Inc`
 2. To build only: `npm run build`
   * This only builds the assets and places them in the correct folders.
 
+### Handling Migrations
 
+Django generates migrations automatically from changes in the `models.py` file in each app. The general workflow is:
+* Make changes to the models, then run `./manage.py makemigrations` for Django to write out a new set of migrations.
+* Apply the new migration files to the database with `./manage.py migrate`
+* Commit the migration and the change in models to Git.
 
+You might also want to use `./manage.py showmigrations` to see which migrations have already been run. To migrate backwards,
+run `./manage.py migrate {app_name} {migration_number}` where `{migration_number}` is the migration you want to migrate backwards to. If
+only the initial migration was applied, you can migrate to no migrations for a particular app by running `./manage.py migrate {app_name} zero`.
+
+You can find all the details about migrations in the [Django documentation for migrations.](https://docs.djangoproject.com/ja/1.9/topics/migrations/)
 
 ## General Resources
 * General Python Setup Guide: http://www.pyladies.com/blog/Get-Your-Mac-Ready-for-Python-Programming/
