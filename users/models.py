@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -12,6 +13,7 @@ class Profile(models.Model):
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile", verbose_name="user")
     company = models.CharField(max_length=255, blank=True)
+    site = models.ForeignKey(Site, null=True)
 
 
 @receiver(post_save, sender=User)

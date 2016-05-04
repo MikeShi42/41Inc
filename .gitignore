@@ -4,6 +4,7 @@ node_modules/
 _build/
 dev.db
 site_media/
+*.idea
 
 # Stupid shit only mike woudl include
 *.sqlite3
