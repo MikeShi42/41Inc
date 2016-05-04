@@ -138,6 +138,7 @@ INSTALLED_APPS = [
     "fourtyone",
     "users",
     "websites",
+    "dashboard",
 ]
 
 # A sample logging configuration. The only tangible logging

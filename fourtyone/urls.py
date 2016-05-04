@@ -9,9 +9,8 @@ urlpatterns = [
     url(r"^$", TemplateView.as_view(template_name="homepage.html"), name="home"),
     url(r"^admin/", include(admin.site.urls)),
     url(r"^account/", include("users.urls")),
-    url(r"^websites/", include("websites.urls")),
-    url(r"^dashboard/", TemplateView.as_view(template_name="creatordash.html"), name="dashboard"),
-    url(r"^sites/1", TemplateView.as_view(template_name="userhomepage.html"),name="site"),
+    url(r"^dashboard/", include("dashboard.urls")),
+    url(r"^sites/", include("websites.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
