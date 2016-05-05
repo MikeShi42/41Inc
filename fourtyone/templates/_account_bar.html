@@ -8,6 +8,9 @@
             <i class="fa fa-user"></i> {% user_display request.user %}
         </p>
         <li>
+            <a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i> {% trans "Dashboard" %}</a>
+        </li>
+        <li>
             <a href="{% url 'account_settings' %}"><i class="fa fa-cog"></i> {% trans "Settings" %}</a>
         </li>
         <li>
@@ -16,7 +19,7 @@
     {% else %}
         <li><a href="{% url 'account_login' %}">{% trans "Log in" %}</a></li>
         {% if ACCOUNT_OPEN_SIGNUP %}
-            <li><a href="{% url 'account_signup' %}">{% trans "Sign up" %}</a></li>
+            <li><a href="{% url 'account_signup' %}">{% trans "Get Started" %}</a></li>
         {% endif %}
     {% endif %}
 </ul>
