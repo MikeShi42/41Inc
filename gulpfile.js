@@ -24,7 +24,14 @@ gulp.task('build:clean', function buildClean() {
 });
 
 gulp.task('build:styles', function buildStyles() {
-  return tasks.css(config.styles.source, {less: {paths: config.styles.npmPaths}})
+  return tasks.css(config.styles.source,
+      {
+          sass: {
+              outputStyle: 'expanded',
+              precision: 10,
+              includePaths: config.styles.npmPaths
+          }
+      })
     .pipe(gulp.dest(config.styles.dist));
 });
 

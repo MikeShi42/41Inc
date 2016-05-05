@@ -35,16 +35,16 @@ exports = module.exports = {
         dist: staticDist + 'fonts/'
     },
     styles: {
-        source: staticSource + 'less/site.less',
+        source: staticSource + 'scss/app.scss',
         dist: staticBuild + 'css/',
         npmPaths: [
-            npmRoot + 'bootstrap/less',
-            npmRoot + 'font-awesome/less',
+            npmRoot + 'bootstrap-sass/assets/stylesheets',
+            npmRoot + 'font-awesome/scss',
             npmRoot
         ]
     },
     scripts: {
-        main: staticSource + 'js/site.js',
+        main: staticSource + 'js/app.js',
         source: [
             staticSource + 'js/**/*'
         ],

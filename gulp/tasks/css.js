@@ -2,18 +2,21 @@
  * Dependencies
  */
 const gulp   = require('gulp');
-const less   = require('gulp-less');
+const sass   = require('gulp-sass');
 const prefix = require('gulp-autoprefixer');
+const sourcemaps = require('gulp-sourcemaps');
 
 /**
  * Module body
  */
 module.exports = (entry, config) => {
   config = config || {};
-  config.less = config.less || {};
+  config.sass = config.sass || {};
   config.autoprefixer = config.autoprefixer || {};
 
   return gulp.src(entry)
-    .pipe(less(config.less))
-    .pipe(prefix(config.autoprefixer));
+      .pipe(sourcemaps.init())
+      .pipe(sass.sync(config.sass).on('error', sass.logError))
+      .pipe(prefix(config.autoprefixer))
+      .pipe(sourcemaps.write());
 };
