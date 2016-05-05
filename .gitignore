@@ -7,6 +7,8 @@ site_media/
 *.idea
 fourtyone/templates/_scripts.html
 fourtyone/templates/_styles.html
+static/_build
+static/dist
 
 # Stupid shit only mike woudl include
 *.sqlite3
