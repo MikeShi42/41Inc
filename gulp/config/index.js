@@ -15,7 +15,7 @@ exports = module.exports = {
     },
     watch: {
         styles: [
-            staticSource + 'less/**/*.less'
+            staticSource + 'scss/**/*.scss'
         ],
         scripts: [
             staticSource + 'js/**/*.js'
