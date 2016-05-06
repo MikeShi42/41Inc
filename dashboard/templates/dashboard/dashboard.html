@@ -1,39 +1,67 @@
-<!DOCTYPE html>
-<html>
+{% extends "site_base.html" %}
 
-<head>
-<meta charset="UTF-8">
-<title> Your Dashboard </title>
-</head>
+{% block body_base %}
 
-<body>
+    <section>
+        <div class="container">
+            <h2>This Past Month</h2>
+            <div class="feature-columns">
+                <div>
+                    <h4>New Subscribers</h4>
+                    <p class="dashboard-header">99999</p>
+                </div>
+                <div>
+                    <h4>Views</h4>
+                    <p class="dashboard-header">99999</p>
 
-<div id="header">
-    <h2> Dashboard </h2>
-    <p> <a href=""> Browse Content </a> </p>
-    <p> <a href=""> Settings </a> </p>
-</div>
+                </div>
+                <div>
+                    <h4>Average Rating</h4>
+                    <p class="dashboard-header">99999</p>
 
-<div id="info">
-    <h2> This Past Month </h2>
-    <h4 id="subscribers"> New Subscribers </h4>
-    <h4 id="views"> Views </h4>
-    <h4 id="rating"> Average Rating </h4>
-</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="jumbotron">
+        <div class="container">
+            <div class="row" id="newContent">
+                <span class="pull-right">
+                <a class="btn btn-success" href="">Add a Video Series</a>
+                    </span>
+                <span class="pull-right">
+                <p>Got new knowledge to share? </p>
+                    </span>
 
-<div id="newContent">
-    <p> Got new knowledge to share? </p>
-    <p> <a href=""> Add a Video </a> </p>
-    <p> <a href=""> Add a Video Series </a> </p>
-</div>
+            </div>
 
-<div id="manage">
-    <h2> Manage Your Series </h2>
-    <p> Subscribers </p>
-    <p> Rating </p>
-    <p> Views </p>
-</div>
 
-</body>
 
-</html>
+            <div class="row">
+                <h3>Manage</h3>
+
+                <table class = "table">
+                   <thead>
+                      <tr>
+                          <th>Name</th>
+                         <th>Subscribers</th>
+                         <th>Ratings</th>
+                          <th>Views</th>
+                      </tr>
+                   </thead>
+
+                   <tbody>
+                      <tr>
+                          <td>Django Dragon</td>
+                         <td>696969</td>
+                         <td>69669</td>
+                          <td>Dank</td>
+                          <td><a class="btn btn-default">Manage</a></td>
+                      </tr>
+                   </tbody>
+
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock %}
