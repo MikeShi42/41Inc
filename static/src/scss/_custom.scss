@@ -30,3 +30,20 @@ p.login-signup {
         margin: 2em 0;
     }
 }
+
+.vcenter-parent {
+  font-size: 0;
+
+  .vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+    font-size: initial;
+  }
+}
+
+li.cta {
+  a {
+    padding: 8px 0;
+  }
+}

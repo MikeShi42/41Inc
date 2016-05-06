@@ -4,8 +4,11 @@
 @import "bootstrap";
 @import "font-awesome";
 
-// Account
-@import "account";
+// Components
+@import "account"; // Account
+@import "button";
+@import "jumbotron";
+
 
 // Site overrides
 @import "custom";
