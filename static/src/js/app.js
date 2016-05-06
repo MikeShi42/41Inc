@@ -3,7 +3,7 @@ window.jQuery = window.$ = require('jquery');
 
 const $ = window.$;
 
-require('bootstrap');
+require('bootstrap-sass');
 
 $(() => {
     console.log('document ready');
