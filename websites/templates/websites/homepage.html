@@ -1,19 +1,135 @@
-<!doctype html>
+{% extends "site_base.html" %}
 
-<html lang="en">
-<head>
-	<meta charset="utf-8">
+{% load i18n %}
 
-	<title>User Homepage </title>
-</head>
+{% load bootstrap %}
 
-<body>
+{% block head_title %}Homepage{% endblock %}
 
-<div id="header">
-	<h2> Homepage </h2>
-	<p> <a href=""> Login </a> </p>
-</div>
 
-</body>
+{% block body %}
+    <section class="jumbotron">
+        <div class="container">
+            <h1 class="text-center">{% blocktrans %}Homepage Name<br>{% endblocktrans %}</h1>
+            <p class="text-center">{% blocktrans %}Explore the homepage like never before.{% endblocktrans %}</p>
+            <p class="text-center">
+                <a href="" class="btn btn-primary btn-lg">Get Started</a>
+                <a href="" class="btn btn-default btn-lg">Learn More</a></div>
+            </p>
+        </div>
 
-</html>
+    </section>
+    <section>
+        <div class="container">
+            <h1 class="text-center">Start Learning Now</h1>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-lg-4">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
+                    <h4>Playlist Title</h4>
+                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
+                        <br>
+                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
+                    <h4>Click Me</h4>
+                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
+                        <br>
+                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
+                    <h4>Playlist Title</h4>
+                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
+                        <br>
+                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
+                    <h4>Playlist Title</h4>
+                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
+                        <br>
+                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
+                    <h4>Playlist Title</h4>
+                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
+                        <br>
+                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
+                    <h4>Playlist Title</h4>
+                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
+                        <br>
+                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
+                    <h4>Playlist Title</h4>
+                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
+                        <br>
+                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
+                    <h4>Playlist Title</h4>
+                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
+                        <br>
+                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
+                    <h4>Playlist Title</h4>
+                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
+                        <br>
+                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
+                    </a>
+                </div>
+            </div>
+            <br>
+            <p class="text-center">
+                <a href="" class="btn btn-primary btn-lg">View More</a><br><br>
+            </p>
+        </div>
+    </section>
+    <section style="background-color:#404040;padding-top:100px;padding-bottom:200px" class="text-center">
+        <h1 style="color:white">Just Do It</h1>
+        <i class="fa fa-play-circle fa-4x" style="color:white"></i><br>
+        <h4 class="col-md-4 col-md-offset-4" style="color:white">Start learning today and you will become a better person, otherwise it's not our fault, it's yours.</h4>
+    </section>
+    <section style="padding-top: 100px;padding-bottom: 100px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                <h1 style="color: lightseagreen">Easy to Use</h1>
+                <h4 style="color: lightseagreen">Give me your money! I mean this product is great and stuff and stuff. So there will be some more typing just so we see where it warps around.</h4>
+                </div>
+                <img src="http://tinyurl.com/ja378yd" class="col-md-3 col-md-offset-1" style="width:600px">
+            </div>
+        </div>
+    </section>
+    <section style="background-color:lightseagreen;padding-top: 100px;padding-bottom: 100px;">
+        <div class="container">
+            <div class="row">
+                <img src="http://tinyurl.com/ja378yd" class="col-md-6" style="width:600px">
+                <div class="col-md-4 col-md-offset-1">
+                <h1 style="color: white">Easy to Use</h1>
+                <h4 style="color: white">Give me your money! I mean this product is great and stuff and stuff. So there will be some more typing just so we see where it warps around.</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{%  endblock %}
