@@ -1,0 +1,12 @@
+.btn.btn-outline {
+  @extend .btn-default;
+  border-color: #fff;
+  color: #fff;
+  background-color: transparent;
+  
+  &:hover {
+    border-color: #fff;
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+  }
+}
