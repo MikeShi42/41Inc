@@ -1,5 +1,6 @@
 {% extends "site_base.html" %}
 
+{% load staticfiles %}
 {% load i18n %}
 
 {% block head_title %}41 Inc.{% endblock %}
@@ -7,71 +8,63 @@
 {% block body_class %}home{% endblock %}
 
 {% block body_base %}
-    <section class="jumbotron">
+    <section class="jumbotron jumbotron-41">
         <div class="container">
             {% include "_messages.html" %}
-            <h1>{% blocktrans %}Welcome to<br>41Inc{% endblocktrans %}</h1>
-            <p>
-                {% blocktrans %}
-                In addition to what is provided by the "zero" project, this project
-                provides thorough integration with django-user-accounts, adding
-                comprehensive account management functionality. It is a foundation
-                suitable for most sites that have user accounts.
-                {% endblocktrans %}
-            </p>
-            {% if not user.is_authenticated %}
-            {% url "account_login" as login_url %}
-            {% url "account_signup" as signup_url %}
-            <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn btn-default">Log In</a> or <a href="{{ signup_url }}" class="btn btn-primary">Sign Up</a> to try out the site.{% endblocktrans %}</p>
-            {% endif %}
-        </div>
-    </section>
-    <section>
-        <div class="container">
-            <h2 class="text-center">{% blocktrans %}What is Pinax?{% endblocktrans %}</h2>
-            <p class="lead">
-                {% blocktrans %}
-                <b>Pinax</b> is an open-source platform based on Django and
-                intended to provide a starting point for websites. It takes
-                care of the things that many sites have in common, so you can
-                focus on what makes your site different.
-                {% endblocktrans %}
-            </p>
-            <div class="feature-columns">
-                <div>
-                    <i class="fa fa-cubes fa-3x"></i><br>
-                    {% blocktrans %}
-                    <b>Starter projects</b> provide project layout,
-                    scaffolding, already integrated components and
-                    ready-to-go code.
-                    {% endblocktrans %}
+            <div class="row vcenter-parent">
+                <div class="col-md-6 vcenter">
+                    <img src="{% static "images/preview.png" %}" class="img-responsive">
                 </div>
-                <div>
-                    <i class="fa fa-puzzle-piece fa-3x"></i><br>
-                    {% blocktrans %}
-                    <b>Reusable apps</b> provide common
-                    infrastructure, back-end functionality,
-                    and user-facing components.
-                    {% endblocktrans %}
-                </div>
-                <div>
-                    <i class="fa fa-tint fa-3x"></i><br>
-                    {% blocktrans %}
-                    <b>Themes</b> provide default templates and
-                    stylesheets for quick prototyping and easy customization.
-                    {% endblocktrans %}
+                <div class="col-md-6 vcenter">
+                    <h1>{% blocktrans %}41 Inc.{% endblocktrans %}</h1>
+                    <p>
+                        {% blocktrans %}
+                            Put yourself on the big screen - in minutes.
+                        {% endblocktrans %}
+                    </p>
+                    {% if not user.is_authenticated %}
+                        {% url "account_login" as login_url %}
+                        {% url "account_signup" as signup_url %}
+                        <div class="links">
+                            <a href="{{ signup_url }}" class="btn btn-primary btn-lg">Get Started</a>
+                            <a href="#" class="btn btn-outline btn-lg">Learn More</a>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </section>
-    <section>
-        <div class="container">
-            <p class="lead text-center">
-                {% blocktrans %}
-                See <a href="http://pinaxproject.com/">pinaxproject.com</a>
-                for more information.
-                {% endblocktrans %}
-            </p>
-        </div>
-    </section>
+    <div class="container">
+        <section>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="text-center h1">Built with 41 Inc.</h2>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="row vcenter-parent">
+                <div class="col-sm-6 vcenter">
+                    <h2>Revolutionary dashboard</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium minima quasi quidem rerum
+                        tempore. Blanditiis consequuntur corporis esse ex expedita laudantium modi, perspiciatis quasi
+                        rem rerum sequi vel. Consequatur, perferendis.</p>
+                </div>
+                <div class="col-sm-6 vcenter">
+                    <img src="{% static "images/preview.png" %}" class="img-responsive">
+                </div>
+            </div>
+            <div class="row vcenter-parent">
+                <div class="col-sm-6 vcenter">
+                    <img src="{% static "images/preview.png" %}" class="img-responsive">
+                </div>
+                <div class="col-sm-6 vcenter">
+                    <h2>Feature-rich from the start</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium minima quasi quidem rerum
+                        tempore. Blanditiis consequuntur corporis esse ex expedita laudantium modi, perspiciatis quasi
+                        rem rerum sequi vel. Consequatur, perferendis.</p>
+                </div>
+            </div>
+        </section>
+    </div>
 {% endblock %}
