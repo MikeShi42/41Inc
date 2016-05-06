@@ -27,7 +27,7 @@
                         {% url "account_signup" as signup_url %}
                         <div class="links">
                             <a href="{{ signup_url }}" class="btn btn-primary btn-lg">Get Started</a>
-                            <a href="#" class="btn btn-outline btn-lg">Learn More</a>
+                            <a href="#feature-1" class="btn btn-outline btn-lg">Learn More</a>
                         </div>
                     {% endif %}
                 </div>
@@ -35,7 +35,7 @@
         </div>
     </section>
     <div class="container">
-        <section>
+        <section id="built-with">
             <div class="row">
                 <div class="col-xs-12">
                     <h2 class="text-center h1">Built with 41 Inc.</h2>
@@ -43,7 +43,7 @@
             </div>
         </section>
         <section>
-            <div class="row vcenter-parent">
+            <div class="row vcenter-parent" id="feature-1">
                 <div class="col-sm-6 vcenter">
                     <h2>Revolutionary dashboard</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium minima quasi quidem rerum
@@ -54,7 +54,7 @@
                     <img src="{% static "images/preview.png" %}" class="img-responsive">
                 </div>
             </div>
-            <div class="row vcenter-parent">
+            <div class="row vcenter-parent" id="feature-2">
                 <div class="col-sm-6 vcenter">
                     <img src="{% static "images/preview.png" %}" class="img-responsive">
                 </div>
