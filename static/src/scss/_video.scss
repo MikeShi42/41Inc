@@ -1,17 +1,86 @@
-.video-js {padding-top: 56.25%}
-.vjs-fullscreen {padding-top: 0px}
+$vjs-playlist-border-radius: 5px;
+$vjs-playlist-bg-color: rgba(0,0,0,1);
+$vjs-playlist-hover-color: rgba(0,0,0,.5);
+
+.video-js {
+  padding-top: 56.25%
+}
+
+.vjs-fullscreen {
+  padding-top: 0px
+}
 
 .jumbotron-video {
   padding-top: 20px;
   padding-bottom: 20px;
 
   p {
-    font-size: initial;
-    font-weight: initial;
+    font-size: $font-size-h4;
+    font-weight: 300;
   }
 }
 
 .video-41 {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.vjs-playlist-header {
+  margin-top: 20px;
+}
+
+.vjs-playlist-41 {
+  padding: 0;
+
+  li.vjs-playlist-item {
+    @include make-row();
+    @include vcenter-parent;
+
+    background-color: $vjs-playlist-bg-color;
+    cursor: pointer;
+
+    &:first-child {
+      border-top-left-radius: $vjs-playlist-border-radius;
+      border-top-right-radius: $vjs-playlist-border-radius;
+    }
+
+    &:nth-last-child(2) {
+      border-bottom-left-radius: $vjs-playlist-border-radius;
+      border-bottom-right-radius: $vjs-playlist-border-radius;
+    }
+
+    &:hover {
+      background-color: $vjs-playlist-hover-color;
+    }
+
+    // Remove the play icon
+    .vjs-icon-play:before {
+      display: none;
+    }
+
+    .vjs-playlist-thumbnail {
+      @include make-xs-column(4);
+      @include vcenter-child;
+
+      img {
+        @include img-responsive();
+      }
+    }
+
+    .vjs-playlist-duration {
+      display: none;
+    }
+
+    .vjs-playlist-name {
+      @include make-xs-column(8);
+      @include vcenter-child;
+      font-size: initial;
+      font-style: normal;
+      font-weight: 300;
+    }
+
+    .vjs-playlist-description {
+      display: none;
+    }
+  }
 }
