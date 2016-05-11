@@ -47,3 +47,69 @@ li.cta {
     padding: 8px 0;
   }
 }
+
+// Evil hack - copies the padding/line height of a button
+// due to a weird vertical centering issue - gonna delete this later
+.btn-invis {
+  background: transparent;
+  border: none;
+  &:active {
+    box-shadow: none;
+  }
+  &:hover {
+    cursor: initial;
+  }
+  &::selection::-moz-selection {
+    background: initial;
+  }
+}
+
+/* Dashboard */
+.dash-panels {
+  .panel {
+    border: none;
+    text-align: center;
+    box-shadow: none;
+    margin: 10px 0 10px 0;
+    p {
+      font-size: xx-large;
+    }
+    h4 {
+      color: #fff;
+    }
+    #new-subscribers {
+      background-color: #00b3ee;  /* Temporary colors */
+    }
+    #new-views {
+      background-color: #0b97c4;
+    }
+    #avg-rating {
+      background-color: #00d6b2;
+    }
+  }
+}
+.dash-content {
+  .add-video-label {
+    margin-right: 10px;
+  }
+}
+.series-list {  /* Can possibly be adapted to video list later */
+  td, th {
+    &:not(:first-child) {
+      text-align: center;
+    }
+    &:first-child {
+      width: 50%;
+      padding-left: 4%;
+    }
+  }
+  tbody tr {
+    background-color: #fff;
+    > td {
+      vertical-align: middle;
+    }
+  }
+
+}
+
+/* End Dashboard */
