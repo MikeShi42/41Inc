@@ -1,23 +1,25 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from django.contrib.auth.models import User
 from django.views import generic
 from django.views.generic.edit import CreateView
 
 from videos.models import Video
+from videos.forms import VideoForm
 
 
 class VideoCreate(LoginRequiredMixin, CreateView):
     login_url = '/account/login'
+    success_url = '/videos'
 
     model = Video
-    fields = ['title', 'description', 'url', 'thumbnail_url']
+    form_class = VideoForm
     template_name = 'videos/create.html'
 
     def form_valid(self, form):
         video = form.save(commit=False)
-        video.user = User.objects.get(user=self.request.user)
+        video.creator = self.request.user
         video.save()
+        return super(VideoCreate, self).form_valid(form)
 
 
 class IndexView(LoginRequiredMixin, generic.ListView):
