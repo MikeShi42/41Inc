@@ -9,7 +9,7 @@
     {% if video_list %}
         <ul>
         {% for video in video_list %}
-            <li><p>Title: {{ video.title }}, description: {{ video.description }}</p></li>
+            <p><strong>{{ video.title }}</strong>: {{ video.description }}</p>
         {% endfor %}
         </ul>
     {% else %}
