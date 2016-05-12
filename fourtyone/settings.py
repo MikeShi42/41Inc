@@ -134,6 +134,7 @@ INSTALLED_APPS = [
     "account",
     "metron",
     "pinax.eventlog",
+    "storages",
 
     # project
     "fourtyone",
@@ -190,3 +191,12 @@ ACCOUNT_USE_AUTH_AUTHENTICATE = True
 AUTHENTICATION_BACKENDS = [
     "account.auth_backends.UsernameAuthenticationBackend",
 ]
+
+# Azure Storage configuration.
+
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+AZURE_CONTAINER = "assets"
+
+AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')
+AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')
+
