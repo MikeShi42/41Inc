@@ -1,6 +1,9 @@
 {% extends "site_base.html" %}
 
 {% block body_base %}
+    {% block site_sidebar %}
+        {% include "_site_sidebar.html" %}
+    {% endblock %}
 
     <section class="jumbotron dash">
         <div class="container dash-upper">
