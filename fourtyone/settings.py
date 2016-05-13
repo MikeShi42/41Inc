@@ -16,8 +16,11 @@ DATABASES = {
 
 ALLOWED_HOSTS = []
 
-# Host that represents FourtyOne Inc App, equal to domain in sites table
-ROOT_HOST = "localhost:8000"
+ROOT_URLCONF = "websites.urls"
+HOST_MIDDLEWARE_URLCONF_MAP = {
+    "localhost": "fourtyone.urls",
+    "tesc.app:8000": "websites.urls",
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -110,9 +113,9 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "fourtyone.multihost.MultiHostMiddleware",
 ]
 
-ROOT_URLCONF = "fourtyone.urls"
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = "fourtyone.wsgi.application"
