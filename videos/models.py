@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
 from series.models import Series
+from validators import validate_video_file
 
 
 class Video(models.Model):
@@ -16,7 +17,7 @@ class Video(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField()
-    content = models.FileField(upload_to='videos')
+    content = models.FileField(upload_to='videos', validators=[validate_video_file])
     thumbnail = models.ImageField(upload_to='thumbnails')
 
     @property

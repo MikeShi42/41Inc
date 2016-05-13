@@ -200,3 +200,14 @@ AZURE_CONTAINER = "assets"
 AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')
 AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')
 
+# List of acceptable video mime types.
+
+VIDEO_MIME_TYPES = [
+    'video/mp4',
+    'video/quicktime',
+    'video/webm',
+    'video/avi',
+    'video/ms-video',
+    'video/x-ms-video'
+]
+
