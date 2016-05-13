@@ -4,31 +4,35 @@ body {
   padding-top: 50px;
   position: relative;
 }
+
 section {
   padding: 20px 0px;
 }
+
 .modal form {
   margin-bottom: 0px;
 }
+
 footer {
-    padding-bottom: 20px;
+  padding-bottom: 20px;
 }
+
 p.login-signup {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .feature-columns {
-    @include make-row();
+  @include make-row();
 
-    > div {
-        i.fa {
-            margin-bottom: 0.2em;
-        }
-
-        @include make-sm-column(4);
-        @extend .text-center;
-        margin: 2em 0;
+  > div {
+    i.fa {
+      margin-bottom: 0.2em;
     }
+
+    @include make-sm-column(4);
+    @extend .text-center;
+    margin: 2em 0;
+  }
 }
 
 .vcenter-parent {
@@ -47,3 +51,61 @@ li.cta {
     padding: 8px 0;
   }
 }
+
+/* Dashboard */
+
+.dash {
+  .dash-upper {
+    margin-bottom: 20px;
+    .dash-panels {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      .panel {
+        border: none;
+        text-align: center;
+        box-shadow: none;
+        p {
+          font-size: xx-large;
+        }
+        h4 {
+          color: #fff;
+        }
+        #new-subscribers {
+          background-color: #00b3ee; /* Temporary colors */
+        }
+        #new-views {
+          background-color: #0b97c4;
+        }
+        #avg-rating {
+          background-color: #00d6b2;
+        }
+      }
+    }
+  }
+  background-color: transparent;
+  .dash-content {
+    .add-video-label {
+      margin-right: 10px;
+    }
+  }
+}
+
+.series-list { /* Can possibly be adapted to video list later */
+  td, th {
+    font-size: medium;
+    &:not(:first-child) {
+      text-align: center;
+    }
+    &:first-child {
+      width: 50%;
+      padding-left: 4%;
+    }
+  }
+  tbody tr {
+    background-color: #fff;
+    > td {
+      vertical-align: middle;
+    }
+  }
+}
+/* End Dashboard */
