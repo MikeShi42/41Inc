@@ -17,7 +17,7 @@ class Video(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     content = models.FileField(upload_to='videos')
-    thumbnail = models.FileField(upload_to='thumbnails')
+    thumbnail = models.ImageField(upload_to='thumbnails')
 
     @property
     def url(self):
