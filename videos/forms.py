@@ -3,7 +3,15 @@ from videos.models import Video
 
 
 class VideoForm(forms.ModelForm):
+    """
+    Form class for uploading videos to Azure Storage.
+    """
+
     def __init__(self, *args, **kwargs):
+        """
+        Makes the series multiple-choice field on form not required, since some
+        videos are independent videos who don't need no series.
+        """
         super(VideoForm, self).__init__(*args, **kwargs)
         self.fields['series'].required = False
 

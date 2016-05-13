@@ -16,6 +16,9 @@ class VideoCreate(LoginRequiredMixin, CreateView):
     template_name = 'videos/create.html'
 
     def form_valid(self, form):
+        """
+        Sets creator_id to the user that's currently logged in.
+        """
         form.instance.creator = self.request.user
         return super(VideoCreate, self).form_valid(form)
 

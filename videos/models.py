@@ -19,6 +19,13 @@ class Video(models.Model):
     content = models.FileField(upload_to='videos')
     thumbnail = models.FileField(upload_to='thumbnails')
 
+    @property
+    def url(self):
+        """
+        Shorthand model property for a video url for convenience.
+        """
+        return self.content.url
+
     def __str__(self):
         return "%s: %s" % (self.title, self.description)
 

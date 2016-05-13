@@ -15,7 +15,9 @@
                 {{ form|bootstrap }}
                 <button class="btn btn-primary" type="submit">{% trans "Save" %}</button>
             </form>
-
         </div>
     </div>
+    <section>
+        <a href="{% url 'video-index' %}">Back to video list</a>
+    </section>
 {% endblock %}
