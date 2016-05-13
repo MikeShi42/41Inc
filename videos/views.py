@@ -9,7 +9,7 @@ from videos.models import Video
 
 
 class VideoCreate(LoginRequiredMixin, CreateView):
-    login_url = '/account/login'
+    login_url = '/account/login/'
 
     model = Video
     form_class = VideoForm
@@ -44,7 +44,7 @@ class VideoCreate(LoginRequiredMixin, CreateView):
 
 
 class IndexView(LoginRequiredMixin, generic.ListView):
-    login_url = '/account/login'
+    login_url = '/account/login/'
 
     template_name = 'videos/index.html'
     context_object_name = 'video_list'
