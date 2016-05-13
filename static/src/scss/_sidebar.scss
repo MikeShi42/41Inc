@@ -2,16 +2,18 @@
  * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * Temporary css copied from startbootstrap
  */
 
 /* Toggle Styles */
 
 #wrapper {
     padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    //-webkit-transition: all 0.5s ease;
+    //-moz-transition: all 0.5s ease;
+    //-o-transition: all 0.5s ease;
+    //transition: all 0.5s ease;
 }
 
 #wrapper.toggled {
@@ -21,26 +23,25 @@
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 250px;
+    left: 0px;
     width: 0;
     height: 100%;
-    margin-left: -250px;
     overflow-y: auto;
-    background: #000;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    background: #29455c;
+    //-webkit-transition: all 0.5s ease;
+    //-moz-transition: all 0.5s ease;
+    //-o-transition: all 0.5s ease;
+    //transition: all 0.5s ease;
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+    width: 90px;
 }
 
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-    padding: 15px;
+    //padding: 15px;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -51,17 +52,26 @@
 /* Sidebar Styles */
 
 .sidebar-nav {
+    text-align: center;
     position: absolute;
     top: 0;
-    width: 250px;
+    //width: 90px;
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
 .sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
+    //text-indent: 20px;
+    //line-height: 40px;
+    text-align: center;
+    //margin-top: 10px;
+    margin: 10px;
+    background: #fff;
+    //padding-top: 4px;
+    //padding-bottom: 4px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .sidebar-nav li a {
@@ -70,11 +80,11 @@
     color: #999999;
 }
 
-.sidebar-nav li a:hover {
-    text-decoration: none;
-    color: #fff;
-    background: rgba(255,255,255,0.2);
-}
+//.sidebar-nav li a:hover {
+//    text-decoration: none;
+//    color: #fff;
+//    background: rgba(255,255,255,0.2);
+//}
 
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
@@ -88,7 +98,7 @@
 }
 
 .sidebar-nav > .sidebar-brand a {
-    color: #999999;
+    color: white;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
@@ -98,15 +108,14 @@
 
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 250px;
-    }
-
-    #wrapper.toggled {
-        padding-left: 0;
+        padding-left: 90px;
+        .toggled {
+            padding-left: 0;
+        }
     }
 
     #sidebar-wrapper {
-        width: 250px;
+        width: 94px;
     }
 
     #wrapper.toggled #sidebar-wrapper {
