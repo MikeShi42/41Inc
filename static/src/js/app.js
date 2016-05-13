@@ -22,11 +22,11 @@ $(() => {
         // you can use <picture> syntax to display responsive images
         thumbnail: [
             {
-                srcset: 'http://lorempixel.com/400/400',
+                srcset: 'http://lorempixel.com/400/300',
                 type: 'image/jpeg'
             },
             {
-                srcset: 'http://lorempixel.com/400/400'
+                srcset: 'http://lorempixel.com/400/300'
             }
         ]
     }, {
@@ -39,7 +39,7 @@ $(() => {
         ],
         thumbnail: [
             {
-                srcset: 'http://lorempixel.com/400/400'
+                srcset: 'http://lorempixel.com/400/300'
             }
         ]
     }]);
