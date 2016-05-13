@@ -16,7 +16,6 @@ urlpatterns = [
     url(r"^account/", include("users.urls")),
     url(r"^dashboard/", include("dashboard.urls")),
     url(r"^sites/", include("websites.urls")),
-    url(r"^videos/", include("videos.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -22,7 +22,9 @@ class Video(models.Model):
     @property
     def url(self):
         """
-        Shorthand model property for a video url for convenience.
+        Shorthand model property for a video url for convenience. Instead of
+        accessing the video Azure Storage URL with video.content.url, we can
+        use just video.url.
         """
         return self.content.url
 

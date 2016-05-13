@@ -15,5 +15,5 @@
     {% else %}
         <p>No videos have been uploaded yet!</p>
     {% endif %}
-    <a href="{% url 'video-create' %}">Upload a video!</a>
+    <a href="{% url 'videos:create' site_id=site_id %}">Upload a video!</a>
 {% endblock %}
