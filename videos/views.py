@@ -43,9 +43,7 @@ class VideoCreate(LoginRequiredMixin, CreateView):
         return reverse_lazy('videos:index', kwargs={'site_id': self.kwargs['site_id']})
 
 
-class IndexView(LoginRequiredMixin, generic.ListView):
-    login_url = '/account/login/'
-
+class IndexView(generic.ListView):
     template_name = 'videos/index.html'
     context_object_name = 'video_list'
 
@@ -63,4 +61,4 @@ class IndexView(LoginRequiredMixin, generic.ListView):
         logged in user.
         """
         site = Site.objects.get(pk=self.kwargs['site_id'])
-        return Video.objects.filter(creator=self.request.user, site=site)
+        return Video.objects.filter(site=site)
