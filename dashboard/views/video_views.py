@@ -13,7 +13,7 @@ class VideoCreate(LoginRequiredMixin, CreateView):
 
     model = Video
     form_class = VideoForm
-    template_name = 'videos/create.html'
+    template_name = 'dashboard/videos/create.html'
 
     def get_context_data(self, **kwargs):
         """
@@ -44,7 +44,7 @@ class VideoCreate(LoginRequiredMixin, CreateView):
 
 
 class VideoIndexView(generic.ListView):
-    template_name = 'videos/index.html'
+    template_name = 'dashboard/videos/index.html'
     context_object_name = 'video_list'
 
     def get_context_data(self, **kwargs):
