@@ -25,6 +25,6 @@ class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
         return site
 
     def create_info(self, form):
-        info = Info(description=form.cleaned_data["description"])
+        info = Info(description=form.cleaned_data["description"], creator=self.request.user)
         info.save()
         return info
