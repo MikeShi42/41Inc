@@ -29,8 +29,7 @@ class VideoCreate(LoginRequiredMixin, CreateView):
         site ID from the named arguments in the URL. Afterwards, redirects to
         the success URL.
         """
-        site = Site.objects.get(pk=self.kwargs['website_id'])
-        form.instance.site = site
+        form.instance.site = Site.objects.get(pk=self.kwargs['website_id'])
         form.instance.creator = self.request.user
         return super(VideoCreate, self).form_valid(form)
 

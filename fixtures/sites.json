@@ -3,16 +3,56 @@
         "pk": 1,
         "model": "sites.site",
         "fields": {
-            "domain": "localhost:8000",
-            "name": "41 Inc."
+            "domain": "google.com",
+            "name": "Google"
         }
     },
+
+    {
+        "pk": 1,
+        "model": "websites.info",
+        "fields": {
+            "site": 1,
+            "creator": 1,
+            "description": "Info for Google."
+        }
+    },
+
     {
         "pk": 2,
         "model": "sites.site",
         "fields": {
-            "domain": "example.com",
-            "name": "41 Inc."
+            "domain": "yahoo.com",
+            "name": "Yahoo"
+        }
+    },
+
+     {
+        "pk": 2,
+        "model": "websites.info",
+        "fields": {
+            "site": 2,
+            "creator": 2,
+            "description": "Info for Yahoo."
+        }
+    },
+
+    {
+        "pk": 3,
+        "model": "sites.site",
+        "fields": {
+            "domain": "bing.com",
+            "name": "Bing"
+        }
+    },
+
+    {
+        "pk": 3,
+        "model": "websites.info",
+        "fields": {
+            "site": 3,
+            "creator": 3,
+            "description": "Info for Bing."
         }
     }
 ]
