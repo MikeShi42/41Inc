@@ -1,8 +1,10 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import redirect
 from django.views import generic
 from django.views.generic.edit import CreateView
 
@@ -19,7 +21,6 @@ class VideoCreate(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMix
     """
 
     login_url = '/account/login/'
-    raise_exception = True
 
     model = Video
     form_class = VideoForm
@@ -31,6 +32,11 @@ class VideoCreate(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMix
         """Renders view only if logged-in user is site creator, or 403s."""
         site = Site.objects.get(pk=self.kwargs['website_id'])
         return site.info.creator == self.request.user
+
+    def handle_no_permission(self):
+        """Redirects user to dashboard if the user isn't authorized,"""
+        messages.error(self.request, "You can't upload videos for this site!")
+        return redirect('dashboard')
 
     def get_context_data(self, **kwargs):
         """Provides the website_id context variable to the videos:create view."""
