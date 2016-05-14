@@ -17,10 +17,10 @@ class VideoCreate(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         """
-        Provides the site_id context variable to the videos:create view.
+        Provides the website_id context variable to the videos:create view.
         """
         context = super(VideoCreate, self).get_context_data(**kwargs)
-        context['site_id'] = self.kwargs['site_id']
+        context['website_id'] = self.kwargs['website_id']
         return context
 
     def form_valid(self, form):
@@ -29,7 +29,7 @@ class VideoCreate(LoginRequiredMixin, CreateView):
         site ID from the named arguments in the URL. Afterwards, redirects to
         the success URL.
         """
-        site = Site.objects.get(pk=self.kwargs['site_id'])
+        site = Site.objects.get(pk=self.kwargs['website_id'])
         form.instance.site = site
         form.instance.creator = self.request.user
         return super(VideoCreate, self).form_valid(form)
@@ -40,19 +40,19 @@ class VideoCreate(LoginRequiredMixin, CreateView):
         to use reverse_lazy instead of reverse because the URLs have not been
         loaded when this file is imported.
         """
-        return reverse_lazy('videos:index', kwargs={'site_id': self.kwargs['site_id']})
+        return reverse_lazy('videos:index', kwargs={'website_id': self.kwargs['website_id']})
 
 
-class IndexView(generic.ListView):
+class VideoIndexView(generic.ListView):
     template_name = 'videos/index.html'
     context_object_name = 'video_list'
 
     def get_context_data(self, **kwargs):
         """
-        Provides the site_id context to the videos:index view.
+        Provides the website_id context to the videos:index view.
         """
-        context = super(IndexView, self).get_context_data(**kwargs)
-        context['site_id'] = self.kwargs['site_id']
+        context = super(VideoIndexView, self).get_context_data(**kwargs)
+        context['website_id'] = self.kwargs['website_id']
         return context
 
     def get_queryset(self):
@@ -60,5 +60,5 @@ class IndexView(generic.ListView):
         Gets all videos that belong to both the current site and the currently
         logged in user.
         """
-        site = Site.objects.get(pk=self.kwargs['site_id'])
+        site = Site.objects.get(pk=self.kwargs['website_id'])
         return Video.objects.filter(site=site)

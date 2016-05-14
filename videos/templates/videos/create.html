@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-5">
 
-            <form method="POST" enctype="multipart/form-data" action="{% url "videos:create" site_id=site_id %}">
+            <form method="POST" enctype="multipart/form-data" action="{% url "videos:create" website_id=website_id %}">
                 <legend>{% trans "Upload Video" %}</legend>
                 {% csrf_token %}
                 {{ form|bootstrap }}
@@ -18,6 +18,6 @@
         </div>
     </div>
     <section>
-        <a href="{% url 'videos:index' site_id=site_id %}">Back to video list</a>
+        <a href="{% url 'videos:index' website_id=website_id %}">Back to video list</a>
     </section>
 {% endblock %}
