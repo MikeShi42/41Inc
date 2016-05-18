@@ -2,11 +2,11 @@
 from account.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.models import Site
-from django.views.generic import FormView
+from django.core.urlresolvers import reverse
+from django.views.generic import FormView, UpdateView
 
-from websites.forms import WebsiteForm
+from websites.forms import WebsiteForm, PaymentSettingsForm
 from websites.models import Info
-
 
 class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
     template_name = 'dashboard/websites/create.html'
@@ -28,3 +28,12 @@ class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
         info = Info(description=form.cleaned_data["description"])
         info.save()
         return info
+
+class PaymentSettings(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    template_name = 'dashboard/websites/settings/payments.html'
+    model = Info
+    form_class = PaymentSettingsForm
+    success_message = "Payment settings saved!"
+
+    def get_success_url(self):
+        return reverse('payments_settings', args=(self.get_object().site_id,))
