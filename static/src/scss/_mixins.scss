@@ -1,0 +1,12 @@
+// Creates a wrapper for vertical centering
+@mixin vcenter-parent() {
+  font-size: 0;
+}
+
+// For each element in wrapper that needs to be vertically centered
+@mixin vcenter-child() {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+  font-size: initial;
+}

@@ -135,6 +135,7 @@ INSTALLED_APPS = [
     "metron",
     "pinax.eventlog",
     "storages",
+    "debug_toolbar",
 
     # project
     "fourtyone",
@@ -210,4 +211,9 @@ VIDEO_MIME_TYPES = [
     'video/ms-video',
     'video/x-ms-video'
 ]
+
+try:
+    from local_settings import *
+except ImportError as exp:
+    pass
 

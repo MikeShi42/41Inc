@@ -5,6 +5,7 @@ _build/
 dev.db
 site_media/
 *.idea
+fourtyone/local_settings.py
 fourtyone/templates/_scripts.html
 fourtyone/templates/_styles.html
 static/_build
