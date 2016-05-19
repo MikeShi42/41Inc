@@ -17,9 +17,11 @@ DATABASES = {
 ALLOWED_HOSTS = []
 
 ROOT_URLCONF = "websites.urls"
+
+# Configure this to match your HOSTS configuration
 HOST_MIDDLEWARE_URLCONF_MAP = {
-    "localhost": "fourtyone.urls",
-    "tesc.app:8000": "websites.urls",
+    "localhost": "fourtyone.urls",      # 41Inc Site
+    "tesc.app:8000": "websites.urls",   # DjangoDragon and other client websites
 }
 
 # Local time zone for this installation. Choices can be found here:
@@ -183,7 +185,7 @@ FIXTURE_DIRS = [
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 ACCOUNT_OPEN_SIGNUP = True
-ACCOUNT_EMAIL_UNIQUE = True
+ACCOUNT_EMAIL_UNIQUE = True # TODO: Should be changed to False when the email is overwritten
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = False
 ACCOUNT_LOGIN_REDIRECT_URL = "home"
 ACCOUNT_LOGOUT_REDIRECT_URL = "home"
@@ -191,5 +193,5 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
 ACCOUNT_USE_AUTH_AUTHENTICATE = True
 
 AUTHENTICATION_BACKENDS = [
-    "account.auth_backends.UsernameAuthenticationBackend",
+    "users.auth_backends.UsernameSiteAuthenticationBackend",
 ]
