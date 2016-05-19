@@ -22,4 +22,4 @@ class PaymentSettingsForm(forms.ModelForm):
 
     class Meta:
         model = Info
-        fields = ['premium_enabled', 'price_month', 'price_year', 'stripe_public_key', 'stripe_secret_key']
+        fields = ['premium_enabled', 'price_month', 'price_year']

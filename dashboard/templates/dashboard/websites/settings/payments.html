@@ -2,23 +2,38 @@
 
 {% load i18n %}
 {% load bootstrap %}
+{% load static %}
 
 {% block head_title %}{% trans "Payments Settings" %}{% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <form method="post" action="" autocapitalize="off" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+            <form method="post" action="" autocapitalize="off" {% if form.is_multipart %}
+                  enctype="multipart/form-data"{% endif %}>
                 <legend>{% trans "Payments Settings" %}</legend>
+
+                <div class="form-group">
+                    <a href="#" class="stripe-connect"><span>Connect with Stripe</span></a>
+                    <p class="help-block">
+                        You <strong>must</strong> connect with Stripe before you can enable premium subscriptions.
+                    </p>
+                    <p class="help-block"><a href="https://stripe.com/">Stripe</a> will handle payments for your site's
+                        subscriptions. You will be prompted to creating a Stripe account if you don't already have one.
+                    </p>
+                </div>
+
+                <hr/>
 
                 {% csrf_token %}
 
                 {{ form|bootstrap }}
 
-                {% if redirect_field_value %}
-                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                {% endif %}
                 <button type="submit" class="btn btn-primary">{% trans "Save Settings" %}</button>
+
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
             </form>
         </div>
     </div>
