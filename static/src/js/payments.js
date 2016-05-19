@@ -6,7 +6,7 @@ class StripeHandler {
 
     constructor() {
         this.handler = StripeCheckout.configure({
-            key: 'pk_test_6pRNASCoBOKtIshFeQd4XMU',
+            key: 'pk_test_ct2aMVE28fnn81LEj2fSJk2s',
             locale: 'auto'
         });
     }
@@ -15,30 +15,26 @@ class StripeHandler {
         this.handler.close();
     }
 
-    handleSub(type) {
+    handleSub(type, price) {
         return e => {
             e.preventDefault();
 
             let description = '';
-            let price = 0.00;
 
             switch (type) {
                 case 'year':
-                    description = 'Yearly Subscription';
-                    price = 12000;
+                    description = `Yearly Subscription - \$${price}/year`;
                     break;
                 case 'month':
                 default:
-                    description = 'Monthly Subscription';
-                    price = 4000;
+                    description = `Monthly Subscription - \$${price}/month`;
             }
 
             this.handler.open({
                 name: '41 Inc.',
                 description,
-                amount: price,
                 zipCode: true,
-                panelLabel: 'Subscribe'
+                panelLabel: 'Subscribe Now'
             });
         };
     }

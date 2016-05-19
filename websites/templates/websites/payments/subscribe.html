@@ -36,10 +36,11 @@
                             Monthly
                         </div>
                         <div class="panel-body">
-                            <div class="plan-price">$40</div>
+                            <div class="plan-price">${{ price_month }}</div>
                         </div>
                         <div class="panel-footer">
-                            <a href="#" id="month-sub-btn" class="btn btn-primary btn-lg btn-block">Subscribe Now</a>
+                            <a href="#" id="month-sub-btn" class="btn btn-primary btn-lg btn-block"
+                               data-price="{{ price_month }}">Subscribe Now</a>
                         </div>
                     </div>
                 </div>
@@ -50,10 +51,11 @@
                             Yearly
                         </div>
                         <div class="panel-body">
-                            <div class="plan-price">$120</div>
+                            <div class="plan-price">${{ price_year }}</div>
                         </div>
                         <div class="panel-footer">
-                            <a href="#" id="year-sub-btn" class="btn btn-primary btn-lg btn-block">Subscribe Now</a>
+                            <a href="#" id="year-sub-btn" class="btn btn-primary btn-lg btn-block"
+                               data-price="{{ price_year }}">Subscribe Now</a>
                         </div>
                     </div>
                 </div>

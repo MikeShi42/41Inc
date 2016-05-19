@@ -19,8 +19,19 @@ $(() => {
         stripeHandler.close();
     });
 
-    $('#month-sub-btn').on('click', stripeHandler.handleSub('month'));
-    $('#year-sub-btn').on('click', stripeHandler.handleSub('year'));
+
+    /**
+     * Subscription
+     */
+    // Month Button
+    let monthBtn = $('#month-sub-btn');
+    let monthPrice = monthBtn.data('price');
+    monthBtn.on('click', stripeHandler.handleSub('month', monthPrice));
+
+    // Year Button
+    let yearBtn = $('#year-sub-btn');
+    let yearPrice = yearBtn.data('price');
+    yearBtn.on('click', stripeHandler.handleSub('year', yearPrice));
 
     // fire up the plugin
     const player = videojs('video');
