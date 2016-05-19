@@ -8,7 +8,20 @@ require('bootstrap-sass');
 const $ = window.$;
 const videojs = window.videojs;
 
+const StripeHandler = require('./payments');
+
 $(() => {
+    // Stripe Checkout
+    const stripeHandler = new StripeHandler();
+
+    // Close Checkout on page navigation:
+    $(window).on('popstate', () => {
+        stripeHandler.close();
+    });
+
+    $('#month-sub-btn').on('click', stripeHandler.handleSub('month'));
+    $('#year-sub-btn').on('click', stripeHandler.handleSub('year'));
+
     // fire up the plugin
     const player = videojs('video');
     player.playlist([{
