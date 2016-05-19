@@ -11,5 +11,5 @@ class Info(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
-    creator = models.OneToOneField(User, on_delete=models.CASCADE)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField()
