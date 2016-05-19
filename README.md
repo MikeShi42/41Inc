@@ -77,6 +77,13 @@ should look like `~/Projects/41Inc`.
 ```
 3. `npm install`
   * This will install the frontend dependencies.
+  
+### Setting up Local Settings
+**IMPORTANT!**
+You'll need to populate `local_settings.py` to define some of the API keys and values required for the app to communicate with third-party services.
+
+1. Rename `fourtyone/local_settings_example.py` to `fourtyone/local_settings.py`
+2. Replace the values with the proper values found on Slack.
 
 ### Trying Out Django
 

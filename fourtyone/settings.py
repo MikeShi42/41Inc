@@ -137,6 +137,7 @@ INSTALLED_APPS = [
     "account",
     "metron",
     "pinax.eventlog",
+    "debug_toolbar",
 
     # project
     "fourtyone",
@@ -193,3 +194,8 @@ ACCOUNT_USE_AUTH_AUTHENTICATE = True
 AUTHENTICATION_BACKENDS = [
     "account.auth_backends.UsernameAuthenticationBackend",
 ]
+
+try:
+    from local_settings import *
+except ImportError as exp:
+    pass

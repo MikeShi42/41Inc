@@ -4,10 +4,17 @@
 @import "bootstrap";
 @import "font-awesome";
 
+// Vendor Components
+@import "stripe_buttons";
+
+// Mixins
+@import "mixins";
+
 // Components
 @import "account"; // Account
 @import "button";
 @import "jumbotron";
+@import "video";
 
 
 // Site overrides
