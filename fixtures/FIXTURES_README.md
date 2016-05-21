@@ -6,7 +6,6 @@ These files just put dummy data in the database for testing. To load the data, r
 ./manage.py loaddata users
 ./manage.py loaddata sites
 ./manage.py loaddata series
-./manage.py loaddata videos
 ```
 
 The plaintext password in `users.json` is "password".

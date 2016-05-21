@@ -4,15 +4,55 @@
         "model": "sites.site",
         "fields": {
             "domain": "localhost:8000",
-            "name": "41 Inc."
+            "name": "41, Inc."
         }
     },
+
+    {
+        "pk": 1,
+        "model": "websites.info",
+        "fields": {
+            "site": 1,
+            "creator": 1,
+            "description": "Main site that all website creators are part of."
+        }
+    },
+
     {
         "pk": 2,
         "model": "sites.site",
         "fields": {
-            "domain": "example.com",
-            "name": "41 Inc."
+            "domain": "godjango.com",
+            "name": "GoDjango"
+        }
+    },
+
+    {
+        "pk": 2,
+        "model": "websites.info",
+        "fields": {
+            "site": 2,
+            "creator": 2,
+            "description": "Learn Django, Python, and more. GoDjango is created by Buddy Lindsey. Each episode is focused on something that can help django developers do django development better. Most videos will be short, sweet, and to the point about the specific topic. It is expected that most developers have some experience with Django, but anyone will usually be able to benefit some how."
+        }
+    },
+
+    {
+        "pk": 3,
+        "model": "sites.site",
+        "fields": {
+            "domain": "laracasts.com",
+            "name": "Laracasts"
+        }
+    },
+
+     {
+        "pk": 3,
+        "model": "websites.info",
+        "fields": {
+            "site": 3,
+            "creator": 3,
+            "description": "With Laracasts, not only will you learn the necessary skills for building modern web applications (using PHP, Laravel, VueJS, and more) but you'll have fun doing it. Ever wished for someone to sit next to you, and explain that complicated concept you're struggling with? Hi, I'm Jeffrey."
         }
     }
 ]
