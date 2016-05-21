@@ -16,8 +16,13 @@ DATABASES = {
 
 ALLOWED_HOSTS = []
 
-# Host that represents FourtyOne Inc App, equal to domain in sites table
-ROOT_HOST = "localhost:8000"
+ROOT_URLCONF = "websites.urls"
+
+# Configure this to match your HOSTS configuration
+HOST_MIDDLEWARE_URLCONF_MAP = {
+    "localhost": "fourtyone.urls",      # 41Inc Site
+    "tesc.app:8000": "websites.urls",   # DjangoDragon and other client websites
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -110,9 +115,9 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "fourtyone.multihost.MultiHostMiddleware",
 ]
 
-ROOT_URLCONF = "fourtyone.urls"
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = "fourtyone.wsgi.application"
@@ -182,7 +187,7 @@ FIXTURE_DIRS = [
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 ACCOUNT_OPEN_SIGNUP = True
-ACCOUNT_EMAIL_UNIQUE = True
+ACCOUNT_EMAIL_UNIQUE = True # TODO: Should be changed to False when the email is overwritten
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = False
 ACCOUNT_LOGIN_REDIRECT_URL = "home"
 ACCOUNT_LOGOUT_REDIRECT_URL = "home"
@@ -190,7 +195,7 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
 ACCOUNT_USE_AUTH_AUTHENTICATE = True
 
 AUTHENTICATION_BACKENDS = [
-    "account.auth_backends.UsernameAuthenticationBackend",
+    "users.auth_backends.UsernameSiteAuthenticationBackend",
 ]
 
 # Azure Storage configuration.

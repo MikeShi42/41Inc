@@ -1,9 +1,9 @@
 from django.shortcuts import render
 import account.forms
 import account.views
+from django.contrib import auth
 import users.forms
 from django.contrib.sites.shortcuts import get_current_site
-
 
 class SignupView(account.views.SignupView):
     form_class = users.forms.SignupForm
@@ -24,3 +24,21 @@ class SignupView(account.views.SignupView):
         profile.company = form.cleaned_data["company"]
         profile.site = get_current_site(self.request)
         profile.save()
+
+    def login_user(self):
+        user = auth.authenticate(request = self.request, **self.user_credentials())
+        auth.login(self.request, user)
+        self.request.session.set_expiry(0)
+
+    def get_form_kwargs(self):
+        kw = super(SignupView, self).get_form_kwargs()
+        kw['request'] = self.request  # the trick!
+        return kw
+
+class LoginView(account.views.LoginView):
+    form_class = users.forms.LoginUsernameForm
+
+    def get_form_kwargs(self):
+        kw = super(LoginView, self).get_form_kwargs()
+        kw['request'] = self.request  # the trick!
+        return kw
