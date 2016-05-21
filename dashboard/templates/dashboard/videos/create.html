@@ -1,0 +1,23 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load bootstrap %}
+
+{% block head_title %}{% trans "Video" %}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-5">
+
+            <form method="POST" enctype="multipart/form-data" action="{% url "videos:create" website_id=website_id %}">
+                <legend>{% trans "Upload Video" %}</legend>
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <button class="btn btn-primary" type="submit">{% trans "Save" %}</button>
+            </form>
+        </div>
+    </div>
+    <section>
+        <a href="{% url 'videos:index' website_id=website_id %}">Back to video list</a>
+    </section>
+{% endblock %}
