@@ -11,34 +11,3 @@ class Info(models.Model):
         primary_key=True,
     )
     description = models.TextField()
-    premium_enabled = models.BooleanField(
-        verbose_name='Premium Enabled',
-        help_text='Videos that are marked premium will force users to subscribe before being able to view them.',
-        default=False
-    )
-    price_month = models.DecimalField(
-        verbose_name='Monthly Price',
-        help_text='Users will charged this amount per month for premium access.',
-        max_digits=6,
-        decimal_places=2,
-        default=0.00
-    )
-    price_year = models.DecimalField(
-        verbose_name='Annual Price',
-        help_text='Users will charged this amount per month for premium access.',
-        max_digits=6,
-        decimal_places=2,
-        default=0.00
-    )
-    stripe_public_key = models.CharField(
-        null=True,
-        max_length=32
-    )
-    stripe_secret_key = models.CharField(
-        null=True,
-        max_length=32
-    )
-    stripe_user_id = models.CharField(
-        null=True,
-        max_length=32
-    )

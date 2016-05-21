@@ -138,6 +138,7 @@ INSTALLED_APPS = [
 
     # project
     "fourtyone",
+    "subscriptions",
     "users",
     "websites",
     "dashboard",

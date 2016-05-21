@@ -11,7 +11,9 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import FormView, UpdateView
 
 from dashboard.oauth2 import stripe_connect_service
-from websites.forms import WebsiteForm, PaymentSettingsForm
+from subscriptions.models import Settings as SubscriptionSettings
+from subscriptions.forms import SubscriptionSettingsForm
+from websites.forms import WebsiteForm
 from websites.models import Info
 
 STRIPE_STATE_SALT = 'fourtyone.stripe'
@@ -24,8 +26,9 @@ class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
     success_url = '/dashboard/websites/create'
 
     def form_valid(self, form):
-        self.create_site(form)
-        self.create_info(form)
+        site = self.create_site(form)
+        self.create_info(form, site)
+        self.create_pay_settings(site)
         return super(WebsiteCreate, self).form_valid(form)
 
     def create_site(self, form):
@@ -33,16 +36,21 @@ class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
         site.save()
         return site
 
-    def create_info(self, form):
-        info = Info(description=form.cleaned_data["description"])
+    def create_info(self, form, site):
+        info = Info(site=site, description=form.cleaned_data["description"])
         info.save()
         return info
+
+    def create_pay_settings(self, site):
+        settings = SubscriptionSettings(site=site)
+        settings.save()
+        return settings
 
 
 class PaymentSettings(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'dashboard/websites/settings/payments.html'
-    model = Info
-    form_class = PaymentSettingsForm
+    model = SubscriptionSettings
+    form_class = SubscriptionSettingsForm
     success_message = "Payment settings saved!"
 
     def get_success_url(self):
@@ -83,14 +91,14 @@ def stripe_callback(request):
     # process the returned json object from stripe
     stripe_payload = json.loads(resp.text)
 
-    # Get Info model for updating
-    site = Info.objects.get(pk=state['site_id'])
+    # Get settings for updating
+    settings = SubscriptionSettings.objects.get(pk=state['site_id'])
 
     # Update info model with credentials
-    site.stripe_user_id = stripe_payload['stripe_user_id']
-    site.stripe_public_key = stripe_payload['stripe_publishable_key']
-    site.stripe_secret_key = stripe_payload['access_token']
-    site.save()
+    settings.stripe_user_id = stripe_payload['stripe_user_id']
+    settings.stripe_public_key = stripe_payload['stripe_publishable_key']
+    settings.stripe_secret_key = stripe_payload['access_token']
+    settings.save()
 
     messages.success(request, 'Stripe account successfully connected!')
 

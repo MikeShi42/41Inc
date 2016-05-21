@@ -3,7 +3,6 @@ from django.contrib.sites.models import Site
 from django.core.exceptions import ValidationError
 
 import fourtyone.validators as f_validators
-from websites.models import Info
 
 
 class WebsiteForm(forms.Form):
@@ -16,10 +15,3 @@ class WebsiteForm(forms.Form):
         if Site.objects.filter(domain=domain).count() > 0:
             raise ValidationError('This domain is already in use.')
         return domain
-
-
-class PaymentSettingsForm(forms.ModelForm):
-
-    class Meta:
-        model = Info
-        fields = ['premium_enabled', 'price_month', 'price_year']

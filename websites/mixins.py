@@ -5,7 +5,7 @@ from account.utils import handle_redirect_to_login
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
-from websites.models import Info
+from subscriptions.models import Settings
 
 
 class PremiumEnabledMixin(object):
@@ -14,7 +14,7 @@ class PremiumEnabledMixin(object):
         self.args = args
         self.kwargs = kwargs
 
-        site = Info.objects.get(pk=self.kwargs['site_id'])
+        site = Settings.objects.get(pk=self.kwargs['site_id'])
 
         if site.premium_enabled:
             return super(PremiumEnabledMixin, self).dispatch(request, *args, **kwargs)
