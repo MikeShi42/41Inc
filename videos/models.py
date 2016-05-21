@@ -5,10 +5,11 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
 from series.models import Series
+from validators import validate_video_file
 
 
 class Video(models.Model):
-    site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='videos')
+    site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='videos', null=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='videos')
 
     series = models.ManyToManyField(Series, related_name='videos')
@@ -16,8 +17,17 @@ class Video(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField()
-    url = models.CharField(max_length=255)
-    thumbnail_url = models.CharField(max_length=255)
+    content = models.FileField(upload_to='videos', validators=[validate_video_file])
+    thumbnail = models.ImageField(upload_to='thumbnails')
+
+    @property
+    def url(self):
+        """
+        Shorthand model property for a video url for convenience. Instead of
+        accessing the video Azure Storage URL with video.content.url, we can
+        use just video.url.
+        """
+        return self.content.url
 
     def __str__(self):
         return "%s: %s" % (self.title, self.description)

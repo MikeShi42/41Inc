@@ -1,0 +1,19 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load bootstrap %}
+
+{% block head_title %}{% trans "Videos" %}{% endblock %}
+
+{% block body %}
+    {% if video_list %}
+        <ul>
+        {% for video in video_list %}
+            <p><strong>{{ video.title }}</strong>: {{ video.description }}</p>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No videos have been uploaded yet!</p>
+    {% endif %}
+    <a href="{% url 'videos:create' website_id=website_id %}">Upload a video!</a>
+{% endblock %}

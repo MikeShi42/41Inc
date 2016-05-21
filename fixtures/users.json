@@ -9,6 +9,17 @@
             "password": "pbkdf2_sha256$24000$4h0o67lLujdu$rYNGsXw8rt/Pq7tIOVoJVbXcPyT+E2l4fL5BIOj1Cyg="
         }
     },
+
+    {
+        "pk": 1,
+        "model": "users.profile",
+        "fields": {
+            "user": 1,
+            "company": "41, Inc.",
+            "site": 1
+        }
+    },
+
     {
         "pk": 2,
         "model": "auth.user",
@@ -19,6 +30,17 @@
             "password": "pbkdf2_sha256$24000$4h0o67lLujdu$rYNGsXw8rt/Pq7tIOVoJVbXcPyT+E2l4fL5BIOj1Cyg="
         }
     },
+
+     {
+        "pk": 2,
+        "model": "users.profile",
+        "fields": {
+            "user": 2,
+            "company": "GoDjango",
+            "site": 1
+        }
+    },
+
     {
         "pk": 3,
         "model": "auth.user",
@@ -27,6 +49,16 @@
             "last_name": "User 3",
             "username": "testuser3",
             "password": "pbkdf2_sha256$24000$4h0o67lLujdu$rYNGsXw8rt/Pq7tIOVoJVbXcPyT+E2l4fL5BIOj1Cyg="
+        }
+    },
+
+    {
+        "pk": 3,
+        "model": "users.profile",
+        "fields": {
+            "user": 3,
+            "company": "Laracasts",
+            "site": 1
         }
     }
 ]

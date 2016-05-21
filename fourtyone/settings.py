@@ -134,6 +134,7 @@ INSTALLED_APPS = [
     "account",
     "metron",
     "pinax.eventlog",
+    "storages",
     "debug_toolbar",
 
     # project
@@ -192,7 +193,27 @@ AUTHENTICATION_BACKENDS = [
     "account.auth_backends.UsernameAuthenticationBackend",
 ]
 
+# Azure Storage configuration.
+
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+AZURE_CONTAINER = "assets"
+
+AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')
+AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')
+
+# List of acceptable video mime types.
+
+VIDEO_MIME_TYPES = [
+    'video/mp4',
+    'video/quicktime',
+    'video/webm',
+    'video/avi',
+    'video/ms-video',
+    'video/x-ms-video'
+]
+
 try:
     from local_settings import *
 except ImportError as exp:
     pass
+
