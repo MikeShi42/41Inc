@@ -1,12 +1,11 @@
-from django.shortcuts import render
 import account.views
-import websites.forms
+from django.contrib import auth
 from django.contrib.sites.shortcuts import get_current_site
-from django.contrib import auth, messages
-from django.http import HttpResponse
+from django.shortcuts import render
 
+import websites.forms
 from series.models import Series
-# Create your views here.
+
 
 class WebsiteSignupView(account.views.SignupView):
     form_class = websites.forms.SignupForm
@@ -39,9 +38,7 @@ class WebsiteSignupView(account.views.SignupView):
         return kw
 
 
-def site_homepage(request, site_id):
-    # series_for_site = Series.objects.filter(site_id = site_id)
-
+def site_homepage(request):
     series_for_site = Series.objects.all()
     context = {'series_for_site': series_for_site}
     return render(request, 'websites/homepage.html',context)
