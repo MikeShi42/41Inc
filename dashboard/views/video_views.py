@@ -51,9 +51,11 @@ class VideoCreate(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMix
         site ID from the named arguments in the URL. Afterwards, redirects to
         the success URL.
         """
-        form.instance.site = Site.objects.get(pk=self.kwargs['website_id'])
-        form.instance.creator = self.request.user
-        return super(VideoCreate, self).form_valid(form)
+        video = form.save(commit=False)
+        video.site = Site.objects.get(pk=self.kwargs['website_id'])
+        video.creator = self.request.user
+        video.save()
+        return redirect(self.get_success_url())
 
     def get_success_url(self):
         """Redirects to videos list view for site given in named arguments.

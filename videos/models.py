@@ -12,7 +12,7 @@ class Video(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='videos', null=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='videos')
 
-    series = models.ManyToManyField(Series, related_name='videos')
+    series = models.ManyToManyField(Series, through='Listing')
     ratings = models.ManyToManyField(User, through='Rating')
 
     title = models.CharField(max_length=255)
@@ -22,10 +22,10 @@ class Video(models.Model):
 
     @property
     def url(self):
-        """
-        Shorthand model property for a video url for convenience. Instead of
-        accessing the video Azure Storage URL with video.content.url, we can
-        use just video.url.
+        """Shorthand model property for a video url for convenience.
+
+        Instead of accessing the video Azure Storage URL with video.content.url,
+        we can use just video.url.
         """
         return self.content.url
 
@@ -41,3 +41,16 @@ class Rating(models.Model):
 
     def __str__(self):
         return "%s by <User: %s> on <Video: %s>" % (str(self.rating), self.user.username, self.video.title)
+
+
+class Listing(models.Model):
+    series = models.ForeignKey(Series, on_delete=models.CASCADE, related_name='listings')
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name='listings')
+
+    order = models.IntegerField()
+
+    def __str__(self):
+        return "<Video: %s>: #%d in <Series: %s>" % (self.video.title, int(self.order), self.series.title)
+
+    class Meta:
+        unique_together = (('series', 'order'), ('series', 'video'))
