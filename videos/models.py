@@ -30,7 +30,7 @@ class Video(models.Model):
         return self.content.url
 
     def __str__(self):
-        return "%s: %s" % (self.title, self.description)
+        return "%s - %s" % (self.title, self.description)
 
 
 class Rating(models.Model):
@@ -40,7 +40,7 @@ class Rating(models.Model):
     rating = models.IntegerField()
 
     def __str__(self):
-        return "%s by <User: %s> on <Video: %s>" % (str(self.rating), self.user.username, self.video.title)
+        return "%s by %s on %s" % (str(self.rating), self.user, self.video)
 
 
 class Listing(models.Model):
@@ -50,7 +50,8 @@ class Listing(models.Model):
     order = models.IntegerField()
 
     def __str__(self):
-        return "<Video: %s>: #%d in <Series: %s>" % (self.video.title, int(self.order), self.series.title)
+        return "%s - #%d in %s" % (self.video, int(self.order), self.series)
 
     class Meta:
         unique_together = (('series', 'order'), ('series', 'video'))
+        ordering = ['order']
