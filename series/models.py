@@ -14,4 +14,5 @@ class Series(models.Model):
     thumbnail_url = models.CharField(max_length=255)
 
     def __str__(self):
-        return "%s %s" % (self.title, self.description)
+        return "%s - %s" % (self.title, self.description)
+
