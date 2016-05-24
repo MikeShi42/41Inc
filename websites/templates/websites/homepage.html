@@ -25,78 +25,34 @@
             <br>
             <br>
             <div class="row">
+
+                {% if series_for_site %}
+                    {% for series in series_for_site %}
+                        <div class="col-lg-4">
+                            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
+                            <h4>Playlist Title: {{  series.title }}</h4>
+                            <img src="{{  series.thumbnail_url }}" style="width:320px;height:180px">
+                                <br>
+                                <p>IF THIS SHOWS UP WE (PRETTY MUCH) WIN (series desription below)</p>
+                                <p>{{ series.description }}</p>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h3>No series are available.</h3>
+                {% endif %}
+
+
                 <div class="col-lg-4">
                     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
-                    <h4>Playlist Title</h4>
+                    <h4>Placeholder</h4>
                     <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
                         <br>
-                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
+                        <p>Should display series from ALL sites right now (if any). When it's testable, I'll go back and make it only display the appropriate sites.</p>
                     </a>
                 </div>
-                <div class="col-lg-4">
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
-                    <h4>Click Me</h4>
-                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
-                        <br>
-                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
-                    </a>
-                </div>
-                <div class="col-lg-4">
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
-                    <h4>Playlist Title</h4>
-                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
-                        <br>
-                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
-                    </a>
-                </div>
-                <div class="col-lg-4">
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
-                    <h4>Playlist Title</h4>
-                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
-                        <br>
-                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
-                    </a>
-                </div>
-                <div class="col-lg-4">
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
-                    <h4>Playlist Title</h4>
-                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
-                        <br>
-                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
-                    </a>
-                </div>
-                <div class="col-lg-4">
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
-                    <h4>Playlist Title</h4>
-                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
-                        <br>
-                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
-                    </a>
-                </div>
-                <div class="col-lg-4">
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
-                    <h4>Playlist Title</h4>
-                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
-                        <br>
-                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
-                    </a>
-                </div>
-                <div class="col-lg-4">
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
-                    <h4>Playlist Title</h4>
-                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
-                        <br>
-                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
-                    </a>
-                </div>
-                <div class="col-lg-4">
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
-                    <h4>Playlist Title</h4>
-                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
-                        <br>
-                        <p>This is a description of the Playlist, lets just put in a bunch of text to see what it looks like.</p>
-                    </a>
-                </div>
+
+
             </div>
             <br>
             <p class="text-center">
