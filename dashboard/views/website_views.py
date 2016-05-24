@@ -27,7 +27,7 @@ class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
 
     def form_valid(self, form):
         site = self.create_site(form)
-        self.create_info(form, site)
+        self.create_info(form, site, self.request.user)
         self.create_pay_settings(site)
         return super(WebsiteCreate, self).form_valid(form)
 
@@ -36,8 +36,8 @@ class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
         site.save()
         return site
 
-    def create_info(self, form, site):
-        info = Info(site=site, description=form.cleaned_data["description"])
+    def create_info(self, form, site, creator):
+        info = Info(site=site, description=form.cleaned_data["description"], creator=creator)
         info.save()
         return info
 
