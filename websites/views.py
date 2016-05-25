@@ -4,9 +4,9 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from websites.mixins import PremiumEnabledMixin
-from websites.models import Info
 import websites.forms
 from series.models import Series
+from subscriptions.models import Settings as SubscriptionSettings
 
 
 class SubscribeView(PremiumEnabledMixin, TemplateView):
@@ -15,8 +15,11 @@ class SubscribeView(PremiumEnabledMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(SubscribeView, self).get_context_data(**kwargs)
 
+        # Get current site
+        current_site = get_current_site(self.request)
+
         # Get prices
-        site = Info.objects.get(pk=self.kwargs['site_id'])
+        site = SubscriptionSettings.objects.get(pk=current_site.id)
 
         context['price_month'] = site.price_month
         context['price_year'] = site.price_year
