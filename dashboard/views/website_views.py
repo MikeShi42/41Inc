@@ -81,6 +81,9 @@ def stripe_auth(request, pk):
 
 
 def stripe_callback(request):
+    def to_cents(amount):
+        return int(amount * 100)
+
     # the temporary code returned from stripe
     code = request.GET['code']
 
@@ -110,7 +113,8 @@ def stripe_callback(request):
 
     # Create plans if proper settings are set
     if settings.premium_enabled and settings.price_month != 0.00 and settings.price_year != 0.00:
-        setup_plans(stripe_payload['stripe_user_id'], price_month=settings.price_month, price_year=settings.price_year)
+        setup_plans(stripe_payload['stripe_user_id'], price_month=to_cents(settings.price_month),
+                    price_year=to_cents(settings.price_year))
 
     messages.success(request, 'Stripe account successfully connected!')
 
