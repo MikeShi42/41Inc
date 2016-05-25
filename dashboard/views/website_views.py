@@ -13,6 +13,7 @@ from django.views.generic import FormView, UpdateView
 from dashboard.oauth2 import stripe_connect_service
 from subscriptions.models import Settings as SubscriptionSettings
 from subscriptions.forms import SubscriptionSettingsForm
+from subscriptions.plans import setup as setup_plans
 from websites.forms import WebsiteForm
 from websites.models import Info
 
@@ -106,6 +107,10 @@ def stripe_callback(request):
     settings.stripe_public_key = stripe_payload['stripe_publishable_key']
     settings.stripe_secret_key = stripe_payload['access_token']
     settings.save()
+
+    # Create plans if proper settings are set
+    if settings.premium_enabled and settings.price_month != 0.00 and settings.price_year != 0.00:
+        setup_plans(stripe_payload['stripe_user_id'], price_month=settings.price_month, price_year=settings.price_year)
 
     messages.success(request, 'Stripe account successfully connected!')
 
