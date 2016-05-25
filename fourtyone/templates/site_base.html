@@ -3,6 +3,7 @@
 {% load staticfiles %}
 {% load metron_tags %}
 {% load i18n %}
+{% load settings %}
 
 
 {% block styles %}
@@ -27,6 +28,9 @@
 {% block scripts %}
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript" src="https://checkout.stripe.com/checkout.js"></script>
+    <script>
+        window.STRIPE_PUBLIC_KEY = '{% stripe_public_key %}'
+    </script>
     {% include "_scripts.html" %}
 {% endblock %}
 

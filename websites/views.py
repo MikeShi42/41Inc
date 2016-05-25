@@ -1,8 +1,13 @@
 import account.views
+import stripe
 from django.contrib import auth
 from django.contrib.sites.shortcuts import get_current_site
+import json
+from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.shortcuts import render
+
+from fourtyone import settings
 from websites.mixins import PremiumEnabledMixin
 import websites.forms
 from series.models import Series
@@ -25,6 +30,21 @@ class SubscribeView(PremiumEnabledMixin, TemplateView):
         context['price_year'] = site.price_year
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        # Import API key
+        stripe.api_key = settings.STRIPE_CLIENT_SECRET
+
+        # Get token from request
+        token = request.POST['token']
+
+        # Create customer and subscribe to plan
+        customer = stripe.Customer.create(
+            source=token,
+            plan=settings.PLAN_ID_MONTHLY
+        )
+
+        return HttpResponse(customer)
 
 class WebsiteSignupView(account.views.SignupView):
     form_class = websites.forms.SignupForm

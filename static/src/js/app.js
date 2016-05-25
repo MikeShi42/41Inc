@@ -12,25 +12,24 @@ const StripeHandler = require('./payments');
 
 $(() => {
     // Stripe Checkout
-    const stripeHandler = new StripeHandler();
+    const stripeHandler = new StripeHandler(window);
 
     // Close Checkout on page navigation:
     $(window).on('popstate', () => {
         stripeHandler.close();
     });
 
-
     /**
      * Subscription
      */
     // Month Button
-    let monthBtn = $('#month-sub-btn');
-    let monthPrice = monthBtn.data('price');
+    const monthBtn = $('#month-sub-btn');
+    const monthPrice = monthBtn.data('price');
     monthBtn.on('click', stripeHandler.handleSub('month', monthPrice));
 
     // Year Button
-    let yearBtn = $('#year-sub-btn');
-    let yearPrice = yearBtn.data('price');
+    const yearBtn = $('#year-sub-btn');
+    const yearPrice = yearBtn.data('price');
     yearBtn.on('click', stripeHandler.handleSub('year', yearPrice));
 
     // fire up the plugin
