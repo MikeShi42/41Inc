@@ -7,6 +7,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.models import Site
 from django.core import signing
 from django.core.urlresolvers import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import FormView, UpdateView
 
@@ -65,6 +67,20 @@ class PaymentSettings(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return context
 
 
+@receiver(post_save, sender=SubscriptionSettings, dispatch_uid='update_stripe_plans')
+def update_stripe(sender, instance, **kwargs):
+    """
+    Update Stripe plans if needed when payment settings are saved
+    :param sender:
+    :param instance:
+    :param kwargs:
+    :return:
+    """
+    if instance.premium_enabled and instance.price_month != 0.00 and instance.price_year != 0.00 and instance.stripe_user_id is not None:
+        setup_plans(instance.stripe_user_id, price_month=to_cents(instance.price_month),
+                    price_year=to_cents(instance.price_year))
+
+
 def stripe_auth(request, pk):
     # Data to pass into state
     data = {
@@ -81,9 +97,6 @@ def stripe_auth(request, pk):
 
 
 def stripe_callback(request):
-    def to_cents(amount):
-        return int(amount * 100)
-
     # the temporary code returned from stripe
     code = request.GET['code']
 
@@ -121,3 +134,7 @@ def stripe_callback(request):
     # Sample return of the access_token, please don't do this! this is
     # just an example that it does in fact return the access_token
     return HttpResponseRedirect(reverse('payments_settings', args=(state['site_id'],)))
+
+
+def to_cents(amount):
+    return int(amount * 100)
