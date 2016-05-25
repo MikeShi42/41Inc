@@ -56,6 +56,13 @@ class PaymentSettings(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def get_success_url(self):
         return reverse('payments_settings', args=(self.get_object().site_id,))
 
+    def get_context_data(self, **kwargs):
+        context = super(PaymentSettings, self).get_context_data(**kwargs)
+
+        context['site_id'] = self.kwargs['pk']
+
+        return context
+
 
 def stripe_auth(request, pk):
     # Data to pass into state
