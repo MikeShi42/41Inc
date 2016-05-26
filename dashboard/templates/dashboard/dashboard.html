@@ -4,7 +4,6 @@
 
     <section class="jumbotron dash">
         <div class="container dash-upper">
-
             {% include "_messages.html" %}
 
             <div class="row">
@@ -73,34 +72,23 @@
                         <tr>
                             <th></th>
                             <th>Subscribers</th>
-                            <th>Ratings</th>
+                            <th>Rating</th>
                             <th>Views</th>
                             <th></th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td>Django Dragon</td>
-                            <td>696969</td>
-                            <td>69669</td>
-                            <td>000</td>
-                            <td><a class="btn btn-primary">Manage</a></td>
-                        </tr>
-                        <tr>
-                            <td>Django Dragon</td>
-                            <td>696969</td>
-                            <td>69669</td>
-                            <td>1290</td>
-                            <td><a class="btn btn-primary">Manage</a></td>
-                        </tr>
-                        <tr>
-                            <td>Django Dragon</td>
-                            <td>696969</td>
-                            <td>69669</td>
-                            <td>1290</td>
-                            <td><a class="btn btn-primary">Manage</a></td>
-                        </tr>
+
+                        {% for s in series %}
+                            <tr>
+                                <td>{{ s.title }}</td>
+                                <td>{{ s.subscribers }}</td>
+                                <td>{{ s.rating }}</td>
+                                <td>{{ s.views }}</td>
+                                <td><a href="" class="btn btn-primary">Manage</a></td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>

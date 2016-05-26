@@ -1,11 +1,10 @@
 from django.conf.urls import include, url
-from django.views.generic import TemplateView
-
-from dashboard.views import WebsiteCreate, VideoCreate, VideoIndexView, PaymentSettings, stripe_auth, stripe_callback
+from dashboard.views import WebsiteCreate, VideoCreate, VideoIndexView, PaymentSettings, DashboardView, stripe_auth, stripe_callback
 
 urlpatterns = [
-    url(r"^$", TemplateView.as_view(template_name="dashboard/dashboard.html"), name="dashboard"),
+    # url(r"^$", TemplateView.as_view(template_name="dashboard/dashboard.html"), name="dashboard"),
 
+    url(r"^$", DashboardView.as_view(), name="dashboard"),
     # /websites/
     url(r"^websites/", include([
 
