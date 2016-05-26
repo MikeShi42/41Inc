@@ -46,10 +46,18 @@ class SubscribeView(PremiumEnabledMixin, TemplateView):
         # Get token from request
         token = request.POST['token']
 
+        # Get plan
+        plans = {
+            'month': settings.PLAN_ID_MONTHLY,
+            'year': settings.PLAN_ID_YEARLY
+        }
+
+        plan = plans[request.POST['plan']]
+
         # Create Stripe customer
         customer = stripe.Customer.create(
             source=token,
-            plan=settings.PLAN_ID_MONTHLY,
+            plan=plan,
             stripe_account=stripe_account
         )
 
