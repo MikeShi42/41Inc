@@ -1,5 +1,5 @@
 from django import forms
 
 class SeriesForm(forms.Form):
-        title = forms.CharField();
+        series_name = forms.CharField();
         description = forms.CharField(widget=forms.Textarea())
