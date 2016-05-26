@@ -2,6 +2,7 @@ from django.http import HttpResponse
 
 from django.views.generic import TemplateView
 from django.shortcuts import render
+from websites.models import Info
 
 
 class DashboardView(TemplateView):
@@ -9,9 +10,11 @@ class DashboardView(TemplateView):
 
     def get_context_data(self):
         user = self.request.user
-        context = {}
-        context['user'] = user
-        context['series'] = user.series.all()
+        context = {
+            'user': user,
+            'series': user.series.all(),
+            'websites': Info.objects.filter(creator_id=user.id)
+        }
         print context
         return context
 

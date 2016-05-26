@@ -2,14 +2,10 @@
 {% load account_tags %}
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
-        <li>
-            <a href="#">Dashboard</a>
-        </li>
-        <li>
-            <a href="#">Shortcuts</a>
-        </li>
-        <li>
-            <a href="#">Overview</a>
-        </li>
+        {% for site in websites %}
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+        {% endfor %}
     </ul>
 </div>
