@@ -59,6 +59,7 @@ class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, 
         customer = stripe.Customer.create(
             source=token,
             plan=plan,
+            email=request.user.email,
             stripe_account=stripe_account
         )
 

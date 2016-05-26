@@ -42,6 +42,7 @@ class StripeHandler {
                 name: '41 Inc.',
                 description,
                 zipCode: true,
+                email: this.window.USER_EMAIL,
                 panelLabel: 'Subscribe Now'
             });
         };

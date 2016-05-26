@@ -30,6 +30,9 @@
     <script type="text/javascript" src="https://checkout.stripe.com/checkout.js"></script>
     <script>
         window.STRIPE_PUBLIC_KEY = '{% stripe_public_key %}'
+        {% if request.user.is_authenticated %}
+            window.USER_EMAIL = '{{ request.user.email }}';
+        {% endif %}
     </script>
     {% include "_scripts.html" %}
 {% endblock %}
