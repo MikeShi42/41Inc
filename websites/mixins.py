@@ -1,12 +1,11 @@
 from __future__ import unicode_literals
 
-from account.conf import settings
-from account.utils import handle_redirect_to_login
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from django.utils import timezone
 
-from subscriptions.models import Settings
+from subscriptions.models import Settings, Subscription
 
 
 class PremiumEnabledMixin(object):
@@ -23,3 +22,20 @@ class PremiumEnabledMixin(object):
 
     def redirect_to_homepage(self):
         return reverse('site_homepage', args=(self.kwargs['site_id'],))
+
+class SubscriptionMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super(SubscriptionMixin, self).get_context_data(**kwargs)
+
+        # Check current subscription
+        # TODO: clean this up because it's kind of ugly
+        try:
+            subscription = Subscription.objects.get(user=self.request.user)
+            if subscription.active_until > timezone.now():
+                context['subscribed'] = True
+            else:
+                context['subscribed'] = False
+        except Subscription.DoesNotExist:
+            context['subscribed'] = False
+
+        return context

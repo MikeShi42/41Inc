@@ -39,8 +39,12 @@
                             <div class="plan-price">${{ price_month }}</div>
                         </div>
                         <div class="panel-footer">
-                            <a href="#" id="month-sub-btn" class="btn btn-primary btn-lg btn-block"
-                               data-price="{{ price_month }}">Subscribe Now</a>
+                            {% if subscribed %}
+                                <button class="btn btn-disabled btn-lg btn-block" disabled>Subscribed</button>
+                            {% else %}
+                                <a href="#" id="month-sub-btn" class="btn btn-primary btn-lg btn-block"
+                                   data-price="{{ price_month }}">Subscribe Now</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -54,8 +58,12 @@
                             <div class="plan-price">${{ price_year }}</div>
                         </div>
                         <div class="panel-footer">
-                            <a href="#" id="year-sub-btn" class="btn btn-primary btn-lg btn-block"
-                               data-price="{{ price_year }}">Subscribe Now</a>
+                            {% if subscribed %}
+                                <button class="btn btn-disabled btn-lg btn-block" disabled>Subscribed</button>
+                            {% else %}
+                                <a href="#" id="year-sub-btn" class="btn btn-primary btn-lg btn-block"
+                                   data-price="{{ price_year }}">Subscribe Now</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

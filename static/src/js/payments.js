@@ -11,7 +11,7 @@ class StripeHandler {
             locale: 'auto',
             token: token => {
                 $.post(this.window.location, {token: token.id, plan: this.plan}, () => {
-
+                    this.window.location.reload();
                 });
             }
         });

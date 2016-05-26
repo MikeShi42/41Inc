@@ -1,6 +1,7 @@
 import account.views
 import datetime
 import stripe
+from account.mixins import LoginRequiredMixin
 from django.contrib import auth
 from django.contrib.sites.shortcuts import get_current_site
 import json
@@ -10,13 +11,13 @@ from django.views.generic import TemplateView
 from django.shortcuts import render
 
 from fourtyone import settings
-from websites.mixins import PremiumEnabledMixin
+from websites.mixins import PremiumEnabledMixin, SubscriptionMixin
 import websites.forms
 from series.models import Series
 from subscriptions.models import Settings as SubscriptionSettings, Subscription
 
 
-class SubscribeView(PremiumEnabledMixin, TemplateView):
+class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, TemplateView):
     template_name = 'websites/payments/subscribe.html'
 
     def get_context_data(self, **kwargs):
