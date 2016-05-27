@@ -63,7 +63,9 @@ class VideoCreate(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMix
         Need to use reverse_lazy instead of reverse because the URLs have not
         been loaded when this file is imported.
         """
-        return reverse_lazy('videos:index', kwargs={'website_id': self.kwargs['website_id']})
+        site = Site.objects.get(pk=self.kwargs['website_id'])
+        uri = reverse_lazy('videos:index', urlconf='websites.urls')
+        return 'http://%s%s' % (site.domain, uri)
 
 
 class VideoIndexView(generic.ListView):
@@ -86,3 +88,13 @@ class VideoIndexView(generic.ListView):
         """Gets videos belonging to current site and logged in user."""
         site = get_current_site(self.request)
         return Video.objects.filter(site=site)
+
+
+class VideoDetailView(generic.DetailView):
+    model = Video
+
+    template_name = 'dashboard/videos/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(VideoDetailView, self).get_context_data(**kwargs)
+        return context

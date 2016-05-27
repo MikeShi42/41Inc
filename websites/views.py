@@ -1,7 +1,7 @@
 import account.views
 from django.contrib import auth
 from django.contrib.sites.shortcuts import get_current_site
-from django.shortcuts import render
+from django.views.generic.base import TemplateView
 
 import websites.forms
 from series.models import Series
@@ -28,7 +28,7 @@ class WebsiteSignupView(account.views.SignupView):
         profile.save()
 
     def login_user(self):
-        user = auth.authenticate(request = self.request, **self.user_credentials())
+        user = auth.authenticate(request=self.request, **self.user_credentials())
         auth.login(self.request, user)
         self.request.session.set_expiry(0)
 
@@ -38,7 +38,10 @@ class WebsiteSignupView(account.views.SignupView):
         return kw
 
 
-def site_homepage(request):
-    series_for_site = Series.objects.all()
-    context = {'series_for_site': series_for_site}
-    return render(request, 'websites/homepage.html',context)
+class HomeView(TemplateView):
+    template_name = 'websites/homepage.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['series_for_site'] = Series.objects.filter(site=get_current_site(self.request))
+        return context
