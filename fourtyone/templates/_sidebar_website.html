@@ -1,11 +1,25 @@
 {% load i18n %}
+{% load static %}
 {% load account_tags %}
-<div id="sidebar-wrapper">
+<div id="sidebar-website">
     <ul class="sidebar-nav">
         {% for site in websites %}
             <li>
-                <a href="#">Dashboard</a>
+                <a href="#">
+                    <img src="http://lorempixel.com/400/400">
+                </a>
             </li>
         {% endfor %}
+    <!-- Delete this when we have more -->
+     <li>
+                <a href="#">
+                    <img src="http://lorempixel.com/400/400">
+                </a>
+            </li>
+     <li>
+                <a href="/dashboard/websites/create">
+                    <img id="add_site" src="{% static "images/plus.svg" %}">
+                </a>
+            </li>
     </ul>
 </div>

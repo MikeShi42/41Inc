@@ -1,15 +1,45 @@
-#sidebar-wrapper {
+#sidebar-website {
   position: absolute;
   left: 0;
+  top: 0;
   background-color: #9d9d9d;
-  width: 100px;
   height: 100%;
   height: 100vh;
   z-index: 50;
+  padding-top: 50px;
 }
 .with-sidebar {
 }
-#sidebar-wrapper ul, #sidebar-wrapper li {
+#sidebar-website ul, #sidebar-website li {
+  text-decoration: none;
   list-style-type: none;
   padding-left: 0;
+}
+
+#sidebar-website li {
+  border: 6px solid white;
+  border-radius: 5px;
+  margin: 10px;
+  img {
+    width: 70px;
+    height: 70px;
+    &#add_site {
+      padding: 10px;
+      background-color: #fff;
+    }
+  }
+
+}
+
+// Collapse sidebar into above dashboard for smaller screens
+@media screen and (max-width: 1100px) {
+  #sidebar-website {
+    position: static;
+    height: auto;
+    padding-top: 0;
+    text-align: center;
+    li {
+      display: inline-block
+    }
+  }
 }
