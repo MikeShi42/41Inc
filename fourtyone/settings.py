@@ -18,6 +18,9 @@ ALLOWED_HOSTS = []
 
 ROOT_URLCONF = "websites.urls"
 
+ADMIN_DOMAIN = "localhost:8000"
+ADMIN_URLCONF = 'fourtyone.urls'
+
 # Configure this to match your HOSTS configuration
 HOST_MIDDLEWARE_URLCONF_MAP = {
     "localhost": "fourtyone.urls",      # 41Inc Site

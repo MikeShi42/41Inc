@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-
 from django.contrib.sites.models import Site
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import redirect
 from django.views import generic
@@ -79,10 +79,10 @@ class VideoIndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         """Provides the website_id context to the videos:index view."""
         context = super(VideoIndexView, self).get_context_data(**kwargs)
-        context['website_id'] = self.kwargs['website_id']
+        context['website_id'] = get_current_site(self.request).id
         return context
 
     def get_queryset(self):
         """Gets videos belonging to current site and logged in user."""
-        site = Site.objects.get(pk=self.kwargs['website_id'])
+        site = get_current_site(self.request)
         return Video.objects.filter(site=site)
