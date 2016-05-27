@@ -5,9 +5,8 @@
         "fields": {
             "site": 1,
             "creator": 1,
-            "title": "first series title",
-            "description": "description of first series",
-            "thumbnail_url": "http://static.domain.com/url"
+            "title": "Learning the Fundamentals",
+            "description": "Take a quick course for beginners to get familiar with the technology!"
         }
     },
     {
@@ -16,9 +15,8 @@
         "fields": {
             "site": 1,
             "creator": 2,
-            "title": "second series title",
-            "description": "description of second series",
-            "thumbnail_url": "http://static.domain.com/url"
+            "title": "Intermediate Topics",
+            "description": "Go more in depth about these parts of the library with these videos."
         }
     }
 ]

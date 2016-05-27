@@ -22,7 +22,7 @@
         "pk": 2,
         "model": "sites.site",
         "fields": {
-            "domain": "godjango.com",
+            "domain": "godjango.com:8000",
             "name": "GoDjango"
         }
     },
@@ -41,7 +41,7 @@
         "pk": 3,
         "model": "sites.site",
         "fields": {
-            "domain": "laracasts.com",
+            "domain": "laracasts.com:8000",
             "name": "Laracasts"
         }
     },
