@@ -21,10 +21,10 @@
                     <div class="col-sm-4">
                         <div class="panel panel-default">
                             <div class="panel-heading" id="new-subscribers">
-                                <h4>New Subscribers</h4>
+                                <h4>Total Subscribers</h4>
                             </div>
                             <div class="panel-body">
-                                <p>12345</p>
+                                <p>{{ subscribers }}</p>
                             </div>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                                 <h4>Views</h4>
                             </div>
                             <div class="panel-body">
-                                <p>12345</p>
+                                <p>{{ views }}</p>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                                 <h4>Average Rating</h4>
                             </div>
                             <div class="panel-body">
-                                <p>12345</p>
+                                <p>{{ rating }}</p>
                             </div>
                         </div>
                     </div>
@@ -84,16 +84,21 @@
                         </thead>
 
                         <tbody>
-
-                        {% for s in series %}
+                        {% if series %}
+                            {% for s in series %}
+                                <tr>
+                                    <td>{{ s.title }}</td>
+                                    <td>{{ s.subscribers }}</td>
+                                    <td>{{ s.rating }}</td>
+                                    <td>{{ s.views }}</td>
+                                    <td><a href="" class="btn btn-primary">Manage</a></td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
                             <tr>
-                                <td>{{ s.title }}</td>
-                                <td>{{ s.subscribers }}</td>
-                                <td>{{ s.rating }}</td>
-                                <td>{{ s.views }}</td>
-                                <td><a href="" class="btn btn-primary">Manage</a></td>
+                                <td>No series here! Create a new one to begin!</td>
                             </tr>
-                        {% endfor %}
+                        {% endif %}
                         </tbody>
                     </table>
                 </div>
