@@ -20,6 +20,8 @@ class Video(models.Model):
     content = models.FileField(upload_to='videos', validators=[validate_video_file])
     thumbnail = models.ImageField(upload_to='thumbnails')
 
+    views = models.PositiveIntegerField(default=0)
+
     @property
     def url(self):
         """Shorthand model property for a video url for convenience.
