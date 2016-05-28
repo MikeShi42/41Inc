@@ -1,0 +1,73 @@
+{% extends "site_base.html" %}
+
+{% load staticfiles %}
+{% load i18n %}
+
+{% block head_title %}Subscribe{% endblock %}
+
+{% block body_class %}subscribe{% endblock %}
+
+{% block body_base %}
+    <div class="container text-center">
+        <section>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1 class="text-center">Subscribe now!</h1>
+
+                    <img src="http://lorempixel.com/200/200" class="img-responsive center-block" alt="">
+
+                    <p class="lead">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores commodi cumque
+                        dolore
+                        dolorem
+                        doloribus, error explicabo id inventore ipsam iusto neque obcaecati odit pariatur placeat quae
+                        quidem
+                        repellat voluptate.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="plans">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-default plan">
+                        <div class="panel-heading plan-name">
+                            Monthly
+                        </div>
+                        <div class="panel-body">
+                            <div class="plan-price">${{ price_month }}</div>
+                        </div>
+                        <div class="panel-footer">
+                            {% if subscribed %}
+                                <button class="btn btn-disabled btn-lg btn-block" disabled>Subscribed</button>
+                            {% else %}
+                                <a href="#" id="month-sub-btn" class="btn btn-primary btn-lg btn-block"
+                                   data-price="{{ price_month }}">Subscribe Now</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="panel panel-default plan">
+                        <div class="panel-heading plan-name">
+                            Yearly
+                        </div>
+                        <div class="panel-body">
+                            <div class="plan-price">${{ price_year }}</div>
+                        </div>
+                        <div class="panel-footer">
+                            {% if subscribed %}
+                                <button class="btn btn-disabled btn-lg btn-block" disabled>Subscribed</button>
+                            {% else %}
+                                <a href="#" id="year-sub-btn" class="btn btn-primary btn-lg btn-block"
+                                   data-price="{{ price_year }}">Subscribe Now</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

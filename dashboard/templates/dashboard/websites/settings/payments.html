@@ -14,7 +14,7 @@
                 <legend>{% trans "Payments Settings" %}</legend>
 
                 <div class="form-group">
-                    <a href="#" class="stripe-connect"><span>Connect with Stripe</span></a>
+                    <a href="{% url 'payments_stripe_redirect' site_id %}" class="stripe-connect"><span>Connect with Stripe</span></a>
                     <p class="help-block">
                         You <strong>must</strong> connect with Stripe before you can enable premium subscriptions.
                     </p>

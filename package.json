@@ -83,6 +83,7 @@
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",
     "browserify-hmr": "^0.3.1",
+    "browserify-shim": "^3.8.12",
     "del": "^2.2.0",
     "fs": "0.0.2",
     "gulp": "gulpjs/gulp#4.0",
@@ -102,5 +103,15 @@
     "gulp-xo": "^0.7.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.6.1"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "stripejs": "global:Stripe",
+    "stripe-checkout": "global:StripeCheckout",
+    "./node_modules/jquery/dist/jquery.js" : "$"
   }
 }
