@@ -8,14 +8,11 @@
 {% block body %}
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <form method="post" action="{% url "series_create"%}">
+            <form method="post" action="{% url "series_create"%}"
+                enctype="multipart/form-data">
                 <legend>{% trans "Create Series" %}</legend>
                 {% csrf_token %}
                 {{ form|bootstrap }}
-                <!--{% if redirect_field_value %}-->
-                    <!--<input type="hidden" name="{{redirect_field_name}}"--> 
-                        <!--value="{{redirecct_field_name}}" />-->
-                <!--{% endif %}-->
                 <button type="submit" class="btn btn-primary">
                     {% trans "Create Series"%}
                 </button>
