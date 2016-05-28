@@ -5,6 +5,7 @@ from django.shortcuts import render
 from websites.models import Info
 from videos.models import Video
 from series.models import Series
+from subscriptions.models import Subscription
 
 
 class DashboardView(TemplateView):
@@ -35,8 +36,8 @@ class DashboardView(TemplateView):
         total_rating = (sum(r.ratings for r in Video.objects.filter(
                     creator_id=user.id
                 )) or 0.0) / 5.0
-        total_subscribers = sum(s.subscribers for s in Series.objects.filter(
-                    creator_id=user.id
+        total_subscribers = sum(1 for s in Subscription.objects.filter(
+                    user_id=user.id
                 )) or 0
         context = {
             'user': user,
@@ -44,7 +45,6 @@ class DashboardView(TemplateView):
             'websites': Info.objects.filter(creator_id=user.id),
             'views': total_views,
             'subscribers': total_subscribers,
-
             'rating': total_rating
 
         }
