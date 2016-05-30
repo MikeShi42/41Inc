@@ -1,0 +1,44 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load bootstrap %}
+
+{% block head_title %}{% trans "Videos" %}{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="row">
+            <div class="pull-left">
+                <h1>{{ series.title }}</h1>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{% url 'videos:create' website_id %}">Add New Video</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 table-responsive">
+                <table class="table series-list">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Ratings</th>
+                        <th>Views</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for video in object_list %}
+                        <tr>
+                            <td>{{ video.title }}</td>
+                            <td>{{ video.ratings }}</td>
+                            <td>{{ video.views }}</td>
+                            <td><a class="btn btn-primary">Manage</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock %}
