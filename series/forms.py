@@ -10,9 +10,7 @@ class SeriesForm(forms.ModelForm):
         fields = ['title', 'description']
 
     def clean_series(self):
-        series_title = self.cleaned_data['title']
-        q = Site.objects.filter(title=series_title)
-        if q.exists():
-        #Series.objects.filter(title=series_title).count() > 0:
-            raise form.ValidationError(_('This series title is already used.'))
-        return series_title
+        title = self.cleaned_data['title']
+        if Series.objects.filter(title=title).count() > 0:
+            raise ValidationError('This series title is already used.')
+        return title
