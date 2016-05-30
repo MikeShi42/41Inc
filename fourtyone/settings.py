@@ -144,6 +144,7 @@ INSTALLED_APPS = [
 
     # project
     "fourtyone",
+    "subscriptions",
     "users",
     "websites",
     "dashboard",
@@ -216,6 +217,10 @@ VIDEO_MIME_TYPES = [
     'video/ms-video',
     'video/x-ms-video'
 ]
+
+# Plan IDs
+PLAN_ID_MONTHLY = '41_premium_month'
+PLAN_ID_YEARLY = '41_premium_year'
 
 try:
     from local_settings import *
