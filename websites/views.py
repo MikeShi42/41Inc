@@ -106,3 +106,8 @@ def site_homepage(request):
     series_for_site = Series.objects.all()
     context = {'series_for_site': series_for_site}
     return render(request, 'websites/homepage.html', context)
+
+def browse_series(request):
+    series_for_site = Series.objects.all()
+    context = {'series_for_site': series_for_site}
+    return render(request, 'websites/browse_series.html', context)

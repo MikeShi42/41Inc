@@ -12,6 +12,7 @@ urlpatterns = [
     # url(r"^account/", include("users.urls")),
     url(r'^videos/(?P<video_id>[0-9]+)$', TemplateView.as_view(template_name="websites/videos/view.html"), name="site_video"),
     url(r'^subscribe/$', SubscribeView.as_view(), name="site_subscribe"),
+    url(r'^series/$', websites.views.browse_series, name="series_browse"),
 ]
 
 urlpatterns += account.urls.urlpatterns
