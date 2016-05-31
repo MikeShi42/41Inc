@@ -1,7 +1,16 @@
 from django.conf.urls import include, url
 from django.views.generic import TemplateView
 
-from dashboard.views import WebsiteCreate, SeriesCreate, VideoCreate, VideoIndexView, PaymentSettings, stripe_auth, stripe_callback
+from dashboard.views import (
+    SeriesView,
+    WebsiteCreate,
+    SeriesCreate,
+    VideoCreate,
+    VideoIndexView,
+    PaymentSettings,
+    stripe_auth,
+    stripe_callback
+)
 
 urlpatterns = [
     url(r"^$", TemplateView.as_view(template_name="dashboard/dashboard.html"), name="dashboard"),
@@ -20,7 +29,17 @@ urlpatterns = [
 
             # /websites/{website_id}/videos/create
             url(r'^create/$', VideoCreate.as_view(), name='create')
+
         ], namespace='videos', app_name='videos')),
+
+        # /websites/{website_id}/series
+        url(r'^(?P<website_id>[0-9]+)/series/', include([
+
+            # /websites/{website_id}/series/{series_id}
+            url(r'^(?P<series_id>[0-9]+)$', SeriesView.as_view(), name='view')
+
+        ], namespace='series', app_name='series')),
+
 
         url(r"^(?P<pk>\d+)/settings/payments/$", PaymentSettings.as_view(), name="payments_settings"),
         url(r"^(?P<pk>\d+)/settings/payments/stripe$", stripe_auth, name="payments_stripe_redirect"),
