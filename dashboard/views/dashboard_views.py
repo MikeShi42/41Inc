@@ -55,7 +55,6 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
         context = {
             'user': user,
             'series': series,
-            'websites': Info.objects.filter(creator_id=user.id),
             'views': total_views,
             'subscribers': total_subscribers,
             'rating': total_rating,
