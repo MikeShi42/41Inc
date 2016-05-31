@@ -12,6 +12,7 @@ from django.dispatch import receiver
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import FormView, UpdateView
 
+from dashboard.mixins import SiteIdMixin
 from dashboard.oauth2 import stripe_connect_service
 from subscriptions.models import Settings as SubscriptionSettings
 from subscriptions.forms import SubscriptionSettingsForm
@@ -22,7 +23,7 @@ from websites.models import Info
 STRIPE_STATE_SALT = 'fourtyone.stripe'
 
 
-class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
+class WebsiteCreate(SiteIdMixin, LoginRequiredMixin, SuccessMessageMixin, FormView):
     template_name = 'dashboard/websites/create.html'
     form_class = WebsiteForm
     success_message = "%(name)s was created successfully"
@@ -50,7 +51,7 @@ class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
         return settings
 
 
-class WebsiteSettings(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class WebsiteSettings(SiteIdMixin, LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'dashboard/websites/settings/settings.html'
     model = Site
     fields = ['name', 'domain']
@@ -60,7 +61,7 @@ class WebsiteSettings(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return reverse('websites_settings', args=(self.kwargs['pk'],))
 
 
-class WebsiteSettingsInfo(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class WebsiteSettingsInfo(SiteIdMixin, LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'dashboard/websites/settings/info.html'
     model = Info
     fields = ['description']
