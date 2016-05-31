@@ -28,8 +28,5 @@ class SeriesCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
     def create_series(self, form):
         series =  Series(title=form.cleaned_data['title'], 
                 description=form.cleaned_data['description'])
-        title = form.cleaned_data['title']
-        if Series.objects.filter(title=title).count() > 0:
-            raise ValidationError('Title already in use')
         series.save()
         return series 

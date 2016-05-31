@@ -8,9 +8,3 @@ class SeriesForm(forms.ModelForm):
     class Meta:
         model = Series 
         fields = ['title', 'description']
-
-    def clean_series(self):
-        title = self.cleaned_data['title']
-        if Series.objects.filter(title=title).count() > 0:
-            raise ValidationError('This series title is already used.')
-        return title
