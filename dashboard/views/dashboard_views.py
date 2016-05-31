@@ -15,11 +15,11 @@ from subscriptions.models import Subscription
 class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
     template_name = 'dashboard/dashboard.html'
 
-    def get_context_data(self):
+    def get_context_data(self, **kwargs):
         user = self.request.user
 
         # Get site ID if available
-        site_id = self.kwargs.get('pk')
+        site_id = self.kwargs.get('website_id')
 
         # Get oldest site if not explicitly set
         if site_id is None:
@@ -58,11 +58,8 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
             'websites': Info.objects.filter(creator_id=user.id),
             'views': total_views,
             'subscribers': total_subscribers,
-            'rating': total_rating
-
+            'rating': total_rating,
+            'site': site
         }
-        return context
 
-    def get(self, request):
-        context = self.get_context_data()
-        return render(request, self.template_name, context=context)
+        return context
