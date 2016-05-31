@@ -5,6 +5,8 @@ from dashboard.views import (
     SeriesEdit,
     SeriesDelete,
     WebsiteCreate,
+    WebsiteSettings,
+    WebsiteSettingsInfo,
     SeriesCreate,
     VideoCreate,
     DashboardView,
@@ -44,9 +46,13 @@ urlpatterns = [
 
         ], namespace='series', app_name='series')),
 
+        url(r'^(?P<pk>[0-9]+)/settings/', include([
+            url(r"^$", WebsiteSettings.as_view(), name="websites_settings"),
+            url(r"^info/$", WebsiteSettingsInfo.as_view(), name="websites_settings_info"),
+            url(r"^payments/$", PaymentSettings.as_view(), name="payments_settings"),
+            url(r"^payments/stripe$", stripe_auth, name="payments_stripe_redirect"),
+        ])),
 
-        url(r"^(?P<pk>\d+)/settings/payments/$", PaymentSettings.as_view(), name="payments_settings"),
-        url(r"^(?P<pk>\d+)/settings/payments/stripe$", stripe_auth, name="payments_stripe_redirect"),
         url(r"^stripe_callback/$", stripe_callback, name="payments_stripe_callback")
     ])),
     url(r"^series/", include([

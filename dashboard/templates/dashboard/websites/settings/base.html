@@ -1,0 +1,20 @@
+{% extends "theme_bootstrap/subnav_base.html" %}
+
+{% load i18n %}
+
+{% block subnav %}
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>{% trans "Website Settings" %}</strong></div>
+    <div class="list-group">
+        <a class="list-group-item" href="{% url "websites_settings" site_id %}">
+            {% trans "Basic Settings" %}
+        </a>
+        <a class="list-group-item" href="{% url "websites_settings_info" site_id %}">
+            {% trans "Site Information" %}
+        </a>
+        <a class="list-group-item" href="{% url "payments_settings" site_id %}">
+            {% trans "Payments" %}
+        </a>
+    </div>
+</div>
+{% endblock %}
