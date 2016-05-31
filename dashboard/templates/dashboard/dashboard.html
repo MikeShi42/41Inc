@@ -56,7 +56,8 @@
             <div class="row" id="newContent">
                 <div class="col-xs-12">
                     <div class="pull-right add-video">
-                        <a class="btn btn-success" href="">Add a New Series</a>
+                        {% url "series_create" as series_url %}              
+                        <a class="btn btn-success" href="{{series_url}}">Add a New Series</a>
                     </div>
                     <div class="pull-right add-video-label">
                         <h5 class>Got new knowledge to share? </h5>

@@ -1,0 +1,35 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load bootstrap %}
+
+{% block head_title %}{% trans "Update Series" %}{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="row">
+            <div class="pull-left">
+                <h1>Update Series</h1>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-danger" href="{% url 'series:delete' website_id pk %}">Delete Series</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <form method="POST" action="{% url "series:edit" website_id pk %}">
+
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}"
+                               value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <button type="submit" class="btn btn-primary">
+                        {% trans "Update Series"%}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -32,6 +32,10 @@ class Video(models.Model):
         """
         return self.content.url
 
+    @property
+    def rating(self):
+        return sum([x.rating for x in self.ratings.all()])
+
     def __str__(self):
         return "%s - %s" % (self.title, self.description)
 

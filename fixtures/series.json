@@ -1,7 +1,7 @@
 [
     {
-        "pk": 1,
         "model": "series.series",
+        "pk": 1,
         "fields": {
             "site": 1,
             "creator": 1,
@@ -11,8 +11,8 @@
         }
     },
     {
-        "pk": 2,
         "model": "series.series",
+        "pk": 2,
         "fields": {
             "site": 1,
             "creator": 2,
