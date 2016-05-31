@@ -1,20 +1,19 @@
-import account.views
 import datetime
+
+import account.views
 import stripe
 from account.mixins import LoginRequiredMixin
 from django.contrib import auth
 from django.contrib.sites.shortcuts import get_current_site
-import json
 from django.http import HttpResponse
 from django.utils import timezone
 from django.views.generic import TemplateView
-from django.shortcuts import render
 
-from fourtyone import settings
-from websites.mixins import PremiumEnabledMixin, SubscriptionMixin
 import websites.forms
+from fourtyone import settings
 from series.models import Series
 from subscriptions.models import Settings as SubscriptionSettings, Subscription
+from websites.mixins import PremiumEnabledMixin, SubscriptionMixin
 
 
 class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, TemplateView):
@@ -102,7 +101,10 @@ class WebsiteSignupView(account.views.SignupView):
         return kw
 
 
-def site_homepage(request):
-    series_for_site = Series.objects.all()
-    context = {'series_for_site': series_for_site}
-    return render(request, 'websites/homepage.html', context)
+class HomeView(TemplateView):
+    template_name = 'websites/homepage.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['series_for_site'] = Series.objects.filter(site=get_current_site(self.request))
+        return context

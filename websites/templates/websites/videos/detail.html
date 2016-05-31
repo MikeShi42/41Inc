@@ -14,21 +14,17 @@
             <div class="row vcenter-parent">
 
                 <div class="col-md-8">
-                    <h2>Video Name</h2>
+                    <h2>{{ video.title }}</h2>
                     <video id="video" class="video-js video-41 vjs-big-play-centered" style="width: 100%;" controls preload="auto"
                            data-setup="{}">
-                        <source src="http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4" type='video/mp4'>
+                        <source src="{{ video.url }}" type='video/mp4'>
                         <p class="vjs-no-js">
                             To view this video please enable JavaScript, and consider upgrading to a web browser that
                             <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
                         </p>
                     </video>
 
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa deleniti dolorem
-                        harum laboriosam minus, nemo numquam officiis praesentium recusandae, repudiandae sequi vel
-                        vero. Cumque earum ipsam quis vitae voluptatem!
-                    </p>
+                    <p>{{ video.description }}</p>
                 </div>
                 <div class="col-md-4">
                     <h4 class="vjs-playlist-header">Playlist</h4>
@@ -41,6 +37,8 @@
         <div class="container">
             <div id="disqus_thread"></div>
             <script>
+                window.currentVideoID = '{{ video.id }}';
+
                 /**
                  * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
                  * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables

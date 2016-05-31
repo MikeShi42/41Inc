@@ -8,6 +8,13 @@ require('bootstrap-sass');
 const $ = window.$;
 const videojs = window.videojs;
 
+const loadSeriesListings = videoID => {
+    $.get(`/api/videos/${videoID}`, data => {
+        console.log(data);
+        return data;
+    });
+};
+
 const StripeHandler = require('./payments');
 
 $(() => {
@@ -34,6 +41,12 @@ $(() => {
 
     // fire up the plugin
     const player = videojs('video');
+
+    var playlistData = loadSeriesListings(window.currentVideoID);
+
+    player.playlist(playlistData);
+
+    /*
     player.playlist([{
         name: 'Disney\'s Oceans',
         description: 'Explore the depths of our planet\'s oceans. ',
@@ -66,6 +79,6 @@ $(() => {
             }
         ]
     }]);
+    */
     player.playlistUi();
 });
-

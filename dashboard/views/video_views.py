@@ -1,11 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-
 from django.contrib.sites.models import Site
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse_lazy
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views import generic
+from django.views.generic.detail import SingleObjectTemplateResponseMixin
 from django.views.generic.edit import CreateView
 
 from videos.forms import VideoForm
@@ -63,7 +65,9 @@ class VideoCreate(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMix
         Need to use reverse_lazy instead of reverse because the URLs have not
         been loaded when this file is imported.
         """
-        return reverse_lazy('videos:index', kwargs={'website_id': self.kwargs['website_id']})
+        site = Site.objects.get(pk=self.kwargs['website_id'])
+        uri = reverse_lazy('videos:index', urlconf='websites.urls')
+        return 'http://%s%s' % (site.domain, uri)
 
 
 class VideoIndexView(generic.ListView):
@@ -73,16 +77,42 @@ class VideoIndexView(generic.ListView):
     Also passes website_id URL parameter for link to site's upload form.
     """
 
-    template_name = 'dashboard/videos/index.html'
+    template_name = 'websites/videos/index.html'
     context_object_name = 'video_list'
 
     def get_context_data(self, **kwargs):
         """Provides the website_id context to the videos:index view."""
         context = super(VideoIndexView, self).get_context_data(**kwargs)
-        context['website_id'] = self.kwargs['website_id']
+        context['website_id'] = get_current_site(self.request).id
         return context
 
     def get_queryset(self):
         """Gets videos belonging to current site and logged in user."""
-        site = Site.objects.get(pk=self.kwargs['website_id'])
+        site = get_current_site(self.request)
         return Video.objects.filter(site=site)
+
+
+class VideoDetailView(generic.DetailView, SingleObjectTemplateResponseMixin):
+    model = Video
+
+    template_name = 'websites/videos/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(VideoDetailView, self).get_context_data(**kwargs)
+        return context
+
+
+def detail(video_id):
+    video = Video.objects.get(pk=video_id)
+    response = {'name': video.title,
+                'description': video.description,
+                'url': video.url,
+                'sources': [
+                    {'src': video.url, 'type': 'video/mp4'}
+                ],
+                'thumbnail': [
+                    {'srcset': video.thumbnail.url, 'type': 'image/jpeg'}
+                ],
+                }
+    # playlist_videos = list(Video.objects.all().exclude(pk=video_id))
+    return JsonResponse(response, safe=False)
