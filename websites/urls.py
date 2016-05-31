@@ -1,9 +1,11 @@
 import account.urls
 from django.conf.urls import include, url
+from django.views.generic import DetailView
 
 import users.views
 import websites.views
 from dashboard.views import VideoIndexView, VideoDetailView, detail
+from series.models import Series
 from websites.views import HomeView
 from websites.views import SubscribeView
 
@@ -22,6 +24,17 @@ urlpatterns = [
 
         # /videos/{video_id}
         url(r'^(?P<pk>[0-9]+)/$', VideoDetailView.as_view(), name="detail"),
+
+    ], namespace='videos')),
+
+    # /series
+    url(r'^series/', include([
+        # /videos/
+        url(r'^$', VideoIndexView.as_view(), name='index'),
+
+        # /videos/{video_id}
+        url(r'^(?P<pk>[0-9]+)/$', DetailView.as_view(template_name='websites/series/detail.html', model=Series),
+            name="detail"),
 
     ], namespace='videos')),
 
