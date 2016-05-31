@@ -9,14 +9,16 @@ from dashboard.views import (
     SeriesCreate,
     VideoCreate,
     VideoIndexView,
+    DashboardView,
     PaymentSettings,
     stripe_auth,
     stripe_callback
 )
 
 urlpatterns = [
-    url(r"^$", TemplateView.as_view(template_name="dashboard/dashboard.html"), name="dashboard"),
+    # url(r"^$", TemplateView.as_view(template_name="dashboard/dashboard.html"), name="dashboard"),
 
+    url(r"^$", DashboardView.as_view(), name="dashboard"),
     # /websites/
     url(r"^websites/", include([
 

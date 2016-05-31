@@ -228,4 +228,3 @@ except ImportError as exp:
     pass
 
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
-
