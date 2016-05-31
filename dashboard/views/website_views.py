@@ -16,7 +16,7 @@ from dashboard.oauth2 import stripe_connect_service
 from subscriptions.models import Settings as SubscriptionSettings
 from subscriptions.forms import SubscriptionSettingsForm
 from subscriptions.plans import setup as setup_plans
-from websites.forms import WebsiteForm
+from websites.forms import WebsiteForm, website_edit_form_factory
 from websites.models import Info
 
 STRIPE_STATE_SALT = 'fourtyone.stripe'
@@ -48,6 +48,41 @@ class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
         settings = SubscriptionSettings(site=site)
         settings.save()
         return settings
+
+
+class WebsiteEdit(LoginRequiredMixin, SuccessMessageMixin, FormView):
+    template_name = 'dashboard/websites/settings/settings.html'
+    form_class = WebsiteForm
+    success_message = "Your website was updated successfully"
+
+    def form_valid(self, form):
+        self.update_site(self.kwargs['pk'], form)
+        self.update_info(self.kwargs['pk'], form)
+        return super(WebsiteEdit, self).form_valid(form)
+
+    def update_site(self, site_id, form):
+        site = Site.objects.get(pk=site_id)
+        site.name = form.cleaned_data['name']
+        site.domain = form.cleaned_data['domain']
+        site.save()
+        return site
+
+    def update_info(self, site_id, form):
+        info = Info.objects.get(pk=site_id)
+        info.description = form.cleaned_data['description']
+        info.save()
+        return info
+
+    def get_success_url(self):
+        return reverse('websites_settings', args=(self.kwargs['pk'],))
+
+    def get_context_data(self, **kwargs):
+        context = super(WebsiteEdit, self).get_context_data(**kwargs)
+        context['site_id'] = self.kwargs['pk']
+        return context
+
+    def get_form(self, form_class=None):
+        return website_edit_form_factory(self.kwargs['pk'])
 
 
 class PaymentSettings(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
