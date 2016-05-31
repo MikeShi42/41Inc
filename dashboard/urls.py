@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 
 from dashboard.views import (
     SeriesView,
+    SeriesEdit,
     WebsiteCreate,
     SeriesCreate,
     VideoCreate,
@@ -36,7 +37,10 @@ urlpatterns = [
         url(r'^(?P<website_id>[0-9]+)/series/', include([
 
             # /websites/{website_id}/series/{series_id}
-            url(r'^(?P<series_id>[0-9]+)$', SeriesView.as_view(), name='view')
+            url(r'^(?P<series_id>[0-9]+)$', SeriesView.as_view(), name='view'),
+
+            # /websites/{website_id}/series/{series_id}/edit
+            url(r'^(?P<pk>[0-9]+)/edit$', SeriesEdit.as_view(), name='edit'),
 
         ], namespace='series', app_name='series')),
 

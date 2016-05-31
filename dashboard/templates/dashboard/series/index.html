@@ -12,7 +12,8 @@
                 <h1>{{ series.title }}</h1>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{% url 'videos:create' website_id %}">Add New Video</a>
+                <a class="btn btn-warning" href="{% url 'series:edit' website_id series_id %}">Edit Series</a>
+                <a class="btn btn-success" href="{% url 'videos:create' website_id %}">Add New Video</a>
             </div>
         </div>
         <div class="row">
