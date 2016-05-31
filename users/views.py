@@ -1,9 +1,13 @@
+from account.utils import default_redirect
 from django.shortcuts import render
 import account.forms
 import account.views
 from django.contrib import auth
 import users.forms
 from django.contrib.sites.shortcuts import get_current_site
+
+from fourtyone import settings
+
 
 class SignupView(account.views.SignupView):
     form_class = users.forms.SignupForm
@@ -34,6 +38,15 @@ class SignupView(account.views.SignupView):
         kw = super(SignupView, self).get_form_kwargs()
         kw['request'] = self.request  # the trick!
         return kw
+
+    def get_success_url(self, fallback_url=None, **kwargs):
+        if fallback_url is None:
+            if get_current_site(self.request).id == settings.ACCOUNT_ROOT_SITE_ID:
+                fallback_url = settings.ACCOUNT_ROOT_SIGNUP_REDIRECT_URL
+            else:
+                fallback_url = settings.ACCOUNT_CONSUMER_SIGNUP_REDIRECT_URL
+        kwargs.setdefault("redirect_field_name", self.get_redirect_field_name())
+        return default_redirect(self.request, fallback_url, **kwargs)
 
 class LoginView(account.views.LoginView):
     form_class = users.forms.LoginUsernameForm
