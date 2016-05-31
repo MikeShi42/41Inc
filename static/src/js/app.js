@@ -8,9 +8,18 @@ require('bootstrap-sass');
 const $ = window.$;
 const videojs = window.videojs;
 
+const loadSeriesListings = videoID => {
+    $.get(`/api/videos/${videoID}`, data => {
+        console.log(data);
+    });
+};
+
 $(() => {
     // fire up the plugin
     const player = videojs('video');
+
+    loadSeriesListings(window.currentVideoID);
+
     player.playlist([{
         name: 'Disney\'s Oceans',
         description: 'Explore the depths of our planet\'s oceans. ',
@@ -45,4 +54,3 @@ $(() => {
     }]);
     player.playlistUi();
 });
-

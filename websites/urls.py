@@ -3,7 +3,7 @@ from django.conf.urls import include, url
 
 import users.views
 import websites.views
-from dashboard.views import VideoIndexView, VideoDetailView
+from dashboard.views import VideoIndexView, VideoDetailView, detail
 from websites.views import HomeView
 
 urlpatterns = [
@@ -23,6 +23,15 @@ urlpatterns = [
         url(r'^(?P<pk>[0-9]+)/$', VideoDetailView.as_view(), name="detail"),
 
     ], namespace='videos')),
+
+    url(r'^api/', include([
+        # /api/videos
+        url(r'^videos/', include([
+            # /api/videos/{video_id}
+            url(r'^(?P<video_id>[0-9]+)/$', detail, name="detail"),
+
+        ], namespace='videos'))
+    ], namespace='api')),
 ]
 
 urlpatterns += account.urls.urlpatterns

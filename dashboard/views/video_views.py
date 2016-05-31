@@ -1,12 +1,15 @@
+from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
+from django.core import serializers
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import redirect
 from django.views import generic
 from django.views.generic.edit import CreateView
+from django.views.generic.detail import BaseDetailView, SingleObjectTemplateResponseMixin
 
 from videos.forms import VideoForm
 from videos.models import Video
@@ -90,7 +93,7 @@ class VideoIndexView(generic.ListView):
         return Video.objects.filter(site=site)
 
 
-class VideoDetailView(generic.DetailView):
+class VideoDetailView(generic.DetailView, SingleObjectTemplateResponseMixin):
     model = Video
 
     template_name = 'dashboard/videos/detail.html'
@@ -98,3 +101,10 @@ class VideoDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(VideoDetailView, self).get_context_data(**kwargs)
         return context
+
+
+def detail(request, video_id):
+    video = Video.objects.get(pk=video_id)
+    response = {'title': video.title, 'description': video.description, 'url': video.url,
+                'playlist_videos': list(Video.objects.all().exclude(pk=video_id))}
+    return JsonResponse(response, safe=False)
