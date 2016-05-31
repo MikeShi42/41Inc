@@ -23,20 +23,7 @@ class WebsiteForm(forms.Form):
         return domain
 
 
-def website_edit_form_factory(site_id):
-    site = Site.objects.get(pk=site_id)
-    info = site.info
-
-    class SiteForm(WebsiteForm):
-        name = forms.CharField(initial=site.name)
-        domain = forms.CharField(validators=[f_validators.validate_domain_name], initial=site.domain)
-        description = forms.CharField(widget=forms.Textarea(), initial=info.description)
-
-    return SiteForm
-
-
 class PaymentSettingsForm(forms.ModelForm):
-
     class Meta:
         model = SubscriptionSettings
         fields = ['premium_enabled', 'price_month', 'price_year']
@@ -57,6 +44,7 @@ class SignupForm(users.forms.SignupForm):
         required=False
     )
 
+
 # Adding on site validation
 class LoginUsernameForm(account.forms.LoginUsernameForm):
     def __init__(self, *args, **kwargs):
@@ -76,4 +64,3 @@ class LoginUsernameForm(account.forms.LoginUsernameForm):
         else:
             raise forms.ValidationError(self.authentication_fail_message)
         return self.cleaned_data
-

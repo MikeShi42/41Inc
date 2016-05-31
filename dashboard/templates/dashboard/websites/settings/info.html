@@ -3,19 +3,19 @@
 {% load i18n %}
 {% load bootstrap %}
 
-{% block head_title %}{% trans "Website Settings" %}{% endblock %}
+{% block head_title %}{% trans "Website Settings | Information" %}{% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <form method="post" action="" autocapitalize="off" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
-                <legend>{% trans "Website Settings" %}</legend>
+                <legend>{% trans "Website Information" %}</legend>
                 {% csrf_token %}
                 {{ form|bootstrap }}
                 {% if redirect_field_value %}
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
-                <button type="submit" class="btn btn-primary">{% trans "Save Settings" %}</button>
+                <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
             </form>
         </div>
     </div>

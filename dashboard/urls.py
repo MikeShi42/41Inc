@@ -5,7 +5,8 @@ from dashboard.views import (
     SeriesView,
     SeriesEdit,
     WebsiteCreate,
-    WebsiteEdit,
+    WebsiteSettings,
+    WebsiteSettingsInfo,
     SeriesCreate,
     VideoCreate,
     VideoIndexView,
@@ -46,7 +47,8 @@ urlpatterns = [
         ], namespace='series', app_name='series')),
 
         url(r'^(?P<pk>[0-9]+)/settings/', include([
-            url(r"^$", WebsiteEdit.as_view(), name="websites_settings"),
+            url(r"^$", WebsiteSettings.as_view(), name="websites_settings"),
+            url(r"^info/$", WebsiteSettingsInfo.as_view(), name="websites_settings_info"),
             url(r"^payments/$", PaymentSettings.as_view(), name="payments_settings"),
             url(r"^payments/stripe$", stripe_auth, name="payments_stripe_redirect"),
         ])),
