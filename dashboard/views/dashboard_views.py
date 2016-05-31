@@ -1,4 +1,5 @@
 from account.mixins import LoginRequiredMixin
+from django.contrib.sites.models import Site
 from django.http import HttpResponse
 
 from django.views.generic import TemplateView
@@ -15,11 +16,20 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
     template_name = 'dashboard/dashboard.html'
 
     def get_context_data(self):
-
         user = self.request.user
 
+        # Get site ID if available
+        site_id = self.kwargs.get('pk')
+
+        # Get oldest site if not explicitly set
+        if site_id is None:
+            site = Site.objects.filter(info__creator=self.request.user).order_by('id')[0]
+        # Otherwise we can get the site based off the URL
+        else:
+            site = Site.objects.get(pk=site_id)
+
         # Need to pass more data with each series, so making a dict
-        raw_series = Series.objects.filter(creator_id=user.id)
+        raw_series = site.series.all()
         series = []
         for rs in raw_series:
             s = {
