@@ -1,14 +1,17 @@
+from account.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 
 from django.views.generic import TemplateView
 from django.shortcuts import render
+
+from dashboard.mixins import WebsiteCreatedMixin
 from websites.models import Info
 from videos.models import Video
 from series.models import Series
 from subscriptions.models import Subscription
 
 
-class DashboardView(TemplateView):
+class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
     template_name = 'dashboard/dashboard.html'
 
     def get_context_data(self):
