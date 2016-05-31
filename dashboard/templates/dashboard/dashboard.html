@@ -1,109 +1,101 @@
-{% extends "site_base.html" %}
+{% extends "dashboard/base.html" %}
 
+{% block body %}
+    <div class="container dash-upper">
+        {% include "_messages.html" %}
 
-{% block body_base %}
-
-{% block sidebar_website %}
-    {% include "_sidebar_website.html" %}
-{% endblock %}
-
-    <section class="jumbotron dash with-sidebar">
-        <div class="container dash-upper">
-            {% include "_messages.html" %}
-
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2>This Past Month</h2>
-                </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>This Past Month</h2>
             </div>
-            <div class="row">
-                <div class="panel-group dash-panels">
-                    <div class="col-sm-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" id="new-subscribers">
-                                <h4>Total Subscribers</h4>
-                            </div>
-                            <div class="panel-body">
-                                <p>{{ subscribers }}</p>
-                            </div>
+        </div>
+        <div class="row">
+            <div class="panel-group dash-panels">
+                <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" id="new-subscribers">
+                            <h4>Total Subscribers</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{ subscribers }}</p>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" id="new-views">
-                                <h4>Views</h4>
-                            </div>
-                            <div class="panel-body">
-                                <p>{{ views }}</p>
-                            </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" id="new-views">
+                            <h4>Views</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{ views }}</p>
                         </div>
                     </div>
-                     <div class="col-sm-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" id="avg-rating">
-                                <h4>Average Rating</h4>
-                            </div>
-                            <div class="panel-body">
-                                <p>{{ rating }}</p>
-                            </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" id="avg-rating">
+                            <h4>Average Rating</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{ rating }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="container dash-content">
-            <div class="row" id="newContent">
-                <div class="col-xs-12">
-                    <div class="pull-right add-video">
-                        {% url "series_create" as series_url %}              
-                        <a class="btn btn-success" href="{{series_url}}">Add a New Series</a>
-                    </div>
-                    <div class="pull-right add-video-label">
-                        <h5 class>Got new knowledge to share? </h5>
-                    </div>
+    <div class="container dash-content">
+        <div class="row" id="newContent">
+            <div class="col-xs-12">
+                <div class="pull-right add-video">
+                    {% url "series_create" as series_url %}
+                    <a class="btn btn-success" href="{{ series_url }}">Add a New Series</a>
+                </div>
+                <div class="pull-right add-video-label">
+                    <h5 class>Got new knowledge to share? </h5>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-xs-12">
-                    <h3>Manage Series</h3>
-                </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Manage Series</h3>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-xs-12 table-responsive">
-                    <table class="table series-list">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Subscribers</th>
-                            <th>Rating</th>
-                            <th>Views</th>
-                            <th></th>
-                        </tr>
-                        </thead>
+        <div class="row">
+            <div class="col-xs-12 table-responsive">
+                <table class="table series-list">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Subscribers</th>
+                        <th>Rating</th>
+                        <th>Views</th>
+                        <th></th>
+                    </tr>
+                    </thead>
 
-                        <tbody>
-                        {% if series %}
-                            {% for s in series %}
-                                <tr>
-                                    <td>{{ s.title }}</td>
-                                    <td>{{ s.subscribers }}</td>
-                                    <td>{{ s.rating }}</td>
-                                    <td>{{ s.views }}</td>
-                                    <td><a href="" class="btn btn-primary">Manage</a></td>
-                                </tr>
-                            {% endfor %}
-                        {% else %}
+                    <tbody>
+                    {% if series %}
+                        {% for s in series %}
                             <tr>
-                                <td>No series here! Create a new one to begin!</td>
+                                <td>{{ s.title }}</td>
+                                <td>{{ s.subscribers }}</td>
+                                <td>{{ s.rating }}</td>
+                                <td>{{ s.views }}</td>
+                                <td><a href="" class="btn btn-primary">Manage</a></td>
                             </tr>
-                        {% endif %}
-                        </tbody>
-                    </table>
-                </div>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>No series here! Create a new one to begin!</td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+
+{% block body_base %}
+
+    {% block sidebar_website %}
+        {% include "_sidebar_website.html" %}
+    {% endblock %}
+
+    <section class="jumbotron dash with-sidebar">
+        {% include "_messages.html" %}
+        {% block body %}{% endblock %}
+    </section>
+{% endblock %}
