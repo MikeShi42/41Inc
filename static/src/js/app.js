@@ -15,7 +15,30 @@ const loadSeriesListings = videoID => {
     });
 };
 
+const StripeHandler = require('./payments');
+
 $(() => {
+    // Stripe Checkout
+    const stripeHandler = new StripeHandler(window);
+
+    // Close Checkout on page navigation:
+    $(window).on('popstate', () => {
+        stripeHandler.close();
+    });
+
+    /**
+     * Subscription
+     */
+    // Month Button
+    const monthBtn = $('#month-sub-btn');
+    const monthPrice = monthBtn.data('price');
+    monthBtn.on('click', stripeHandler.handleSub('month', monthPrice));
+
+    // Year Button
+    const yearBtn = $('#year-sub-btn');
+    const yearPrice = yearBtn.data('price');
+    yearBtn.on('click', stripeHandler.handleSub('year', yearPrice));
+
     // fire up the plugin
     const player = videojs('video');
 

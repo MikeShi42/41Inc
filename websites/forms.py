@@ -6,9 +6,9 @@ from django.contrib import auth
 
 import account.forms
 import users.forms
+from subscriptions.models import Settings as SubscriptionSettings
 
 import fourtyone.validators as f_validators
-from websites.models import Info
 
 
 class WebsiteForm(forms.Form):
@@ -26,7 +26,7 @@ class WebsiteForm(forms.Form):
 class PaymentSettingsForm(forms.ModelForm):
 
     class Meta:
-        model = Info
+        model = SubscriptionSettings
         fields = ['premium_enabled', 'price_month', 'price_year']
 
 

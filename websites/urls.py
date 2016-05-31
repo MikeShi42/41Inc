@@ -5,6 +5,7 @@ import users.views
 import websites.views
 from dashboard.views import VideoIndexView, VideoDetailView, detail
 from websites.views import HomeView
+from websites.views import SubscribeView
 
 urlpatterns = [
     # Root URL for client sites /
@@ -32,6 +33,9 @@ urlpatterns = [
 
         ], namespace='videos'))
     ], namespace='api')),
+
+    # url(r"^account/", include("users.urls")),
+    url(r'^subscribe/$', SubscribeView.as_view(), name="site_subscribe"),
 ]
 
 urlpatterns += account.urls.urlpatterns
