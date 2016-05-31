@@ -18,6 +18,9 @@ ALLOWED_HOSTS = []
 
 ROOT_URLCONF = "websites.urls"
 
+ADMIN_DOMAIN = "localhost:8000"
+ADMIN_URLCONF = 'fourtyone.urls'
+
 # Configure this to match your HOSTS configuration
 HOST_MIDDLEWARE_URLCONF_MAP = {
     "localhost": "fourtyone.urls",      # 41Inc Site
@@ -194,6 +197,9 @@ ACCOUNT_LOGIN_REDIRECT_URL = "home"
 ACCOUNT_LOGOUT_REDIRECT_URL = "home"
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
 ACCOUNT_USE_AUTH_AUTHENTICATE = True
+ACCOUNT_ROOT_SIGNUP_REDIRECT_URL = "websites_create"
+ACCOUNT_ROOT_SITE_ID = 1
+ACCOUNT_CONSUMER_SIGNUP_REDIRECT_URL = "home"
 
 AUTHENTICATION_BACKENDS = [
     "users.auth_backends.UsernameSiteAuthenticationBackend",
@@ -228,4 +234,3 @@ except ImportError as exp:
     pass
 
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
-

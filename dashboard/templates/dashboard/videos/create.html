@@ -1,7 +1,8 @@
-{% extends "site_base.html" %}
+{% extends "dashboard/base.html" %}
 
 {% load i18n %}
 {% load bootstrap %}
+{% load domain_url %}
 
 {% block head_title %}{% trans "Video" %}{% endblock %}
 
@@ -18,6 +19,6 @@
         </div>
     </div>
     <section>
-        <a href="{% url 'videos:index' website_id=website_id %}">Back to video list</a>
+        <a href="{% domain_url 'videos:index' client_site=website_id %}">Back to video list</a>
     </section>
 {% endblock %}

@@ -24,36 +24,24 @@
             <h1 class="text-center">Start Learning Now</h1>
             <br>
             <br>
-            <div class="row">
 
                 {% if series_for_site %}
-                    {% for series in series_for_site %}
-                        <div class="col-lg-4">
-                            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
-                            <h4>Playlist Title: {{  series.title }}</h4>
-                            <img src="{{  series.thumbnail_url }}" style="width:320px;height:180px">
-                                <br>
-                                <p>IF THIS SHOWS UP WE (PRETTY MUCH) WIN (series desription below)</p>
-                                <p>{{ series.description }}</p>
-                            </a>
-                        </div>
-                    {% endfor %}
+                    <div class="row ">
+                        {% for series in series_for_site %}
+                                {% if forloop.counter0|divisibleby:3 %}
+                                    <div class="clearfix"></div>
+                                {% endif %}
+                                <div class="col-md-4 series-card">
+                                    <h3>{{ series.title }} <small>{{ series.listings.count }} videos</small></h3>
+                                    <img src="http://media.istockphoto.com/photos/photographic-camera-lens-with-bokeh-light-picture-id499201764" class="img-responsive" alt="Series thumbnail image">
+                                    <p>{{ series.description }}</p>
+                                </div>
+                        {% endfor %}
+                    </div>
                 {% else %}
                     <h3>No series are available.</h3>
                 {% endif %}
 
-
-                <div class="col-lg-4">
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="thumbnail" style="color:black;text-decoration-line:none;border-radius:0">
-                    <h4>Placeholder</h4>
-                    <img src="http://tinyurl.com/ja378yd" style="width:320px;height:180px">
-                        <br>
-                        <p>Should display series from ALL sites right now (if any). When it's testable, I'll go back and make it only display the appropriate sites.</p>
-                    </a>
-                </div>
-
-
-            </div>
             <br>
             <p class="text-center">
                 <a href="" class="btn btn-primary btn-lg">View More</a><br><br>

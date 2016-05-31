@@ -1,22 +1,24 @@
 from django.conf.urls import include, url
-from django.views.generic import TemplateView
 
 from dashboard.views import (
     SeriesView,
     SeriesEdit,
     SeriesDelete,
     WebsiteCreate,
+    WebsiteSettings,
+    WebsiteSettingsInfo,
     SeriesCreate,
     VideoCreate,
-    VideoIndexView,
+    DashboardView,
     PaymentSettings,
     stripe_auth,
     stripe_callback
 )
 
 urlpatterns = [
-    url(r"^$", TemplateView.as_view(template_name="dashboard/dashboard.html"), name="dashboard"),
+    # url(r"^$", TemplateView.as_view(template_name="dashboard/dashboard.html"), name="dashboard"),
 
+    url(r"^$", DashboardView.as_view(), name="dashboard"),
     # /websites/
     url(r"^websites/", include([
 
@@ -26,12 +28,8 @@ urlpatterns = [
         # /websites/{website_id}/videos
         url(r'^(?P<website_id>[0-9]+)/videos/', include([
 
-            # /websites/{website_id}/videos/
-            url(r'^$', VideoIndexView.as_view(), name='index'),
-
             # /websites/{website_id}/videos/create
             url(r'^create/$', VideoCreate.as_view(), name='create')
-
         ], namespace='videos', app_name='videos')),
 
         # /websites/{website_id}/series
@@ -48,9 +46,13 @@ urlpatterns = [
 
         ], namespace='series', app_name='series')),
 
+        url(r'^(?P<pk>[0-9]+)/settings/', include([
+            url(r"^$", WebsiteSettings.as_view(), name="websites_settings"),
+            url(r"^info/$", WebsiteSettingsInfo.as_view(), name="websites_settings_info"),
+            url(r"^payments/$", PaymentSettings.as_view(), name="payments_settings"),
+            url(r"^payments/stripe$", stripe_auth, name="payments_stripe_redirect"),
+        ])),
 
-        url(r"^(?P<pk>\d+)/settings/payments/$", PaymentSettings.as_view(), name="payments_settings"),
-        url(r"^(?P<pk>\d+)/settings/payments/stripe$", stripe_auth, name="payments_stripe_redirect"),
         url(r"^stripe_callback/$", stripe_callback, name="payments_stripe_callback")
     ])),
     url(r"^series/", include([
