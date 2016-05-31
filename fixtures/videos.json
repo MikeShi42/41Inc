@@ -1,0 +1,69 @@
+[
+    {
+        "pk": 1,
+        "model": "videos.video",
+        "fields": {
+            "title": "hello",
+            "description": "hello world!",
+            "content": "{}",
+            "thumbnail": "url",
+            "creator_id": 1,
+            "site_id": 1,
+            "views": 69
+        }
+    },
+
+    {
+        "pk": 1,
+        "model": "videos.listing",
+        "fields": {
+            "order": 1,
+            "series_id": 1,
+            "video_id": 1
+        }
+    },
+
+    {
+        "pk": 1,
+        "model": "videos.rating",
+        "fields": {
+            "rating": 5,
+            "user_id": 1,
+            "video_id": 1
+        }
+    },
+
+    {
+        "pk": 2,
+        "model": "videos.rating",
+        "fields": {
+            "rating": 3,
+            "user_id": 2,
+            "video_id": 1
+        }
+    },
+
+    {
+        "pk": 2,
+        "model": "videos.video",
+        "fields": {
+            "title": "my second awesome fucking video",
+            "description": "hello world!",
+            "content": "{}",
+            "thumbnail": "url",
+            "creator_id": 1,
+            "site_id": 1,
+            "views": 4761
+        }
+    },
+
+    {
+        "pk": 2,
+        "model": "videos.listing",
+        "fields": {
+            "order": 2,
+            "series_id": 1,
+            "video_id": 2
+        }
+    }
+]
