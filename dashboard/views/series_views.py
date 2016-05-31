@@ -1,13 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import FormView, UpdateView
+from django.views.generic import FormView, UpdateView, DeleteView
 from series.forms import SeriesForm
 from django.core.exceptions import ValidationError
 from django.views.generic.list import ListView
 from django.contrib.sites.models import Site
 from series.models import Series
 from videos.models import Listing
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 
 class SeriesCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
     model = Series
@@ -71,3 +71,17 @@ class SeriesEdit(LoginRequiredMixin, UpdateView):
             'series_id':self.kwargs.get('pk')
         })
 
+
+class SeriesDelete(LoginRequiredMixin, DeleteView):
+
+    model = Series
+
+    success_url = reverse_lazy('dashboard')
+
+    template_name = 'dashboard/series/deleteSeries.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SeriesDelete, self).get_context_data(**kwargs)
+        context['website_id'] = self.kwargs.get('website_id')
+        context['pk'] = self.kwargs.get('pk')
+        return context

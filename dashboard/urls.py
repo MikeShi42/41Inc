@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from dashboard.views import (
     SeriesView,
     SeriesEdit,
+    SeriesDelete,
     WebsiteCreate,
     SeriesCreate,
     VideoCreate,
@@ -41,6 +42,9 @@ urlpatterns = [
 
             # /websites/{website_id}/series/{series_id}/edit
             url(r'^(?P<pk>[0-9]+)/edit$', SeriesEdit.as_view(), name='edit'),
+
+            # /websites/{website_id}/series/{series_id}/delete
+            url(r'^(?P<pk>[0-9]+)/delete$', SeriesDelete.as_view(), name='delete'),
 
         ], namespace='series', app_name='series')),
 
