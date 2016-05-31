@@ -1,14 +1,10 @@
 from account.mixins import LoginRequiredMixin
 from django.contrib.sites.models import Site
-from django.http import HttpResponse
 
 from django.views.generic import TemplateView
-from django.shortcuts import render
 
 from dashboard.mixins import WebsiteCreatedMixin
-from websites.models import Info
 from videos.models import Video
-from series.models import Series
 from subscriptions.models import Subscription
 
 
@@ -44,14 +40,14 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
             }
             series.append(s)
         total_views = sum(v.views for v in Video.objects.filter(
-                    creator_id=user.id
-                )) or 0
+            creator_id=user.id
+        )) or 0
         total_rating = (sum(r.ratings for r in Video.objects.filter(
-                    creator_id=user.id
-                )) or 0.0) / 5.0
+            creator_id=user.id
+        )) or 0.0) / 5.0
         total_subscribers = sum(1 for s in Subscription.objects.filter(
-                    user_id=user.id
-                )) or 0
+            user_id=user.id
+        )) or 0
         context = {
             'user': user,
             'series': series,
