@@ -1,12 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import FormView
+from django.views.generic import FormView, UpdateView
 from series.forms import SeriesForm
 from django.core.exceptions import ValidationError
 from django.views.generic.list import ListView
 from django.contrib.sites.models import Site
 from series.models import Series
 from videos.models import Listing
+from django.core.urlresolvers import reverse
 
 class SeriesCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
     model = Series
@@ -50,3 +51,23 @@ class SeriesView(LoginRequiredMixin, ListView):
         listings = Listing.objects.filter(series=self.kwargs['series_id'])
         videos = [listing.video for listing in listings]
         return videos
+
+class SeriesEdit(LoginRequiredMixin, UpdateView):
+    model = Series
+
+    fields=['title', 'description', 'thumbnail_url']
+
+    template_name='dashboard/series/editSeries.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SeriesEdit, self).get_context_data(**kwargs)
+        context['website_id'] = self.kwargs.get('website_id')
+        context['pk'] = self.kwargs.get('pk')
+        return context
+
+    def get_success_url(self):
+        return reverse('series:view', kwargs = {
+            'website_id': self.kwargs.get('website_id'),
+            'series_id':self.kwargs.get('pk')
+        })
+
