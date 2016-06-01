@@ -101,7 +101,6 @@ class WebsiteSignupView(account.views.SignupView):
         kw['request'] = self.request  # the trick!
         return kw
 
-
 class HomeView(TemplateView):
     template_name = 'websites/homepage.html'
 
@@ -110,6 +109,12 @@ class HomeView(TemplateView):
         context['series_for_site'] = Series.objects.filter(site=get_current_site(self.request))
         return context
 
+class SeriesView(TemplateView):
+    template_name = 'websites/browse_series.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SeriesView, self).get_context_data(**kwargs)
+        context['series_for_site'] = Series.objects.filter(site=get_current_site(self.request))
 
 class SeriesDetailView(DetailView):
     template_name = 'websites/series/detail.html'
