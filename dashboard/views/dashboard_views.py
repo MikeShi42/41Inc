@@ -32,6 +32,7 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
         series = []
         for rs in raw_series:
             s = {
+                'id': rs.id,
                 'views': self.get_series_views(rs.id) or 0,
                 'rating': self.get_series_rating(rs.id) or 0.0,
                 'title': rs.title
