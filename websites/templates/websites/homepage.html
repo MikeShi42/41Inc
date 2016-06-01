@@ -1,4 +1,4 @@
-{% extends "site_base.html" %}
+{% extends "consumer_base.html" %}
 
 {% load i18n %}
 
@@ -14,7 +14,7 @@
             <p class="text-center">{% blocktrans %}Explore the homepage like never before.{% endblocktrans %}</p>
             <p class="text-center">
                 <a href="" class="btn btn-primary btn-lg">Get Started</a>
-                <a href="" class="btn btn-default btn-lg">Learn More</a></div>
+                <a href="" class="btn btn-default btn-lg">Learn More</a>
             </p>
         </div>
 
@@ -25,22 +25,25 @@
             <br>
             <br>
 
-                {% if series_for_site %}
-                    <div class="row ">
-                        {% for series in series_for_site %}
-                                {% if forloop.counter0|divisibleby:3 %}
-                                    <div class="clearfix"></div>
-                                {% endif %}
-                                <div class="col-md-4 series-card">
-                                    <h3>{{ series.title }} <small>{{ series.listings.count }} videos</small></h3>
-                                    <img src="http://media.istockphoto.com/photos/photographic-camera-lens-with-bokeh-light-picture-id499201764" class="img-responsive" alt="Series thumbnail image">
-                                    <p>{{ series.description }}</p>
-                                </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <h3>No series are available.</h3>
-                {% endif %}
+            {% if series_for_site %}
+                <div class="row ">
+                    {% for series in series_for_site %}
+                        {% if forloop.counter0|divisibleby:3 %}
+                            <div class="clearfix"></div>
+                        {% endif %}
+                        <div class="col-md-4 series-card">
+                            <h3>{{ series.title }}
+                                <small>{{ series.listings.count }} videos</small>
+                            </h3>
+                            <img src="http://media.istockphoto.com/photos/photographic-camera-lens-with-bokeh-light-picture-id499201764"
+                                 class="img-responsive" alt="Series thumbnail image">
+                            <p>{{ series.description }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <h3>No series are available.</h3>
+            {% endif %}
 
             <br>
             <p class="text-center">
@@ -51,14 +54,16 @@
     <section style="background-color:#404040;padding-top:100px;padding-bottom:200px" class="text-center">
         <h1 style="color:white">Just Do It</h1>
         <i class="fa fa-play-circle fa-4x" style="color:white"></i><br>
-        <h4 class="col-md-4 col-md-offset-4" style="color:white">Start learning today and you will become a better person, otherwise it's not our fault, it's yours.</h4>
+        <h4 class="col-md-4 col-md-offset-4" style="color:white">Start learning today and you will become a better
+            person, otherwise it's not our fault, it's yours.</h4>
     </section>
     <section style="padding-top: 100px;padding-bottom: 100px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                <h1 style="color: lightseagreen">Easy to Use</h1>
-                <h4 style="color: lightseagreen">Give me your money! I mean this product is great and stuff and stuff. So there will be some more typing just so we see where it warps around.</h4>
+                    <h1 style="color: lightseagreen">Easy to Use</h1>
+                    <h4 style="color: lightseagreen">Give me your money! I mean this product is great and stuff and
+                        stuff. So there will be some more typing just so we see where it warps around.</h4>
                 </div>
                 <img src="http://tinyurl.com/ja378yd" class="col-md-3 col-md-offset-1" style="width:600px">
             </div>
@@ -69,11 +74,12 @@
             <div class="row">
                 <img src="http://tinyurl.com/ja378yd" class="col-md-6" style="width:600px">
                 <div class="col-md-4 col-md-offset-1">
-                <h1 style="color: white">Easy to Use</h1>
-                <h4 style="color: white">Give me your money! I mean this product is great and stuff and stuff. So there will be some more typing just so we see where it warps around.</h4>
+                    <h1 style="color: white">Easy to Use</h1>
+                    <h4 style="color: white">Give me your money! I mean this product is great and stuff and stuff. So
+                        there will be some more typing just so we see where it warps around.</h4>
                 </div>
             </div>
         </div>
     </section>
 
-{%  endblock %}
+{% endblock %}

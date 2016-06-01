@@ -1,8 +1,14 @@
 {% extends "dashboard/base.html" %}
 
+{% block head_title %}{{ site.name }}{% endblock %}
+
 {% block body %}
     <div class="container dash-upper">
-        {% include "_messages.html" %}
+        <div class="row">
+            <div class="page-header">
+                <h2>{{ site.name }}</h2>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-xs-12">
@@ -70,7 +76,6 @@
                     <thead>
                     <tr>
                         <th></th>
-                        <th>Subscribers</th>
                         <th>Rating</th>
                         <th>Views</th>
                         <th></th>
@@ -82,7 +87,6 @@
                         {% for s in series %}
                             <tr>
                                 <td>{{ s.title }}</td>
-                                <td>{{ s.subscribers }}</td>
                                 <td>{{ s.rating }}</td>
                                 <td>{{ s.views }}</td>
                                 <td><a href="" class="btn btn-primary">Manage</a></td>
@@ -90,7 +94,7 @@
                         {% endfor %}
                     {% else %}
                         <tr>
-                            <td>No series here! Create a new one to begin!</td>
+                            <td colspan="4">No series here! Create a new one to begin!</td>
                         </tr>
                     {% endif %}
                     </tbody>

@@ -105,6 +105,7 @@ TEMPLATES = [
                 "account.context_processors.account",
                 "django.contrib.auth.context_processors.auth",
                 "pinax_theme_bootstrap.context_processors.theme",
+                "fourtyone.context_processors.site_processor"
             ],
         },
     },

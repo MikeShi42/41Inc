@@ -23,7 +23,7 @@ from websites.models import Info
 STRIPE_STATE_SALT = 'fourtyone.stripe'
 
 
-class WebsiteCreate(SiteIdMixin, LoginRequiredMixin, SuccessMessageMixin, FormView):
+class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
     template_name = 'dashboard/websites/create.html'
     form_class = WebsiteForm
     success_message = "%(name)s was created successfully"
