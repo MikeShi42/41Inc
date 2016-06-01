@@ -19,8 +19,12 @@ urlpatterns = [
     # url(r"^$", TemplateView.as_view(template_name="dashboard/dashboard.html"), name="dashboard"),
 
     url(r"^$", DashboardView.as_view(), name="dashboard"),
+
     # /websites/
     url(r"^websites/", include([
+
+        # /websites/{website_id}
+        url(r"^(?P<website_id>[0-9]+)/$", DashboardView.as_view(), name="websites_dashboard"),
 
         # /websites/create
         url(r"^create/$", WebsiteCreate.as_view(), name="websites_create"),
