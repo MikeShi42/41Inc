@@ -4,23 +4,24 @@
 {% load bootstrap %}
 {% load domain_url %}
 
-{% block head_title %}{% trans "Create a Video" %}{% endblock %}
+{% block head_title %}{% trans "Update Video" %}{% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col-md-5">
 
-                <form method="POST" enctype="multipart/form-data" action="{% url "videos:create" website_id=website_id %}">
-                    <legend>{% trans "Upload Video" %}</legend>
+                <form method="POST" enctype="multipart/form-data" action="{% url "videos:edit" pk=object.id website_id=website_id %}">
+                    <legend>{% trans "Edit Video" %}</legend>
                     {% csrf_token %}
                     {{ form|bootstrap }}
                     <button class="btn btn-primary" type="submit">{% trans "Save" %}</button>
                 </form>
+
             </div>
         </div>
-        <section>
-            <a href="{% domain_url 'videos:index' client_site=website_id %}">Back to video list</a>
-        </section>
-        </div>
+    <section>
+        <a href="{% domain_url 'videos:index' client_site=website_id %}">Back to video list</a>
+    </section>
+    </div>
 {% endblock %}
