@@ -83,5 +83,15 @@
             "username": "josephle",
             "password": "pbkdf2_sha256$24000$4h0o67lLujdu$rYNGsXw8rt/Pq7tIOVoJVbXcPyT+E2l4fL5BIOj1Cyg="
         }
+    },
+
+    {
+        "pk": 1,
+        "model": "users.profile",
+        "fields": {
+            "user": 1,
+            "company": "UCSD",
+            "site": 1
+        }
     }
 ]
