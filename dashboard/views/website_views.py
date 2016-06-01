@@ -169,4 +169,4 @@ class WebsiteCustomize(LoginRequiredMixin, SiteIdMixin, UpdateView):
     template_name = 'dashboard/websites/settings/customize.html'
 
     def get_success_url(self):
-        return HttpResponseRedirect(reverse('websites_customize', args=(self.kwargs['website_id'])))
+        return reverse('websites_customize', args=(self.kwargs['pk']))
