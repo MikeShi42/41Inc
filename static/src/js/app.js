@@ -4,6 +4,7 @@ require('videojs-playlist');
 require('videojs-playlist-ui');
 window.jQuery = window.$ = require('jquery');
 require('bootstrap-sass');
+require('bootstrap-colorpicker');
 
 const $ = window.$;
 const videojs = window.videojs;
@@ -18,6 +19,10 @@ const loadSeriesListings = videoID => {
 const StripeHandler = require('./payments');
 
 $(() => {
+    // Color selector
+    $('#id_main_color').colorpicker({format: 'hex'});
+    $('#id_main_bg_color').colorpicker({format: 'hex'});
+
     // Stripe Checkout
     const stripeHandler = new StripeHandler(window);
 

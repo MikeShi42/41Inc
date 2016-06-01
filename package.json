@@ -11,6 +11,7 @@
   },
   "license": "",
   "dependencies": {
+    "bootstrap-colorpicker": "^2.3.3",
     "bootstrap-sass": "^3.3.6",
     "font-awesome": "^4.5.0",
     "jquery": "^2.1.4",
@@ -112,6 +113,6 @@
   "browserify-shim": {
     "stripejs": "global:Stripe",
     "stripe-checkout": "global:StripeCheckout",
-    "./node_modules/jquery/dist/jquery.js" : "$"
+    "./node_modules/jquery/dist/jquery.js": "$"
   }
 }
