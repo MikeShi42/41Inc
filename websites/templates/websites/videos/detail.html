@@ -15,7 +15,7 @@
 
                 <div class="col-md-8">
                     <h2>{{ video.title }}</h2>
-                    {% if video.premium %}
+                    {% if video.premium and not request.user.profile.subscribed %}
                         <div>
                             <p>This video is only accessible to subscribers.</p>
 
