@@ -15,14 +15,14 @@ class Info(models.Model):
     description = models.TextField()
 
     # Customization fields
-    main_color = models.TextField()
-    main_bg_color = models.TextField()
-    nav_color = models.TextField()
-    nav_bg_color = models.TextField()
+    main_color = models.TextField(default="#fff")
+    main_bg_color = models.TextField(default="#666")
+    nav_color = models.TextField(default="#fff")
+    nav_bg_color = models.TextField(default="#666")
 
     # Logo
-    logo = models.ImageField(upload_to='logos')
+    logo = models.ImageField(null=True, upload_to='logos')
 
     # Pitch information
-    header = models.TextField()
-    sub_header = models.TextField()
+    header = models.TextField(default="Start Learning Now")
+    sub_header = models.TextField(default="We're the go-to source of tutorials on the web")
