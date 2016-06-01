@@ -11,9 +11,10 @@ from django.views.generic.detail import SingleObjectTemplateResponseMixin
 from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
+from django.db.models import Max
 
 from videos.forms import VideoForm
-from videos.models import Video
+from videos.models import Video, Listing
 
 
 class VideoCreate(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMixin, CreateView):
@@ -59,6 +60,13 @@ class VideoCreate(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMix
         video.site = Site.objects.get(pk=self.kwargs['website_id'])
         video.creator = self.request.user
         video.save()
+
+        if form.cleaned_data['series']:
+            max_order = Listing.objects.filter(series=form.cleaned_data['series']).aggregate(Max('order'))['order__max']
+            listing_order = 1 if max_order is None else max_order + 1
+            listing = Listing(series=form.cleaned_data['series'][0], video=video, order=listing_order)
+            listing.save()
+
         return redirect(self.get_success_url())
 
     def get_success_url(self):
