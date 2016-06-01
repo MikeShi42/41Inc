@@ -1,6 +1,7 @@
 from account.mixins import LoginRequiredMixin
 from django.contrib.sites.models import Site
 from django.utils import timezone
+from django.db.models import Sum
 
 from django.views.generic import TemplateView
 
@@ -30,19 +31,14 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
         series = []
         for rs in raw_series:
             s = {
-                'views': sum(v.views for v in Video.objects.filter(
-                    series=rs.id,
-                )),
-                'rating': (sum(r.ratings for r in Video.objects.filter(
-                    series=rs.id
-                )) or 0.0) / 5.0,
+                # 'rating': (sum(r.ratings for r in Video.objects.filter(
+                #     series=rs.id
+                # )) or 0.0) / 5.0,
                 'title': rs.title,
                 'subscribers': 1,
             }
             series.append(s)
-        total_views = sum(v.views for v in Video.objects.filter(
-            creator_id=user.id
-        )) or 0
+        total_views = self.get_view_count(site) or 0
         total_rating = (sum(r.ratings for r in Video.objects.filter(
             creator_id=user.id
         )) or 0.0) / 5.0
@@ -57,6 +53,9 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
         }
 
         return context
+
+    def get_view_count(self, site):
+        return Video.objects.filter(site=site).aggregate(Sum('views'))['views__sum']
 
     def get_subscriber_count(self, site):
         return Subscription.objects.filter(site=site,active_until__gt=timezone.now()).count()
