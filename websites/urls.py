@@ -31,7 +31,7 @@ urlpatterns = [
         # /videos/{video_id}
         url(r'^(?P<pk>[0-9]+)/$', SeriesDetailView.as_view(), name="detail"),
 
-    ], namespace='videos')),
+    ], namespace='series')),
 
     url(r'^api/', include([
         # /api/videos
