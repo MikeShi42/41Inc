@@ -17,8 +17,6 @@ class Info(models.Model):
     # Customization fields
     main_color = models.TextField(default="#fff")
     main_bg_color = models.TextField(default="#666")
-    nav_color = models.TextField(default="#fff")
-    nav_bg_color = models.TextField(default="#666")
 
     # Logo
     logo = models.ImageField(null=True, upload_to='logos')
@@ -26,3 +24,6 @@ class Info(models.Model):
     # Pitch information
     header = models.TextField(default="Start Learning Now")
     sub_header = models.TextField(default="We're the go-to source of tutorials on the web")
+
+    # Reasons to subscribe
+    subscribe_pitch = models.TextField(default="Be part of a revolution")
