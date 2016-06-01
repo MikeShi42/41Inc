@@ -7,12 +7,13 @@ from django.contrib import auth
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 from django.utils import timezone
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, DetailView
 
 import websites.forms
 from fourtyone import settings
 from series.models import Series
 from subscriptions.models import Settings as SubscriptionSettings, Subscription
+from videos.models import Listing
 from websites.mixins import PremiumEnabledMixin, SubscriptionMixin
 
 
@@ -119,5 +120,18 @@ class HomeView(TemplateView):
 
         return context
 
+<<<<<<< HEAD
 class CustomizeView(FormView):
     template_name = 'websites/customize.html'
+=======
+
+class SeriesDetailView(DetailView):
+    template_name = 'websites/series/detail.html'
+    model = Series
+
+    def get_context_data(self, **kwargs):
+        context = super(SeriesDetailView, self).get_context_data(**kwargs)
+        listings = Listing.objects.filter(series=self.kwargs['pk'])
+        context['videos'] = [listing.video for listing in listings]
+        return context
+>>>>>>> master

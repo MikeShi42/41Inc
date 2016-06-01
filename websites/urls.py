@@ -1,12 +1,12 @@
 import account.urls
 from django.conf.urls import include, url
+from django.views.generic import ListView
 
 import users.views
 import websites.views
 from dashboard.views import VideoIndexView, VideoDetailView, detail
-from websites.views import HomeView
-from websites.views import SubscribeView
-from websites.views import CustomizeView
+from series.models import Series
+from websites.views import HomeView, SubscribeView, SeriesDetailView, Customizeview
 
 urlpatterns = [
     # Root URL for client sites /
@@ -23,6 +23,13 @@ urlpatterns = [
 
         # /videos/{video_id}
         url(r'^(?P<pk>[0-9]+)/$', VideoDetailView.as_view(), name="detail"),
+
+    ], namespace='videos')),
+
+    # /series
+    url(r'^series/', include([
+        # /videos/{video_id}
+        url(r'^(?P<pk>[0-9]+)/$', SeriesDetailView.as_view(), name="detail"),
 
     ], namespace='videos')),
 
