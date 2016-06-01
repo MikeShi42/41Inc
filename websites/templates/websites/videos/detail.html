@@ -16,6 +16,7 @@
 
                 <div class="col-md-8">
                     {% comment %}<h2 class="detail-title">{{ video.title }}</h2>
+                    {% endcomment %}
                     {% is_site_premium request as site_premium %}
                     {% if site_premium and video.premium and not request.user.profile.subscribed %}
                         <div class="panel panel-black paywall">
@@ -26,7 +27,6 @@
                             </div>
                         </div>
                     {% else %}
-                    {% endcomment %}
                         <video id="video" class="video-js video-41 vjs-big-play-centered" style="width: 100%;" controls
                                preload="auto"
                                data-setup="{}">
@@ -38,7 +38,6 @@
                                     video</a>
                             </p>
                         </video>
-                    {% comment %}
                     {% endif %}
                     {% comment %}<p class="detail-description">{{ video.description }}</p>{% endcomment %}
                 </div>

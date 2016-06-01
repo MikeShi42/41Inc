@@ -69,7 +69,7 @@ class VideoCreate(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMix
         """
         site = Site.objects.get(pk=self.kwargs['website_id'])
         uri = reverse_lazy('videos:index', urlconf='websites.urls')
-        return 'http://%s%s' % (site.domain, uri)
+        return 'http://%s:8000%s' % (site.domain, uri)
 
 
 class VideoEdit(SuccessMessageMixin, UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
@@ -104,7 +104,7 @@ class VideoEdit(SuccessMessageMixin, UpdateView, LoginRequiredMixin, PermissionR
     def get_success_url(self):
         site = Site.objects.get(pk=self.kwargs['website_id'])
         uri = reverse_lazy('videos:index', urlconf='websites.urls')
-        return 'http://%s%s' % (site.domain, uri)
+        return 'http://%s:8000%s' % (site.domain, uri)
 
 
 class VideoDelete(LoginRequiredMixin, DeleteView):
