@@ -20,11 +20,16 @@ class SeriesCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'dashboard/series/createSeries.html'
     form_class = SeriesForm
     success_message = "%(title)s was created successfully"
-    success_url = '/dashboard/series/create'
 
     def form_valid(self, form):
         self.create_series(form)
         return super(SeriesCreate, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(SeriesCreate, self).get_context_data(**kwargs)
+        context['website_id'] = self.kwargs['website_id']
+        return context
+
  
     def create_series(self, form):
         """Set the creator_id of the newly created series to the user that's 
@@ -32,7 +37,7 @@ class SeriesCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         """        
         curr_site = get_current_site(self.request)
 
-        series =  Series(title=form.cleaned_data['title'], description=form.cleaned_data['description'], creator=self.request.user, site=curr_site)
+        series =  Series(title=form.cleaned_data['title'], description=form.cleaned_data['description'], creator=self.request.user, site=self.kwargs['website_id'])
         series.save()
         return series
 

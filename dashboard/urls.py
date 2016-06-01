@@ -42,7 +42,9 @@ urlpatterns = [
 
         # /websites/{website_id}/series
         url(r'^(?P<website_id>[0-9]+)/series/', include([
-
+            # /websites/{website_id}/series/create
+            url(r'^create/$', SeriesCreate.as_view(), name='create'),
+          
             # /websites/{website_id}/series/{series_id}
             url(r'^(?P<series_id>[0-9]+)$', SeriesView.as_view(), name='view'),
 
@@ -51,7 +53,6 @@ urlpatterns = [
 
             # /websites/{website_id}/series/{series_id}/delete
             url(r'^(?P<pk>[0-9]+)/delete$', SeriesDelete.as_view(), name='delete'),
-            url(r'^(?P<pk>[0-9]+)/create$', SeriesCreate.as_view(), name='create'),
 
         ], namespace='series', app_name='series')),
 
