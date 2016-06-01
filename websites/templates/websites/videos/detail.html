@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load i18n %}
+{% load subscription_tags %}
 
 {% block head_title %}View Video{% endblock %}
 
@@ -15,14 +16,28 @@
 
                 <div class="col-md-8">
                     <h2>{{ video.title }}</h2>
-                    <video id="video" class="video-js video-41 vjs-big-play-centered" style="width: 100%;" controls preload="auto"
-                           data-setup="{}">
-                        <source src="{{ video.url }}" type='video/mp4'>
-                        <p class="vjs-no-js">
-                            To view this video please enable JavaScript, and consider upgrading to a web browser that
-                            <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                        </p>
-                    </video>
+                    {% is_site_premium request as site_premium %}
+                    {% if site_premium and video.premium and not request.user.profile.subscribed %}
+                        <div class="panel panel-black paywall">
+                            <div class="panel-body">
+                                <p>This video is only accessible to subscribers.</p>
+
+                                <p><a href="{% url 'site_subscribe' %}">Subscribe now</a> for access.</p>
+                            </div>
+                        </div>
+                    {% else %}
+                        <video id="video" class="video-js video-41 vjs-big-play-centered" style="width: 100%;" controls
+                               preload="auto"
+                               data-setup="{}">
+                            <source src="{{ video.url }}" type='video/mp4'>
+                            <p class="vjs-no-js">
+                                To view this video please enable JavaScript, and consider upgrading to a web browser
+                                that
+                                <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5
+                                    video</a>
+                            </p>
+                        </video>
+                    {% endif %}
 
                     <p>{{ video.description }}</p>
                 </div>
