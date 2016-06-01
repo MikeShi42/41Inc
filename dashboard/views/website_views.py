@@ -167,3 +167,6 @@ class WebsiteCustomize(LoginRequiredMixin, SiteIdMixin, UpdateView):
     model = Info
     fields = ['main_color', 'main_bg_color', 'logo', 'header', 'sub_header', 'subscribe_pitch']
     template_name = 'dashboard/websites/settings/customize.html'
+
+    def get_success_url(self):
+        return HttpResponseRedirect(reverse('websites_customize', args=(self.kwargs['website_id'])))
