@@ -1,6 +1,6 @@
 import account.urls
 from django.conf.urls import include, url
-from django.views.generic import DetailView
+from django.views.generic import ListView
 
 import users.views
 import websites.views
@@ -28,9 +28,6 @@ urlpatterns = [
 
     # /series
     url(r'^series/', include([
-        # /videos/
-        url(r'^$', VideoIndexView.as_view(), name='index'),
-
         # /videos/{video_id}
         url(r'^(?P<pk>[0-9]+)/$', SeriesDetailView.as_view(), name="detail"),
 
