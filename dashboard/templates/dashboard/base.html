@@ -8,7 +8,9 @@
     {% endblock %}
 
     <section class="jumbotron dash with-sidebar">
-        {% include "_messages.html" %}
-        {% block body %}{% endblock %}
+        <div class="container dash-upper">
+            {% include "_messages.html" %}
+            {% block body %}{% endblock %}
+        </div>
     </section>
 {% endblock %}

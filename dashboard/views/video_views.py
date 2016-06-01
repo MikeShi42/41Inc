@@ -6,8 +6,10 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse_lazy
 from django.http import JsonResponse
 from django.shortcuts import redirect
-from django.views.generic.detail import DetailView, SingleObjectTemplateResponseMixin
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.detail import DetailView
+from django.views.generic.detail import SingleObjectTemplateResponseMixin
+from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
 
 from videos.forms import VideoForm
@@ -103,6 +105,18 @@ class VideoEdit(SuccessMessageMixin, UpdateView, LoginRequiredMixin, PermissionR
         site = Site.objects.get(pk=self.kwargs['website_id'])
         uri = reverse_lazy('videos:index', urlconf='websites.urls')
         return 'http://%s%s' % (site.domain, uri)
+
+
+class VideoDelete(LoginRequiredMixin, DeleteView):
+    model = Video
+    success_url = reverse_lazy('dashboard')
+    template_name = 'dashboard/videos/delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(VideoDelete, self).get_context_data(**kwargs)
+        context['website_id'] = self.kwargs.get('website_id')
+        context['pk'] = self.kwargs.get('pk')
+        return context
 
 
 class VideoIndexView(ListView):

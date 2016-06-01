@@ -1,9 +1,12 @@
 from account.mixins import LoginRequiredMixin
 from django.contrib.sites.models import Site
+from django.utils import timezone
+from django.db.models import Sum, Avg
 
 from django.views.generic import TemplateView
 
 from dashboard.mixins import WebsiteCreatedMixin
+from series.models import Series
 from videos.models import Video
 from subscriptions.models import Subscription
 
@@ -29,25 +32,14 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
         series = []
         for rs in raw_series:
             s = {
-                'views': sum(v.views for v in Video.objects.filter(
-                    series=rs.id,
-                )),
-                'rating': (sum(r.ratings for r in Video.objects.filter(
-                    series=rs.id
-                )) or 0.0) / 5.0,
-                'title': rs.title,
-                'subscribers': 1,
+                'views': self.get_series_views(rs.id) or 0,
+                'rating': self.get_series_rating(rs.id) or 0.0,
+                'title': rs.title
             }
             series.append(s)
-        total_views = sum(v.views for v in Video.objects.filter(
-            creator_id=user.id
-        )) or 0
-        total_rating = (sum(r.ratings for r in Video.objects.filter(
-            creator_id=user.id
-        )) or 0.0) / 5.0
-        total_subscribers = sum(1 for s in Subscription.objects.filter(
-            user_id=user.id
-        )) or 0
+        total_views = self.get_view_count(site) or 0
+        total_rating = self.get_site_rating(site) or 0.0
+        total_subscribers = self.get_subscriber_count(site) or 0
         context = {
             'user': user,
             'series': series,
@@ -58,3 +50,18 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
         }
 
         return context
+
+    def get_series_views(self, series_id):
+        return Video.objects.filter(series=series_id).aggregate(Sum('views'))['views__sum']
+
+    def get_series_rating(self, series_id):
+        return Video.objects.filter(series=series_id).aggregate(Avg('rating'))['rating__avg']
+
+    def get_view_count(self, site):
+        return Video.objects.filter(site=site).aggregate(Sum('views'))['views__sum']
+
+    def get_subscriber_count(self, site):
+        return Subscription.objects.filter(site=site, active_until__gt=timezone.now()).count()
+
+    def get_site_rating(self, site):
+        return Video.objects.filter(site=site).aggregate(Avg('rating'))['rating__avg']

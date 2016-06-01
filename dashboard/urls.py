@@ -13,8 +13,8 @@ from dashboard.views import (
     DashboardView,
     PaymentSettings,
     stripe_auth,
-    stripe_callback
-)
+    stripe_callback,
+    VideoDelete)
 
 urlpatterns = [
     # url(r"^$", TemplateView.as_view(template_name="dashboard/dashboard.html"), name="dashboard"),
@@ -38,6 +38,9 @@ urlpatterns = [
 
             # /websites/{website_id}/videos/{video_id{/update
             url(r'^(?P<pk>[0-9]+)/edit$', VideoEdit.as_view(), name='edit'),
+
+            # /websites/{website_id}/videos/delete
+            url(r'^(?P<pk>[0-9]+)/delete/$', VideoDelete.as_view(), name='delete')
         ], namespace='videos', app_name='videos')),
 
         # /websites/{website_id}/series
