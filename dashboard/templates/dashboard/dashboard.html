@@ -76,7 +76,6 @@
                     <thead>
                     <tr>
                         <th></th>
-                        <th>Subscribers</th>
                         <th>Rating</th>
                         <th>Views</th>
                         <th></th>
@@ -88,7 +87,6 @@
                         {% for s in series %}
                             <tr>
                                 <td>{{ s.title }}</td>
-                                <td>{{ s.subscribers }}</td>
                                 <td>{{ s.rating }}</td>
                                 <td>{{ s.views }}</td>
                                 <td><a href="" class="btn btn-primary">Manage</a></td>
@@ -96,7 +94,7 @@
                         {% endfor %}
                     {% else %}
                         <tr>
-                            <td>No series here! Create a new one to begin!</td>
+                            <td colspan="4">No series here! Create a new one to begin!</td>
                         </tr>
                     {% endif %}
                     </tbody>
