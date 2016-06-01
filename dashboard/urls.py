@@ -12,8 +12,8 @@ from dashboard.views import (
     DashboardView,
     PaymentSettings,
     stripe_auth,
-    stripe_callback
-)
+    stripe_callback,
+    VideoDelete)
 
 urlpatterns = [
     # url(r"^$", TemplateView.as_view(template_name="dashboard/dashboard.html"), name="dashboard"),
@@ -33,7 +33,11 @@ urlpatterns = [
         url(r'^(?P<website_id>[0-9]+)/videos/', include([
 
             # /websites/{website_id}/videos/create
-            url(r'^create/$', VideoCreate.as_view(), name='create')
+            url(r'^create/$', VideoCreate.as_view(), name='create'),
+
+            # /websites/{website_id}/videos/delete
+            url(r'^(?P<pk>[0-9]+)/delete/$', VideoDelete.as_view(), name='delete')
+
         ], namespace='videos', app_name='videos')),
 
         # /websites/{website_id}/series
