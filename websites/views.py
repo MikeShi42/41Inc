@@ -110,7 +110,7 @@ class HomeView(TemplateView):
         return context
 
 class SeriesView(TemplateView):
-    template_name = 'websites/homepage.html'
+    template_name = 'websites/browse_series.html'
 
     def get_context_data(self, **kwargs):
         context = super(SeriesView, self).get_context_data(**kwargs)
