@@ -23,6 +23,8 @@ class Video(models.Model):
 
     views = models.PositiveIntegerField(default=0)
 
+    premium = models.BooleanField(default=False)
+
     @property
     def url(self):
         """Shorthand model property for a video url for convenience.
