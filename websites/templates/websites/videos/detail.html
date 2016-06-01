@@ -14,7 +14,7 @@
             <div class="row vcenter-parent">
 
                 <div class="col-md-8">
-                    <h2>{{ video.title }}</h2>
+                    {% comment %}<h2 class="detail-title">{{ video.title }}</h2>{% endcomment %}
                     <video id="video" class="video-js video-41 vjs-big-play-centered" style="width: 100%;" controls preload="auto"
                            data-setup="{}">
                         <source src="{{ video.url }}" type='video/mp4'>
@@ -24,7 +24,7 @@
                         </p>
                     </video>
 
-                    <p>{{ video.description }}</p>
+                    {% comment %}<p class="detail-description">{{ video.description }}</p>{% endcomment %}
                 </div>
                 <div class="col-md-4">
                     <h4 class="vjs-playlist-header">Playlist</h4>

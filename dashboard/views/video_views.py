@@ -150,17 +150,30 @@ class VideoDetailView(DetailView, SingleObjectTemplateResponseMixin):
         return context
 
 
-def detail(video_id):
-    video = Video.objects.get(pk=video_id)
-    response = {'name': video.title,
-                'description': video.description,
-                'url': video.url,
-                'sources': [
-                    {'src': video.url, 'type': 'video/mp4'}
-                ],
-                'thumbnail': [
-                    {'srcset': video.thumbnail.url, 'type': 'image/jpeg'}
-                ],
-                }
-    # playlist_videos = list(Video.objects.all().exclude(pk=video_id))
+def detail(request, video_id):
+    video_info = _format_video_response(Video.objects.get(pk=video_id))
+    site_videos = Video.objects.filter(site=get_current_site(request)).exclude(pk=video_id)
+
+    playlist_videos = []
+    for video in site_videos:
+        info = _format_video_response(video)
+        playlist_videos += [info]
+
+    response = [video_info] + playlist_videos
+
+    print(response)
     return JsonResponse(response, safe=False)
+
+
+def _format_video_response(video):
+    video_info = {'name': video.title,
+                  'description': video.description,
+                  'duration': 45,
+                  'sources': [
+                      {'src': video.url, 'type': 'video/mp4'}
+                  ],
+                  'thumbnail': [
+                      {'srcset': video.thumbnail.url, 'type': 'image/jpeg'}
+                  ],
+                  }
+    return video_info
