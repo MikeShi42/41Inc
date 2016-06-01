@@ -15,14 +15,16 @@
 
                 <div class="col-md-8">
                     <h2>{{ video.title }}</h2>
-                    {% if video.premium and not request.user.profile.subscribed %}
-                        <div>
-                            <p>This video is only accessible to subscribers.</p>
+                    {% if video.premium and request.user.profile.subscribed %}
+                        <div class="panel panel-black paywall">
+                            <div class="panel-body">
+                                <p>This video is only accessible to subscribers.</p>
 
-                            <p><a href="{% url 'site_subscribe' %}">Subscribe now</a> for access.</p>
+                                <p><a href="{% url 'site_subscribe' %}">Subscribe now</a> for access.</p>
+                            </div>
                         </div>
 
-                        <hr />
+                        <hr/>
                     {% else %}
                         <video id="video" class="video-js video-41 vjs-big-play-centered" style="width: 100%;" controls
                                preload="auto"
