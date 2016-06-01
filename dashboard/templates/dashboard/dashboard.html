@@ -6,7 +6,11 @@
     <div class="container dash-upper">
         <div class="row">
             <div class="page-header">
-                <h2>{{ site.name }}</h2>
+                <h2>{{ site.name }} <small class="pull-right">
+                    <a href="{% url 'websites_settings' site.id %}" class="btn btn-default">
+                        <i class="fa fa-cog fa-fw"></i> Settings
+                    </a>
+                </small></h2>
             </div>
         </div>
 
