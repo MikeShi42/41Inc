@@ -20,6 +20,7 @@ class SeriesCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'dashboard/series/createSeries.html'
     form_class = SeriesForm
     success_message = "%(title)s was created successfully"
+    success_url = reverse_lazy('dashboard')
 
     def form_valid(self, form):
         self.create_series(form)
@@ -36,8 +37,9 @@ class SeriesCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         currently logged in and also fills in the title and description fields
         """        
         curr_site = get_current_site(self.request)
-
-        series =  Series(title=form.cleaned_data['title'], description=form.cleaned_data['description'], creator=self.request.user, site=self.kwargs['website_id'])
+        series = form.save(commit=False)
+        series.site = Site.objects.get(pk=self.kwargs['website_id'])
+        series.creator = self.request.user
         series.save()
         return series
 
