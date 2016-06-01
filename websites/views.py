@@ -7,7 +7,7 @@ from django.contrib import auth
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 from django.utils import timezone
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 
 import websites.forms
 from fourtyone import settings
@@ -108,3 +108,6 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['series_for_site'] = Series.objects.filter(site=get_current_site(self.request))
         return context
+
+class CustomizeView(FormView):
+    template_name = 'websites/customize.html'

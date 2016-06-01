@@ -16,12 +16,13 @@ class Info(models.Model):
 
     # Customization fields
     main_color = models.TextField()
-    mainbg_color = models.TextField()
+    main_bg_color = models.TextField()
     nav_color = models.TextField()
-    navbg_color = models
+    nav_bg_color = models.TextField()
 
     # Logo
     logo = models.ImageField(upload_to='logos')
 
     # Pitch information
-    
+    header = models.TextField()
+    sub_header = models.TextField()
