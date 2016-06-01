@@ -2,42 +2,42 @@
 
 {% load staticfiles %}
 {% load i18n %}
+{% load domain_url %}
 
-{% block head_title %}View Video{% endblock %}
+{% block head_title %}View Series{% endblock %}
 
 {% block body_class %}site-video{% endblock %}
 
 {% block body_base %}
-    <section id="video-player" class="jumbotron jumbotron-41 jumbotron-video">
+    <section class="jumbotron jumbotron-41">
         <div class="container">
-            {% include "_messages.html" %}
-            <div class="row vcenter-parent">
-
-                <div class="col-md-8">
-                    <h2>Video Name</h2>
-                    <video id="video" class="video-js video-41 vjs-big-play-centered" style="width: 100%;" controls preload="auto"
-                           data-setup="{}">
-                        <source src="http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4" type='video/mp4'>
-                        <p class="vjs-no-js">
-                            To view this video please enable JavaScript, and consider upgrading to a web browser that
-                            <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                        </p>
-                    </video>
-
+            <div class="row">
+                <div class="col-xs-12">
+                    {% include "_messages.html" %}
+                    <h2>{{ object.title }}</h2>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa deleniti dolorem
-                        harum laboriosam minus, nemo numquam officiis praesentium recusandae, repudiandae sequi vel
-                        vero. Cumque earum ipsam quis vitae voluptatem!
+                        {{ object.description }}
                     </p>
-                </div>
-                <div class="col-md-4">
-                    <h4 class="vjs-playlist-header">Playlist</h4>
-                    <ul class="vjs-playlist vjs-playlist-41"></ul>
                 </div>
             </div>
         </div>
     </section>
-    <section id="video-comments">
+
+    <section id="series-videos">
+        <div class="container">
+            <div class="col-md-8 col-md-offset-2">
+                <h3 class="text-center">Series Videos</h3>
+                <hr>
+                <ul class="list-group">
+                    {% for video in videos %}
+                        <a href="{% url 'videos:detail' video.id %}" class="list-group-item">{{ video.title }}</a>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="series-comments">
         <div class="container">
             <div id="disqus_thread"></div>
             <script>

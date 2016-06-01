@@ -7,4 +7,4 @@ class SeriesForm(forms.ModelForm):
 
     class Meta:
         model = Series 
-        exclude = ['creator', 'site', 'thumbnail_url']
+        exclude = ['creator', 'site', 'thumbnail']

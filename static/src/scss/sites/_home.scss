@@ -1,0 +1,10 @@
+// Each series listing on client home page.
+.series-card {
+  background-color: white;
+  padding: 10px;
+
+  img {
+    border-radius: $border-radius-base;
+    margin-bottom: 10px;
+  }
+}

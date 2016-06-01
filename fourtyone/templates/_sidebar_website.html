@@ -1,0 +1,22 @@
+{% load i18n %}
+{% load static %}
+{% load account_tags %}
+{% load dashboard_tags %}
+
+<div id="sidebar-website">
+    <ul class="sidebar-nav">
+        {% get_sites request.user as websites %}
+        {% for site in websites %}
+            <li>
+                <a href="{% url 'websites_dashboard' site.id %}">
+                    <img src="http://lorempixel.com/400/400">
+                </a>
+            </li>
+        {% endfor %}
+        <li>
+            <a href="/dashboard/websites/create">
+                <img id="add_site" src="{% static "images/plus.svg" %}">
+            </a>
+        </li>
+    </ul>
+</div>

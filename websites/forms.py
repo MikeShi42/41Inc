@@ -6,9 +6,9 @@ from django.contrib import auth
 
 import account.forms
 import users.forms
+from subscriptions.models import Settings as SubscriptionSettings
 
 import fourtyone.validators as f_validators
-from websites.models import Info
 
 
 class WebsiteForm(forms.Form):
@@ -24,9 +24,8 @@ class WebsiteForm(forms.Form):
 
 
 class PaymentSettingsForm(forms.ModelForm):
-
     class Meta:
-        model = Info
+        model = SubscriptionSettings
         fields = ['premium_enabled', 'price_month', 'price_year']
 
 
@@ -44,6 +43,7 @@ class SignupForm(users.forms.SignupForm):
         widget=forms.TextInput(),
         required=False
     )
+
 
 # Adding on site validation
 class LoginUsernameForm(account.forms.LoginUsernameForm):
@@ -64,4 +64,3 @@ class LoginUsernameForm(account.forms.LoginUsernameForm):
         else:
             raise forms.ValidationError(self.authentication_fail_message)
         return self.cleaned_data
-

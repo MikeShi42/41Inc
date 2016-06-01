@@ -1,0 +1,29 @@
+{% extends "dashboard/base.html" %}
+
+{% load i18n %}
+{% load bootstrap %}
+
+{% block head_title %}{% trans "Delete Video" %}{% endblock %}
+
+{% block body %}
+    <div class="container dash-upper">
+        <div class="page-header">
+            <h2>Confirm Delete Video</h2>
+        </div>
+        <div class="row">
+
+            <div class="col-xs-12">
+                <p class="lead">Are you sure you want to delete {{ object }}?</p>
+
+                <form method="POST" action="{% url "videos:delete" website_id pk %}">
+
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        {% trans "Delete Video" %}
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
