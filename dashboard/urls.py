@@ -9,6 +9,7 @@ from dashboard.views import (
     WebsiteSettingsInfo,
     SeriesCreate,
     VideoCreate,
+    VideoEdit,
     DashboardView,
     PaymentSettings,
     stripe_auth,
@@ -33,7 +34,10 @@ urlpatterns = [
         url(r'^(?P<website_id>[0-9]+)/videos/', include([
 
             # /websites/{website_id}/videos/create
-            url(r'^create/$', VideoCreate.as_view(), name='create')
+            url(r'^create/$', VideoCreate.as_view(), name='create'),
+
+            # /websites/{website_id}/videos/{video_id{/update
+            url(r'^(?P<pk>[0-9]+)/edit$', VideoEdit.as_view(), name='edit'),
         ], namespace='videos', app_name='videos')),
 
         # /websites/{website_id}/series

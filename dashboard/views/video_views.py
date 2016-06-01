@@ -6,9 +6,9 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse_lazy
 from django.http import JsonResponse
 from django.shortcuts import redirect
-from django.views import generic
-from django.views.generic.detail import SingleObjectTemplateResponseMixin
-from django.views.generic.edit import CreateView
+from django.views.generic.detail import DetailView, SingleObjectTemplateResponseMixin
+from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.list import ListView
 
 from videos.forms import VideoForm
 from videos.models import Video
@@ -70,7 +70,42 @@ class VideoCreate(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMix
         return 'http://%s%s' % (site.domain, uri)
 
 
-class VideoIndexView(generic.ListView):
+class VideoEdit(SuccessMessageMixin, UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
+    login_url = '/account/login/'
+
+    model = Video
+    form_class = VideoForm
+    template_name = 'websites/videos/update.html'
+
+    success_message = "%(title)s was updated successfully."
+
+    def has_permission(self):
+        """Renders view only if logged-in user is site creator, or 403s."""
+        site = Site.objects.get(pk=self.kwargs['website_id'])
+        return site.info.creator == self.request.user
+
+    def handle_no_permission(self):
+        """Redirects user to dashboard if the user isn't authorized,"""
+        messages.error(self.request, "You can't edit videos for this site!")
+        return redirect('dashboard')
+
+    def get_context_data(self, **kwargs):
+        context = super(VideoEdit, self).get_context_data(**kwargs)
+        context['website_id'] = self.kwargs['website_id']
+        return context
+
+    def form_valid(self, form):
+        video = form.save(commit=False)
+        video.save()
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        site = Site.objects.get(pk=self.kwargs['website_id'])
+        uri = reverse_lazy('videos:index', urlconf='websites.urls')
+        return 'http://%s%s' % (site.domain, uri)
+
+
+class VideoIndexView(ListView):
     """Renders videos list view.
 
     Passes video_list iterable to template, which is set up by get_queryset.
@@ -92,9 +127,8 @@ class VideoIndexView(generic.ListView):
         return Video.objects.filter(site=site)
 
 
-class VideoDetailView(generic.DetailView, SingleObjectTemplateResponseMixin):
+class VideoDetailView(DetailView, SingleObjectTemplateResponseMixin):
     model = Video
-
     template_name = 'websites/videos/detail.html'
 
     def get_context_data(self, **kwargs):
