@@ -1,0 +1,72 @@
+{% extends "site_base.html" %}
+
+{% load staticfiles %}
+{% load i18n %}
+{% load domain_url %}
+
+{% block head_title %}View Series{% endblock %}
+
+{% block body_class %}site-video{% endblock %}
+
+{% block body_base %}
+    <section class="jumbotron jumbotron-41">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    {% include "_messages.html" %}
+                    <h2>{{ object.title }}</h2>
+                    <p>
+                        {{ object.description }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="series-videos">
+        <div class="container">
+            <div class="col-md-8 col-md-offset-2">
+                <h3 class="text-center">Series Videos</h3>
+                <hr>
+                <ul class="list-group">
+                    {% for video in videos %}
+                        <a href="{% url 'videos:detail' video.id %}" class="list-group-item">{{ video.title }}</a>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="series-comments">
+        <div class="container">
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                 * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                 */
+                /*
+                 var disqus_config = function () {
+                 this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                 this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                 };
+                 */
+                (function () { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+
+                    s.src = '//dev-41inc.disqus.com/embed.js';
+
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+                powered by Disqus.</a></noscript>
+
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_body %}
+    <script id="dsq-count-scr" src="//dev-41inc.disqus.com/count.js" async></script>
+{% endblock %}
