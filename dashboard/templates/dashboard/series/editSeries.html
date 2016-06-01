@@ -16,7 +16,8 @@
         </div>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <form method="POST" action="{% url "series:edit" website_id pk %}">
+                <form method="POST" action="{% url "series:edit" website_id pk %}" {% if form.is_multipart %}
+                  enctype="multipart/form-data"{% endif %}>
 
                     {% csrf_token %}
                     {{ form|bootstrap }}
