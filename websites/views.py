@@ -15,6 +15,7 @@ from series.models import Series
 from subscriptions.models import Settings as SubscriptionSettings, Subscription
 from videos.models import Listing
 from websites.mixins import PremiumEnabledMixin, SubscriptionMixin
+from websites.models import Info
 
 
 class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, TemplateView):
@@ -29,6 +30,7 @@ class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, 
         # Get prices
         site = SubscriptionSettings.objects.get(pk=current_site.id)
 
+        context['subscribe_pitch'] = Info.objects.get(pk=current_site.id).subscribe_pitch
         context['price_month'] = site.price_month
         context['price_year'] = site.price_year
 
