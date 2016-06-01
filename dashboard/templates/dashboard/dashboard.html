@@ -6,7 +6,11 @@
     <div class="container dash-upper">
         <div class="row">
             <div class="page-header">
-                <h2>{{ site.name }}</h2>
+                <h2>{{ site.name }} <small class="pull-right">
+                    <a href="{% url 'websites_settings' site.id %}" class="btn btn-default">
+                        <i class="fa fa-cog fa-fw"></i> Settings
+                    </a>
+                </small></h2>
             </div>
         </div>
 
@@ -55,8 +59,7 @@
         <div class="row" id="newContent">
             <div class="col-xs-12">
                 <div class="pull-right add-video">
-                    {% url "series_create" as series_url %}
-                    <a class="btn btn-success" href="{{ series_url }}">Add a New Series</a>
+                    <a class="btn btn-success" href="{% url 'series:create' site.id %}">Add a New Series</a>
                 </div>
                 <div class="pull-right add-video-label">
                     <h5 class>Got new knowledge to share? </h5>

@@ -1,0 +1,7 @@
+.panel.panel-black {
+  background-color: black;
+
+  &.paywall {
+    padding: 15% $panel-body-padding;
+  }
+}

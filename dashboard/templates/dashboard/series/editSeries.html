@@ -8,11 +8,10 @@
 {% block body %}
     <section>
         <div class="row">
-            <div class="pull-left">
-                <h1>Update Series</h1>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-danger" href="{% url 'series:delete' website_id pk %}">Delete Series</a>
+            <div class="col-xs-12">
+                <div class="page-header">
+                    <h2>Update Series <small class="pull-right"><a class="btn btn-danger" href="{% url 'series:delete' website_id pk %}">Delete Series</a></small></h2>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -23,10 +22,10 @@
                     {{ form|bootstrap }}
                     {% if redirect_field_value %}
                         <input type="hidden" name="{{ redirect_field_name }}"
-                               value="{{ redirect_field_value }}" />
+                               value="{{ redirect_field_value }}"/>
                     {% endif %}
                     <button type="submit" class="btn btn-primary">
-                        {% trans "Update Series"%}
+                        {% trans "Update Series" %}
                     </button>
                 </form>
             </div>

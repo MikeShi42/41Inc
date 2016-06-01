@@ -9,6 +9,7 @@ from dashboard.views import (
     WebsiteSettingsInfo,
     SeriesCreate,
     VideoCreate,
+    VideoEdit,
     DashboardView,
     PaymentSettings,
     stripe_auth,
@@ -35,14 +36,18 @@ urlpatterns = [
             # /websites/{website_id}/videos/create
             url(r'^create/$', VideoCreate.as_view(), name='create'),
 
+            # /websites/{website_id}/videos/{video_id{/update
+            url(r'^(?P<pk>[0-9]+)/edit$', VideoEdit.as_view(), name='edit'),
+
             # /websites/{website_id}/videos/delete
             url(r'^(?P<pk>[0-9]+)/delete/$', VideoDelete.as_view(), name='delete')
-
         ], namespace='videos', app_name='videos')),
 
         # /websites/{website_id}/series
         url(r'^(?P<website_id>[0-9]+)/series/', include([
-
+            # /websites/{website_id}/series/create
+            url(r'^create/$', SeriesCreate.as_view(), name='create'),
+          
             # /websites/{website_id}/series/{series_id}
             url(r'^(?P<series_id>[0-9]+)$', SeriesView.as_view(), name='view'),
 
@@ -63,8 +68,5 @@ urlpatterns = [
         ])),
 
         url(r"^stripe_callback/$", stripe_callback, name="payments_stripe_callback")
-    ])),
-    url(r"^series/", include([
-        url(r"^create/$", SeriesCreate.as_view(), name="series_create"),
     ])),
 ]

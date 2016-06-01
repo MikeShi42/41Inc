@@ -17,7 +17,7 @@ class VideoForm(forms.ModelForm):
 
     class Meta:
         model = Video
-        fields = ['series', 'title', 'description', 'content', 'thumbnail']
+        fields = ['series', 'title', 'description', 'content', 'thumbnail', 'premium']
         labels = {
             'content': 'Video'
         }
@@ -25,5 +25,6 @@ class VideoForm(forms.ModelForm):
             'series': "Choose which series to put this new video in, or leave blank if the video doesn't belong to a "
                       "series.",
             'content': 'Choose the video file to upload.',
-            'thumbnail': "Choose an image that will appear as the video's thumbnail."
+            'thumbnail': "Choose an image that will appear as the video's thumbnail.",
+            'premium': "Content marked premium will only be accessible to subscribers."
         }

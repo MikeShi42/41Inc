@@ -1,0 +1,35 @@
+{% extends "consumer_base.html" %}
+
+{% load i18n %}
+
+{% load bootstrap %}
+
+{% block head_title %}Browse Series{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1>Browse Series</h1>
+            </div>
+            {% if series_for_site %}
+                {% for series in series_for_site %}
+                    <div class="col-sm-6 col-md-4">
+                        <a href="{% url 'series:detail' series.id %}" class="black">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <img src="{{ series.thumbnail_url }}" class="img-thumbnail">
+                                    <br>
+                                    <h4>{{ series.title }}</h4>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="lead">No series are available.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
