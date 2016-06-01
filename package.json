@@ -12,7 +12,7 @@
   "license": "",
   "dependencies": {
     "bootstrap-sass": "^3.3.6",
-    "font-awesome": "^4.5.0",
+    "font-awesome": "^4.6.3",
     "jquery": "^2.1.4",
     "video.js": "^5.9.2",
     "videojs-playlist": "^2.4.0",
@@ -112,6 +112,6 @@
   "browserify-shim": {
     "stripejs": "global:Stripe",
     "stripe-checkout": "global:StripeCheckout",
-    "./node_modules/jquery/dist/jquery.js" : "$"
+    "./node_modules/jquery/dist/jquery.js": "$"
   }
 }

@@ -13,5 +13,6 @@ class Series(models.Model):
     description = models.TextField()
     thumbnail = models.ImageField(upload_to='thumbnails')
 
+
     def __str__(self):
         return "%s - %s" % (self.title, self.description)

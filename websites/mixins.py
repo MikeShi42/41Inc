@@ -14,14 +14,15 @@ class PremiumEnabledMixin(object):
         self.args = args
         self.kwargs = kwargs
 
-        site = Settings.objects.get(pk=get_current_site(self.request).id)
+        site = get_current_site(self.request)
+        settings = Settings.objects.get(pk=site.id)
 
-        if site.premium_enabled:
+        if settings.premium_enabled:
             return super(PremiumEnabledMixin, self).dispatch(request, *args, **kwargs)
         return HttpResponseRedirect(self.redirect_to_homepage())
 
     def redirect_to_homepage(self):
-        return reverse('site_homepage', args=(self.kwargs['site_id'],))
+        return reverse('home')
 
 class SubscriptionMixin(object):
     def get_context_data(self, **kwargs):

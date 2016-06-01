@@ -45,7 +45,9 @@ urlpatterns = [
 
         # /websites/{website_id}/series
         url(r'^(?P<website_id>[0-9]+)/series/', include([
-
+            # /websites/{website_id}/series/create
+            url(r'^create/$', SeriesCreate.as_view(), name='create'),
+          
             # /websites/{website_id}/series/{series_id}
             url(r'^(?P<series_id>[0-9]+)$', SeriesView.as_view(), name='view'),
 
@@ -65,8 +67,5 @@ urlpatterns = [
         ])),
 
         url(r"^stripe_callback/$", stripe_callback, name="payments_stripe_callback")
-    ])),
-    url(r"^series/", include([
-        url(r"^create/$", SeriesCreate.as_view(), name="series_create"),
     ])),
 ]

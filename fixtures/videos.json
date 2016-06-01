@@ -65,5 +65,30 @@
             "series_id": 1,
             "video_id": 2
         }
+    },
+
+        {
+        "pk": 3,
+        "model": "videos.video",
+        "fields": {
+            "title": "Premium Video",
+            "description": "This video is premium",
+            "content": "{}",
+            "thumbnail": "url",
+            "creator_id": 1,
+            "site_id": 4,
+            "views": 4761,
+            "premium": true
+        }
+    },
+
+    {
+        "pk": 3,
+        "model": "videos.listing",
+        "fields": {
+            "order": 3,
+            "series_id": 1,
+            "video_id": 3
+        }
     }
 ]
