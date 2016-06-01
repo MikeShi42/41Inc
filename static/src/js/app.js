@@ -42,7 +42,7 @@ $(() => {
     // fire up the plugin
     const player = videojs('video');
 
-    var playlistData = loadSeriesListings(window.currentVideoID);
+    const playlistData = loadSeriesListings(window.currentVideoID);
 
     player.playlist(playlistData);
 
