@@ -3,7 +3,7 @@
 {% load staticfiles %}
 {% load i18n %}
 
-{% block head_title %}41 Inc.{% endblock %}
+{% block head_title %}Deo{% endblock %}
 
 {% block body_class %}home{% endblock %}
 
@@ -16,7 +16,9 @@
                     <img src="{% static "images/preview.png" %}" class="img-responsive">
                 </div>
                 <div class="col-md-6 vcenter">
-                    <h1>{% blocktrans %}41 Inc.{% endblocktrans %}</h1>
+                    <h1>{% blocktrans %}Deo{% endblocktrans %}
+                        <small>by 41 Inc.</small>
+                    </h1>
                     <p>
                         {% blocktrans %}
                             Put yourself on the big screen - in minutes.
@@ -35,19 +37,38 @@
         </div>
     </section>
     <div class="container">
-        <section id="built-with">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="text-center h1">Built with 41 Inc.</h2>
+        {#        <section id="built-with">#}
+        {#            <div class="row">#}
+        {#                <div class="col-xs-12">#}
+        {#                    <h2 class="text-center h1">Built with 41 Inc.</h2>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </section>#}
+        <section>
+            <div class="row text-center" id="how-it-works">
+                <h2 class="h1">How it works</h2>
+                <hr />
+                <div class="col-sm-4">
+                    <i class="fa fa-desktop fa-5x"></i>
+                    <p class="h3">Launch your own website with Deo</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class="fa fa-cloud-upload fa-5x"></i>
+                    <p class="h3">Upload content to <strong>your</strong> website</p>
+                </div>
+                <div class="col-sm-4">
+                    <i class="fa fa-usd fa-5x"></i><i class="fa fa-usd fa-5x"></i><i class="fa fa-usd fa-5x"></i>
+                    <p class="h3">Make money from subscribers</p>
                 </div>
             </div>
         </section>
         <section>
             <div class="row vcenter-parent" id="feature-1">
                 <div class="col-sm-6 vcenter">
-                    <h2>Revolutionary dashboard</h2>
-                    <p>Track the growth of your websites, manage your uploaded videos, and view
-                        important data about your content, only through the 41 Inc. Dashboard. </p>
+                    <h2>Feature-rich from the start</h2>
+                    <p>Effortlessly share your knowledge with the world, centrally maintain your own websites,
+                        and gather feedback on your uploaded content through user-friendly features that
+                        allow you to focus on creating.</p>
                 </div>
                 <div class="col-sm-6 vcenter">
                     <img src="{% static "images/preview.png" %}" class="img-responsive">
@@ -58,10 +79,9 @@
                     <img src="{% static "images/preview.png" %}" class="img-responsive">
                 </div>
                 <div class="col-sm-6 vcenter">
-                    <h2>Feature-rich from the start</h2>
-                    <p>Effortlessly share your knowledge with the world, centrally maintain your own websites,
-                        and gather feedback on your uploaded content through user-friendly features that
-                        allow you to focus on creating.</p>
+                    <h2>Analyze your content</h2>
+                    <p>Track the growth of your websites, manage your uploaded videos, and view
+                        important staistics about your content, only through the Deo dashboard.</p>
                 </div>
             </div>
         </section>
