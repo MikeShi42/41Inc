@@ -38,7 +38,7 @@
             "main_bg_color": "#e57f7f",
             "logo": "",
             "header": "Django is the best",
-            "sub_header": "Learn Django, Python and more. GoDjango is the best resource for getting started"
+            "sub_header": "Learn Django, Python and more. GoDjango is the best resource for getting started",
             "subscribe_pitch": "Join the best Django and Python community today"
         }
     },
@@ -63,7 +63,7 @@
             "main_bg_color": "#e57f7f",
             "logo": "",
             "header": "Django is the best",
-            "sub_header": "Learn Laravel, PHP and more. Laracasts is the best resource for getting started"
+            "sub_header": "Learn Laravel, PHP and more. Laracasts is the best resource for getting started",
             "subscribe_pitch": "Join the best Laravel and PHP community today"
         }
     }
