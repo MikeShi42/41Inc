@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load i18n %}
+{% load subscription_tags %}
 
 {% block head_title %}View Video{% endblock %}
 
@@ -15,7 +16,8 @@
 
                 <div class="col-md-8">
                     <h2>{{ video.title }}</h2>
-                    {% if video.premium and request.user.profile.subscribed %}
+                    {% is_site_premium request as site_premium %}
+                    {% if site_premium and video.premium and not request.user.profile.subscribed %}
                         <div class="panel panel-black paywall">
                             <div class="panel-body">
                                 <p>This video is only accessible to subscribers.</p>
