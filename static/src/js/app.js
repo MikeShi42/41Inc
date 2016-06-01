@@ -43,7 +43,5 @@ $(() => {
     $.get(`/api/videos/${window.currentVideoID}`, data => {
         player.playlist(data);
         player.playlistUi();
-    }).fail(error => {
-        alert('failed');
     });
 });
