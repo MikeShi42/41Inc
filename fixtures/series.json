@@ -3,7 +3,7 @@
         "model": "series.series",
         "pk": 1,
         "fields": {
-            "site": 4,
+            "site": 2,
             "creator": 1,
             "title": "Learning the Fundamentals",
             "description": "Take a quick course for beginners to get familiar with the technology!"
@@ -13,7 +13,7 @@
         "model": "series.series",
         "pk": 2,
         "fields": {
-            "site": 4,
+            "site": 2,
             "creator": 2,
             "title": "Intermediate Topics",
             "description": "Go more in depth about these parts of the library with these videos."
