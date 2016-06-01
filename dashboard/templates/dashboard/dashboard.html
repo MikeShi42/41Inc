@@ -92,7 +92,7 @@
                                 <td>{{ s.title }}</td>
                                 <td>{{ s.rating }}</td>
                                 <td>{{ s.views }}</td>
-                                <td><a href="" class="btn btn-primary">Manage</a></td>
+                                <td><a href="{% url 'series:view' website_id=site.id series_id=s.id %}" class="btn btn-primary">Manage</a></td>
                             </tr>
                         {% endfor %}
                     {% else %}

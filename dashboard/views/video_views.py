@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views.generic.detail import DetailView
@@ -75,9 +75,11 @@ class VideoCreate(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMix
         Need to use reverse_lazy instead of reverse because the URLs have not
         been loaded when this file is imported.
         """
-        site = Site.objects.get(pk=self.kwargs['website_id'])
-        uri = reverse_lazy('videos:index', urlconf='websites.urls')
-        return 'http://%s:8000%s' % (site.domain, uri)
+        # site = Site.objects.get(pk=self.kwargs['website_id'])
+        # uri = reverse_lazy('videos:index', urlconf='websites.urls')
+        return reverse('websites_dashboard', kwargs={
+            'website_id': self.kwargs.get('website_id')
+        })
 
 
 class VideoEdit(SuccessMessageMixin, UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
@@ -110,9 +112,11 @@ class VideoEdit(SuccessMessageMixin, UpdateView, LoginRequiredMixin, PermissionR
         return redirect(self.get_success_url())
 
     def get_success_url(self):
-        site = Site.objects.get(pk=self.kwargs['website_id'])
-        uri = reverse_lazy('videos:index', urlconf='websites.urls')
-        return 'http://%s:8000%s' % (site.domain, uri)
+        # site = Site.objects.get(pk=self.kwargs['website_id'])
+        # uri = reverse_lazy('videos:index', urlconf='websites.urls')
+        return reverse('websites_dashboard', kwargs={
+            'website_id': self.kwargs.get('website_id')
+        })
 
 
 class VideoDelete(LoginRequiredMixin, DeleteView):

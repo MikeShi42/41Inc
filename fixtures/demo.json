@@ -14,7 +14,13 @@
         "fields": {
             "site": 1,
             "creator": 1,
-            "description": "Main site that all website creators are part of."
+            "description": "Main site that all website creators are part of.",
+            "main_color": "#fff",
+            "main_bg_color": "#e57f7f",
+            "logo": "",
+            "header": "Django is the best",
+            "sub_header": "Learn Django, Python and more. GoDjango is the best resource for getting started",
+            "subscribe_pitch": "Join the best Django and Python community today"
         }
     },
 
@@ -22,7 +28,7 @@
         "pk": 2,
         "model": "sites.site",
         "fields": {
-            "domain": "godjango.com:8000",
+            "domain": "godjango.dev:8000",
             "name": "GoDjango"
         }
     },
@@ -32,7 +38,7 @@
         "model": "websites.info",
         "fields": {
             "site": 2,
-            "creator": 2,
+            "creator": 1,
             "description": "Learn Django, Python, and more. GoDjango is created by Buddy Lindsey. Each episode is focused on something that can help django developers do django development better. Most videos will be short, sweet, and to the point about the specific topic. It is expected that most developers have some experience with Django, but anyone will usually be able to benefit some how.",
             "main_color": "#fff",
             "main_bg_color": "#e57f7f",
@@ -47,7 +53,7 @@
         "pk": 3,
         "model": "sites.site",
         "fields": {
-            "domain": "laracasts.com:8000",
+            "domain": "laracasts.dev:8000",
             "name": "Laracasts"
         }
     },
@@ -57,7 +63,7 @@
         "model": "websites.info",
         "fields": {
             "site": 3,
-            "creator": 3,
+            "creator": 1,
             "description": "With Laracasts, not only will you learn the necessary skills for building modern web applications (using PHP, Laravel, VueJS, and more) but you'll have fun doing it. Ever wished for someone to sit next to you, and explain that complicated concept you're struggling with? Hi, I'm Jeffrey.",
             "main_color": "#fff",
             "main_bg_color": "#e57f7f",
@@ -65,6 +71,17 @@
             "header": "Django is the best",
             "sub_header": "Learn Laravel, PHP and more. Laracasts is the best resource for getting started",
             "subscribe_pitch": "Join the best Laravel and PHP community today"
+        }
+    },
+
+    {
+        "pk": 1,
+        "model": "auth.user",
+        "fields": {
+            "first_name": "Joseph",
+            "last_name": "Le",
+            "username": "josephle",
+            "password": "pbkdf2_sha256$24000$4h0o67lLujdu$rYNGsXw8rt/Pq7tIOVoJVbXcPyT+E2l4fL5BIOj1Cyg="
         }
     }
 ]
