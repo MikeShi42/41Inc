@@ -14,7 +14,7 @@ from dashboard.views import (
     PaymentSettings,
     stripe_auth,
     stripe_callback,
-    VideoDelete)
+    VideoDelete, WebsiteCustomize)
 
 urlpatterns = [
     # url(r"^$", TemplateView.as_view(template_name="dashboard/dashboard.html"), name="dashboard"),
@@ -64,6 +64,7 @@ urlpatterns = [
             url(r"^info/$", WebsiteSettingsInfo.as_view(), name="websites_settings_info"),
             url(r"^payments/$", PaymentSettings.as_view(), name="payments_settings"),
             url(r"^payments/stripe$", stripe_auth, name="payments_stripe_redirect"),
+            url(r"^customize/$", WebsiteCustomize.as_view(), name="websites_customize"),
         ])),
 
         url(r"^stripe_callback/$", stripe_callback, name="payments_stripe_callback")

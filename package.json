@@ -11,6 +11,7 @@
   },
   "license": "",
   "dependencies": {
+    "bootstrap-colorpicker": "^2.3.3",
     "bootstrap-sass": "^3.3.6",
     "font-awesome": "^4.6.3",
     "jquery": "^2.1.4",

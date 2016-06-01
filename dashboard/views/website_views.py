@@ -159,3 +159,9 @@ def stripe_callback(request):
 
 def to_cents(amount):
     return int(amount * 100)
+
+
+class WebsiteCustomize(LoginRequiredMixin, SiteIdMixin, UpdateView):
+    model = Info
+    fields = ['main_color', 'main_bg_color', 'logo', 'header', 'sub_header', 'subscribe_pitch']
+    template_name = 'dashboard/websites/settings/customize.html'

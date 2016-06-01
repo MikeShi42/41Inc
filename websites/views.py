@@ -7,7 +7,7 @@ from django.contrib import auth
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 from django.utils import timezone
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, FormView, DetailView
 
 import websites.forms
 from fourtyone import settings
@@ -15,6 +15,7 @@ from series.models import Series
 from subscriptions.models import Settings as SubscriptionSettings, Subscription
 from videos.models import Listing
 from websites.mixins import PremiumEnabledMixin, SubscriptionMixin
+from websites.models import Info
 
 
 class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, TemplateView):
@@ -29,6 +30,7 @@ class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, 
         # Get prices
         site = SubscriptionSettings.objects.get(pk=current_site.id)
 
+        context['subscribe_pitch'] = Info.objects.get(pk=current_site.id).subscribe_pitch
         context['price_month'] = site.price_month
         context['price_year'] = site.price_year
 
@@ -106,8 +108,20 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
-        context['series_for_site'] = Series.objects.filter(site=get_current_site(self.request))
+        site = get_current_site(self.request)
+
+        context['series_for_site'] = Series.objects.filter(site=site)
+        context['main_color'] = site.info.main_color
+        context['main_bg_color'] = site.info.main_bg_color
+        context['logo'] = site.info.logo
+        context['header'] = site.info.header
+        context['sub_header'] = site.info.sub_header
+        context['subscribe_pitch'] = site.info.subscribe_pitch
+
         return context
+
+class CustomizeView(FormView):
+    template_name = 'websites/customize.html'
 
 class SeriesView(TemplateView):
     template_name = 'websites/series/index.html'

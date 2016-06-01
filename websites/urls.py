@@ -6,7 +6,7 @@ import users.views
 import websites.views
 from dashboard.views import VideoIndexView, VideoDetailView, detail
 from series.models import Series
-from websites.views import HomeView, SubscribeView, SeriesDetailView, SeriesView
+from websites.views import HomeView, SubscribeView, SeriesDetailView, CustomizeView, SeriesView
 
 urlpatterns = [
     # Root URL for client sites /
@@ -44,6 +44,10 @@ urlpatterns = [
 
     # url(r"^account/", include("users.urls")),
     url(r'^subscribe/$', SubscribeView.as_view(), name="site_subscribe"),
+
+    # customization
+    url(r'^customize/', CustomizeView.as_view(), name="customize"),
+
     url(r'^series/$', SeriesView.as_view(), name="series_browse"),
 ]
 

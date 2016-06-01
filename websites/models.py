@@ -13,3 +13,17 @@ class Info(models.Model):
     )
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField()
+
+    # Customization fields
+    main_color = models.CharField(default="#fff", max_length=10)
+    main_bg_color = models.CharField(default="#666", max_length=10)
+
+    # Logo
+    logo = models.ImageField(null=True, upload_to='logos')
+
+    # Pitch information
+    header = models.TextField(default="Start Learning Now")
+    sub_header = models.TextField(default="We're the go-to source of tutorials on the web")
+
+    # Reasons to subscribe
+    subscribe_pitch = models.TextField(default="Be part of a revolution")
