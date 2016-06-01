@@ -121,12 +121,3 @@ class HomeView(TemplateView):
 
 class CustomizeView(FormView):
     template_name = 'websites/customize.html'
-
-    #
-    # context['main_color'] = site.main_color
-    # context['main_bg_color'] = site.main_bg_color
-    # context['nav_color'] = site.nav_color
-    # context['nav_bg_color'] = site.nav_bg_color
-    # context['logo'] = site.logo
-    # context['header'] = site.header
-    # context['sub_header'] = site.sub_header

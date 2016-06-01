@@ -4,20 +4,25 @@
 
 {% load bootstrap %}
 
-{% block head_title %}Homepage{% endblock %}
+{% block head_title %}{{ title }}Home{% endblock %}
 
 
 
 {% block body %}
 
     <style>
-    .main_color {
-        color: {{ main_color }} !important;
-    }
-    .main_bg_color {
-        background-color: {{ main_bg_color }};
-    }
-
+        .main_color {
+            color: {{ main_color }} !important;
+        }
+        .main_bg_color {
+            background-color: {{ main_bg_color }};
+        }
+        .nav_color {
+            background-color: {{ nav_color }} !important;
+        }
+        .nav_bg_color {
+            background-color: {{ nav_bg_color }} !important;
+        }
     </style>
     <section class="jumbotron main_bg_color">
         <div class="container">
@@ -59,8 +64,8 @@
             </p>
         </div>
     </section>
-    <section style="background-color:#404040;padding-top:100px;padding-bottom:200px" class="text-center">
-        <h1 style="color:white">Just Do It</h1>
+    <section class="main_bg_color text-center" style="padding-top:100px;padding-bottom:200px">
+        <h1 style="color:white;">Just Do It</h1>
         <i class="fa fa-play-circle fa-4x" style="color:white"></i><br>
         <h4 class="col-md-4 col-md-offset-4" style="color:white">Start learning today and you will become a better person, otherwise it's not our fault, it's yours.</h4>
     </section>
@@ -75,7 +80,7 @@
             </div>
         </div>
     </section>
-    <section style="background-color:lightseagreen;padding-top: 100px;padding-bottom: 100px;">
+    <section class="main_bg_color" style="padding-top: 100px;padding-bottom: 100px;">
         <div class="container">
             <div class="row">
                 <img src="http://tinyurl.com/ja378yd" class="col-md-6" style="width:600px">
