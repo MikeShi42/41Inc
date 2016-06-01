@@ -6,7 +6,7 @@ import users.views
 import websites.views
 from dashboard.views import VideoIndexView, VideoDetailView, detail
 from series.models import Series
-from websites.views import HomeView, SubscribeView, SeriesDetailView
+from websites.views import HomeView, SubscribeView, SeriesDetailView, CustomizeView, SeriesView
 
 urlpatterns = [
     # Root URL for client sites /
