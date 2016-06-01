@@ -9,7 +9,11 @@
         {% for site in websites %}
             <li>
                 <a href="{% url 'websites_dashboard' site.id %}">
-                    <img src="http://lorempixel.com/400/400">
+                    <div style="background-color: white;height:60px;min-width:60px;">
+                        <h2 style="padding: 0;margin: 0;text-align:center;line-height:60px">
+                            {{ site.name|make_list|first }}
+                        </h2>
+                    </div>
                 </a>
             </li>
         {% endfor %}
