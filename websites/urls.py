@@ -36,6 +36,7 @@ urlpatterns = [
 
     # url(r"^account/", include("users.urls")),
     url(r'^subscribe/$', SubscribeView.as_view(), name="site_subscribe"),
+    url(r'^series/$', websites.views.browse_series, name="series_browse"),
 ]
 
 urlpatterns += account.urls.urlpatterns
