@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views import generic
@@ -12,8 +12,10 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import FormView
 from django.views.generic.list import ListView
 
-from series.forms import SeriesForm 
+from series.forms import SeriesForm
 from series.models import Series
+from videos.models import Listing
+
 
 class SeriesCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Series
@@ -30,20 +32,19 @@ class SeriesCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         context['website_id'] = self.kwargs['website_id']
         return context
 
- 
     def create_series(self, form):
         """Set the creator_id of the newly created series to the user that's 
         currently logged in and also fills in the title and description fields
-        """        
+        """
         curr_site = get_current_site(self.request)
 
-        series =  Series(title=form.cleaned_data['title'], description=form.cleaned_data['description'], creator=self.request.user, site=self.kwargs['website_id'])
+        series = Series(title=form.cleaned_data['title'], description=form.cleaned_data['description'],
+                        creator=self.request.user, site=self.kwargs['website_id'])
         series.save()
         return series
 
 
 class SeriesView(LoginRequiredMixin, ListView):
-
     template_name = 'dashboard/series/index.html'
 
     def get_context_data(self, **kwargs):
@@ -64,12 +65,13 @@ class SeriesView(LoginRequiredMixin, ListView):
         videos = [listing.video for listing in listings]
         return videos
 
+
 class SeriesEdit(LoginRequiredMixin, UpdateView):
     model = Series
 
-    fields=['title', 'description', 'thumbnail_url']
+    fields = ['title', 'description', 'thumbnail']
 
-    template_name='dashboard/series/editSeries.html'
+    template_name = 'dashboard/series/editSeries.html'
 
     def get_context_data(self, **kwargs):
         context = super(SeriesEdit, self).get_context_data(**kwargs)
@@ -78,14 +80,13 @@ class SeriesEdit(LoginRequiredMixin, UpdateView):
         return context
 
     def get_success_url(self):
-        return reverse('series:view', kwargs = {
+        return reverse('series:view', kwargs={
             'website_id': self.kwargs.get('website_id'),
-            'series_id':self.kwargs.get('pk')
+            'series_id': self.kwargs.get('pk')
         })
 
 
 class SeriesDelete(LoginRequiredMixin, DeleteView):
-
     model = Series
 
     success_url = reverse_lazy('dashboard')

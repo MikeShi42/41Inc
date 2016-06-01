@@ -7,13 +7,13 @@
 
 {% block body %}
     <div class="container dash-upper">
-        <div class="page-header">
-            <h2>Confirm Delete Video</h2>
-        </div>
         <div class="row">
-
             <div class="col-xs-12">
-                <p class="lead">Are you sure you want to delete {{ object }}?</p>
+                <div class="page-header">
+                    <h2>Confirm Delete Video</h2>
+                </div>
+
+                <p class="lead">Are you sure you want to delete <strong>{{ object }}</strong>?</p>
 
                 <form method="POST" action="{% url "videos:delete" website_id pk %}">
 

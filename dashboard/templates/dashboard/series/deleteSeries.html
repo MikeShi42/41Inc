@@ -7,16 +7,20 @@
 
 {% block body %}
     <div class="row">
-        <h1>Confirm Delete Series</h1>
-        <h3>Are you sure you want to delete {{ object }}?</h3>
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h2>Delete Series</h2>
+            </div>
+
+            <p class="lead">Are you sure you want to delete <strong>{{ object }}</strong>?</p>
+
             <form method="POST" action="{% url "series:delete" website_id pk %}">
 
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger">
-                    {% trans "Delete Series"%}
+                    {% trans "Delete Series" %}
                 </button>
             </form>
-       </div>
+        </div>
     </div>
 {% endblock %}

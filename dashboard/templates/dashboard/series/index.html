@@ -3,17 +3,18 @@
 {% load i18n %}
 {% load bootstrap %}
 
-{% block head_title %}{% trans "Videos" %}{% endblock %}
+{% block head_title %}{{ series.title }}{% endblock %}
 
 {% block body %}
     <div class="container dash-upper">
         <div class="row">
-            <div class="pull-left">
-                <h2>{{ series.title }}</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-warning" href="{% url 'series:edit' website_id series_id %}">Edit Series</a>
+            <div class="page-header">
+                <h2>{{ series.title }}
+                    <small class="pull-right">
+                                        <a class="btn btn-warning" href="{% url 'series:edit' website_id series_id %}">Edit Series</a>
                 <a class="btn btn-success" href="{% url 'videos:create' website_id %}">Add New Video</a>
+                    </small>
+                </h2>
             </div>
         </div>
         <div class="row">

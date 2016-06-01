@@ -8,19 +8,22 @@
 {% block body %}
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <form method="POST" action="{% url "series:create" website_id=website_id %}" {% if form.is_multipart %} enctype="multipart/form-data">
-                {% endif %}
-                <legend>{% trans "Create Series" %}</legend>
-                {% csrf_token %}
-                {{ form|bootstrap }}
-                {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" 
-                    value="{{ redirect_field_value }}" />
-                {% endif %}
-                <button type="submit" class="btn btn-primary">
-                    {% trans "Create Series"%}
-                </button>
+            <div class="page-header">
+                <h2>Create Series</h2>
+            </div>
+            <form method="POST" action="{% url "series:create" website_id=website_id %}" {% if form.is_multipart %}
+                  enctype="multipart/form-data">
+            {% endif %}
+            {% csrf_token %}
+            {{ form|bootstrap }}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}"
+                       value="{{ redirect_field_value }}"/>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">
+                {% trans "Create Series" %}
+            </button>
             </form>
-       </div>
+        </div>
     </div>
 {% endblock %}
