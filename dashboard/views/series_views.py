@@ -26,12 +26,9 @@ class SeriesCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
         return super(SeriesCreate, self).form_valid(form)
  
     def create_series(self, form):
-    """Set the creator_id of the newly created series to the user that's 
+        """Set the creator_id of the newly created series to the user that's 
         currently logged in and also fills in the title and description fields
-    """
-        current_user = self.request.user
-        series =  Series(title=form.cleaned_data['title'], 
-                description=form.cleaned_data['description'], 
-                creator=current_user)
+        """        
+        series =  Series(title=form.cleaned_data['title'], description=form.cleaned_data['description'], creator=self.request.user)
         series.save()
         return series 
