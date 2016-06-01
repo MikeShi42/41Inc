@@ -31,9 +31,12 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
         series = []
         for rs in raw_series:
             s = {
-                # 'rating': (sum(r.ratings for r in Video.objects.filter(
-                #     series=rs.id
-                # )) or 0.0) / 5.0,
+                'views': sum(v.views for v in Video.objects.filter(
+                    series=rs.id,
+                )),
+                'rating': (sum(r.ratings for r in Video.objects.filter(
+                    series=rs.id
+                )) or 0.0) / 5.0,
                 'title': rs.title,
                 'subscribers': 1,
             }
