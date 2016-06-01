@@ -6,8 +6,7 @@ import users.views
 import websites.views
 from dashboard.views import VideoIndexView, VideoDetailView, detail
 from series.models import Series
-from websites.views import HomeView
-from websites.views import SubscribeView
+from websites.views import HomeView, SubscribeView, SeriesDetailView
 
 urlpatterns = [
     # Root URL for client sites /
@@ -33,8 +32,7 @@ urlpatterns = [
         url(r'^$', VideoIndexView.as_view(), name='index'),
 
         # /videos/{video_id}
-        url(r'^(?P<pk>[0-9]+)/$', DetailView.as_view(template_name='websites/series/detail.html', model=Series),
-            name="detail"),
+        url(r'^(?P<pk>[0-9]+)/$', SeriesDetailView.as_view(), name="detail"),
 
     ], namespace='videos')),
 

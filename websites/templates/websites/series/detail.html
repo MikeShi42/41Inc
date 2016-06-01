@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load i18n %}
+{% load domain_url %}
 
 {% block head_title %}View Series{% endblock %}
 
@@ -18,6 +19,20 @@
                         {{ object.description }}
                     </p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="series-videos">
+        <div class="container">
+            <div class="col-md-8 col-md-offset-2">
+                <h3 class="text-center">Series Videos</h3>
+                <hr>
+                <ul class="list-group">
+                    {% for video in videos %}
+                        <a href="{% url 'videos:detail' video.id %}" class="list-group-item">{{ video.title }}</a>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </section>
