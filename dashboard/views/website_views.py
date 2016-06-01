@@ -27,10 +27,9 @@ class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
     template_name = 'dashboard/websites/create.html'
     form_class = WebsiteForm
     success_message = "%(name)s was created successfully"
-    success_url = '/dashboard/websites/create'
 
     def form_valid(self, form):
-        site = self.create_site(form)
+        self.created_site = site = self.create_site(form)
         self.create_info(form, site, self.request.user)
         self.create_pay_settings(site)
         return super(WebsiteCreate, self).form_valid(form)
@@ -49,6 +48,9 @@ class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
         settings = SubscriptionSettings(site=site)
         settings.save()
         return settings
+
+    def get_success_url(self):
+        return reverse('websites_dashboard', args=(self.created_site.id,))
 
 
 class WebsiteSettings(SiteIdMixin, LoginRequiredMixin, SuccessMessageMixin, UpdateView):
