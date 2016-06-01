@@ -120,10 +120,9 @@ class HomeView(TemplateView):
 
         return context
 
-<<<<<<< HEAD
 class CustomizeView(FormView):
     template_name = 'websites/customize.html'
-=======
+
 
 class SeriesDetailView(DetailView):
     template_name = 'websites/series/detail.html'
@@ -134,4 +133,3 @@ class SeriesDetailView(DetailView):
         listings = Listing.objects.filter(series=self.kwargs['pk'])
         context['videos'] = [listing.video for listing in listings]
         return context
->>>>>>> master
