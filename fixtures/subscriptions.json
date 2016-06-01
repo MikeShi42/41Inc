@@ -1,0 +1,13 @@
+[
+    {
+        "model": "subscriptions.subscription",
+        "pk": 1,
+        "fields": {
+            "site_id": 2,
+            "user_id": 2,
+            "customer_id": "12321312",
+            "active_until": "2017-04-23",
+            "created_at": "2016-05-31"
+        }
+    }
+]

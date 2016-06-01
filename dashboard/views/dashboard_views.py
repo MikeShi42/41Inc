@@ -45,9 +45,7 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
         total_rating = (sum(r.ratings for r in Video.objects.filter(
             creator_id=user.id
         )) or 0.0) / 5.0
-        total_subscribers = sum(1 for s in Subscription.objects.filter(
-            user_id=user.id
-        )) or 0
+        total_subscribers = self.get_subscriber_count(site) or 0
         context = {
             'user': user,
             'series': series,
@@ -58,3 +56,6 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
         }
 
         return context
+
+    def get_subscriber_count(self, site):
+        return Subscription.objects.filter(site=site).count()
