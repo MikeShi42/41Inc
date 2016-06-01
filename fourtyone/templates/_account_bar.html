@@ -7,7 +7,7 @@
         <p class="navbar-text">
             <i class="fa fa-user"></i> {% user_display request.user %}
         </p>
-        {% if site.id == 1 %}
+        {% if current_site.id == 1 %}
             <li>
                 <a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i> {% trans "Dashboard" %}</a>
             </li>
