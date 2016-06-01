@@ -15,8 +15,8 @@ class Info(models.Model):
     description = models.TextField()
 
     # Customization fields
-    main_color = models.TextField(default="#fff")
-    main_bg_color = models.TextField(default="#666")
+    main_color = models.CharField(default="#fff", max_length=10)
+    main_bg_color = models.CharField(default="#666", max_length=10)
 
     # Logo
     logo = models.ImageField(null=True, upload_to='logos')
