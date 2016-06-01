@@ -5,6 +5,10 @@ body {
   position: relative;
 }
 
+a, a:hover {
+  color: inherit;
+}
+
 section {
   padding: 20px 0px;
 }
