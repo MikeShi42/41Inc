@@ -7,11 +7,22 @@
 {% block head_title %}Homepage{% endblock %}
 
 
+
 {% block body %}
-    <section class="jumbotron">
+
+    <style>
+    .main_color {
+        color: {{ main_color }} !important;
+    }
+    .main_bg_color {
+        background-color: {{ main_bg_color }};
+    }
+
+    </style>
+    <section class="jumbotron main_bg_color">
         <div class="container">
-            <h1 class="text-center">{% blocktrans %}Homepage Name<br>{% endblocktrans %}</h1>
-            <p class="text-center">{% blocktrans %}Explore the homepage like never before.{% endblocktrans %}</p>
+            <h1 class="text-center main_color">{{ header }}</h1>
+            <p class="text-center main_color">{{ sub_header }}</p>
             <p class="text-center">
                 <a href="" class="btn btn-primary btn-lg">Get Started</a>
                 <a href="" class="btn btn-default btn-lg">Learn More</a></div>
