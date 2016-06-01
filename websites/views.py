@@ -112,11 +112,10 @@ class HomeView(TemplateView):
         context['series_for_site'] = Series.objects.filter(site=site)
         context['main_color'] = site.info.main_color
         context['main_bg_color'] = site.info.main_bg_color
-        context['nav_color'] = site.info.nav_color
-        context['nav_bg_color'] = site.info.nav_bg_color
         context['logo'] = site.info.logo
         context['header'] = site.info.header
         context['sub_header'] = site.info.sub_header
+        context['subscribe_pitch'] = site.info.subscribe_pitch
 
         return context
 
