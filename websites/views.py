@@ -8,6 +8,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 from django.utils import timezone
 from django.views.generic import TemplateView, FormView, DetailView
+from django.contrib.sites.models import Site
 
 import websites.forms
 from fourtyone import settings
@@ -109,6 +110,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         site = get_current_site(self.request)
+        site = list(Site.objects.filter(id=site.id))[0]
 
         context['series_for_site'] = Series.objects.filter(site=site)
         context['main_color'] = site.info.main_color
