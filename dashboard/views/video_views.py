@@ -26,8 +26,6 @@ class VideoCreate(PermissionRequiredMixin,CreateView):
     form_class = VideoForm
     template_name = 'dashboard/videos/create.html'
 
-    success_message = "%(title)s was created successfully!"
-
     def has_permission(self):
         """Renders view only if logged-in user is site creator, or 403s."""
         site = Site.objects.get(pk=self.kwargs['website_id'])
@@ -56,7 +54,7 @@ class VideoCreate(PermissionRequiredMixin,CreateView):
         video.creator = self.request.user
         video.save()
 
-        messages.success(self.request, self.success_message % video.title)
+        messages.success(self.request, "%s was successfully created!" % video.title)
 
         if form.cleaned_data['series']:
             max_order = Listing.objects.filter(series=form.cleaned_data['series']).aggregate(Max('order'))['order__max']

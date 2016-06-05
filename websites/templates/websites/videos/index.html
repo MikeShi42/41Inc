@@ -1,31 +1,45 @@
 {% extends "consumer_base.html" %}
 
 {% load i18n %}
-{% load bootstrap %}
 {% load domain_url %}
 
 {% block head_title %}{% trans "Videos" %}{% endblock %}
 
-{% block body %}
-    {% if video_list %}
-        <ul>
-        {% for video in video_list %}
+{% block body_base %}
+    <section class="jumbotron jumbotron-41 main_bg_color">
+        <div class="container">
             <div class="row">
-              <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                  <img src="http://media.istockphoto.com/photos/photographic-camera-lens-with-bokeh-light-picture-id499201764" alt="Video Image">
-                  <div class="caption">
-                    <h3>Video</h3>
-                    <p>Some description goes here.<p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                  </div>
+                <div class="col-md-12">
+                    <h2>Videos</h2>
+                    <p>Check out our available videos!</p>
                 </div>
-              </div>
             </div>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No videos have been uploaded yet!</p>
-    {% endif %}
-    <a href="{% domain_url 'videos:create' admin_url_for_site=website_id %}">Upload a video!</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            {% if video_list %}
+                <div class="row">
+                    {% for video in video_list %}
+                        {% if forloop.counter0|divisibleby:3 %}
+                            <div class="clearfix"></div>
+                        {% endif %}
+                            <div class="col-md-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <img src="{{ video.thumbnail.url }}" class="img-center img-responsive" alt="Series thumbnail image">
+                                        <h3>{{ video.title }}</h3>
+                                        <p class="text-muted">{{ video.description }}</p>
+                                        <button class="btn btn-default" type="submit">Watch</button>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <h3>No videos are available. Check back later!</h3>
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}
