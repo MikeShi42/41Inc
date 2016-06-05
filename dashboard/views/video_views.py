@@ -11,7 +11,7 @@ from django.views.generic.edit import UpdateView
 from videos.forms import VideoForm
 from videos.models import Video, Listing
 
-
+"""View handling new video creation"""
 class VideoCreate(PermissionRequiredMixin,CreateView):
     """Renders video upload form and defines form submission behavior.
 
@@ -77,6 +77,7 @@ class VideoCreate(PermissionRequiredMixin,CreateView):
         })
 
 
+"""View handling interface for editing existing videos in dashboard"""
 class VideoEdit(SuccessMessageMixin, UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
     login_url = '/account/login/'
 
@@ -111,7 +112,7 @@ class VideoEdit(SuccessMessageMixin, UpdateView, LoginRequiredMixin, PermissionR
             'website_id': self.kwargs.get('website_id')
         })
 
-
+"""View handling deleting confirmation"""
 class VideoDelete(LoginRequiredMixin, DeleteView):
     model = Video
     success_url = reverse_lazy('dashboard')

@@ -22,7 +22,7 @@ from websites.models import Info
 
 STRIPE_STATE_SALT = 'fourtyone.stripe'
 
-
+"""View handling creating new website in dashboard"""
 class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
     template_name = 'dashboard/websites/create.html'
     form_class = WebsiteForm
@@ -53,6 +53,7 @@ class WebsiteCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
         return reverse('websites_dashboard', args=(self.created_site.id,))
 
 
+"""View handling basic website settings"""
 class WebsiteSettings(SiteIdMixin, LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'dashboard/websites/settings/settings.html'
     model = Site
@@ -73,6 +74,7 @@ class WebsiteSettingsInfo(SiteIdMixin, LoginRequiredMixin, SuccessMessageMixin, 
         return reverse('websites_settings_info', args=(self.kwargs['pk'],))
 
 
+"""View handling payment settings"""
 class PaymentSettings(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'dashboard/websites/settings/payments.html'
     model = SubscriptionSettings
@@ -104,6 +106,7 @@ def update_stripe(sender, instance, **kwargs):
                     price_year=to_cents(instance.price_year))
 
 
+"""Starts authenticating Stripe user"""
 def stripe_auth(request, pk):
     # Data to pass into state
     data = {
@@ -118,7 +121,7 @@ def stripe_auth(request, pk):
     url = stripe_connect_service.get_authorize_url(**params)
     return HttpResponseRedirect(url)
 
-
+"""Handles Stripe post-authentication settings"""
 def stripe_callback(request):
     # the temporary code returned from stripe
     code = request.GET['code']
@@ -154,8 +157,6 @@ def stripe_callback(request):
 
     messages.success(request, 'Stripe account successfully connected!')
 
-    # Sample return of the access_token, please don't do this! this is
-    # just an example that it does in fact return the access_token
     return HttpResponseRedirect(reverse('payments_settings', args=(state['site_id'],)))
 
 
@@ -163,6 +164,7 @@ def to_cents(amount):
     return int(amount * 100)
 
 
+"""View handles website customization for colors and content"""
 class WebsiteCustomize(SuccessMessageMixin, LoginRequiredMixin, SiteIdMixin, UpdateView):
     model = Info
     fields = ['main_color', 'main_bg_color', 'logo', 'header', 'sub_header', 'subscribe_pitch']
@@ -180,6 +182,7 @@ class WebsiteCustomize(SuccessMessageMixin, LoginRequiredMixin, SiteIdMixin, Upd
         return super(WebsiteCustomize, self).form_valid(form)
 
 
+"""View handles delete confirmation"""
 class WebsiteDelete(LoginRequiredMixin, DeleteView):
     model = Site
 

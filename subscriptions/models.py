@@ -1,10 +1,11 @@
+"""Defines models used related to subscription handling"""
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.db import models
 
-
+"""Keeps records of customers who have active subscriptions"""
 class Subscription(models.Model):
     site = models.ForeignKey(
         Site,
@@ -21,7 +22,7 @@ class Subscription(models.Model):
     active_until = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-
+"""Keeps track of admin settings for subscription prices"""
 class Settings(models.Model):
     site = models.OneToOneField(
         Site,

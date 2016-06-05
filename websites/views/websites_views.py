@@ -16,7 +16,7 @@ from subscriptions.models import Settings as SubscriptionSettings, Subscription
 from websites.forms import SignupForm
 from websites.mixins import PremiumEnabledMixin, SubscriptionMixin
 
-
+"""Renders subscription view for consumers"""
 class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, TemplateView):
     template_name = 'websites/payments/subscribe.html'
 
@@ -72,6 +72,7 @@ class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, 
         return HttpResponse('Subscription created.')
 
 
+"""Allows consumers to sign up for an account on a website"""
 class WebsiteSignupView(account.views.SignupView):
     form_class = SignupForm
 
@@ -103,6 +104,7 @@ class WebsiteSignupView(account.views.SignupView):
         return kw
 
 
+"""Renders the website home page"""
 class HomeView(TemplateView):
     template_name = 'websites/homepage.html'
 

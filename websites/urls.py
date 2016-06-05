@@ -1,3 +1,5 @@
+"""Routes for all of consumer side of the website"""
+
 import account.urls
 from django.conf.urls import include, url
 

@@ -11,9 +11,13 @@ from videos.models import Video
 from subscriptions.models import Subscription
 
 
+"""Dashboard Home View
+Displays overview of views, subscribers, series, etc.
+"""
 class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
     template_name = 'dashboard/dashboard.html'
 
+    """Grab data for template"""
     def get_context_data(self, **kwargs):
         user = self.request.user
 
@@ -54,20 +58,26 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
 
         return context
 
+    """Sum views in a series"""
     def get_series_views(self, series_id):
         return Video.objects.filter(series=series_id).aggregate(Sum('views'))['views__sum']
 
+    """Get average rating of videos in series"""
     def get_series_rating(self, series_id):
         return Video.objects.filter(series=series_id).aggregate(Avg('rating'))['rating__avg']
 
+    """Gets the view count of all videos in a site"""
     def get_view_count(self, site):
         return Video.objects.filter(site=site).aggregate(Sum('views'))['views__sum']
 
+    """Gets the sub count for a site"""
     def get_subscriber_count(self, site):
         return Subscription.objects.filter(site=site, active_until__gt=timezone.now()).count()
 
+    """Gets the avg rating of videos across the site"""
     def get_site_rating(self, site):
         return Video.objects.filter(site=site).aggregate(Avg('rating'))['rating__avg']
 
+    """Gets the first 5 videos of a site"""
     def get_site_videos(self, site):
         return Video.objects.filter(site=site)[:5]

@@ -16,7 +16,7 @@ from series.forms import SeriesForm
 from series.models import Series
 from videos.models import Listing
 
-
+"""View for creating new series on admin dashboard"""
 class SeriesCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
     model = Series
     template_name = 'dashboard/series/createSeries.html'
@@ -49,6 +49,7 @@ class SeriesCreate(LoginRequiredMixin, SuccessMessageMixin, FormView):
         })
 
 
+"""View for seeing current series for dashboard"""
 class SeriesView(LoginRequiredMixin, ListView):
     template_name = 'dashboard/series/index.html'
 
@@ -70,7 +71,7 @@ class SeriesView(LoginRequiredMixin, ListView):
         videos = [listing.video for listing in listings]
         return videos
 
-
+"""View for editing existing series for dashboard"""
 class SeriesEdit(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Series
 
@@ -91,6 +92,7 @@ class SeriesEdit(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         })
 
 
+"""View for confirming deletion of series for dashboard"""
 class SeriesDelete(LoginRequiredMixin, DeleteView):
     model = Series
 

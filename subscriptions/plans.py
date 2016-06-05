@@ -1,3 +1,5 @@
+"""Manage plan updates with the stripe API"""
+
 import stripe
 
 from fourtyone import settings
