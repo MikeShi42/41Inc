@@ -1,4 +1,6 @@
 from django import forms
+
+from series.models import Series
 from videos.models import Video
 
 
@@ -11,9 +13,16 @@ class VideoForm(forms.ModelForm):
         """
         Makes the series multiple-choice field on form not required, since some
         videos are independent videos who don't need no series.
+
+        Some logic to get the form to load the correct sites
         """
+        self.site = kwargs.pop('site')
         super(VideoForm, self).__init__(*args, **kwargs)
         self.fields['series'].required = False
+
+        # Filter series for current site
+        self.fields['series'].queryset = Series.objects.filter(site=self.site)
+
 
     class Meta:
         model = Video

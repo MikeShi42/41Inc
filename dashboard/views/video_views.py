@@ -76,6 +76,11 @@ class VideoCreate(PermissionRequiredMixin,CreateView):
             'website_id': self.kwargs.get('website_id')
         })
 
+    def get_form_kwargs(self):
+        kwargs = super(VideoCreate, self).get_form_kwargs()
+        kwargs['site'] = self.kwargs.get('website_id')
+        return kwargs
+
 
 """View handling interface for editing existing videos in dashboard"""
 class VideoEdit(SuccessMessageMixin, UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
@@ -111,6 +116,12 @@ class VideoEdit(SuccessMessageMixin, UpdateView, LoginRequiredMixin, PermissionR
         return reverse('websites_dashboard', kwargs={
             'website_id': self.kwargs.get('website_id')
         })
+
+    def get_form_kwargs(self):
+        kwargs = super(VideoEdit, self).get_form_kwargs()
+        kwargs['site'] = self.kwargs.get('website_id')
+        return kwargs
+
 
 """View handling deleting confirmation"""
 class VideoDelete(LoginRequiredMixin, DeleteView):
