@@ -1,11 +1,13 @@
-from account.utils import default_redirect
-from django.shortcuts import render
-import account.forms
 import account.views
+from django.contrib.auth.mixins import LoginRequiredMixin
+from account.utils import default_redirect
 from django.contrib import auth
-import users.forms
+from django.contrib.auth.models import User
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.shortcuts import get_current_site
+from django.views.generic.edit import UpdateView
 
+import users.forms
 from fourtyone import settings
 
 
@@ -30,7 +32,7 @@ class SignupView(account.views.SignupView):
         profile.save()
 
     def login_user(self):
-        user = auth.authenticate(request = self.request, **self.user_credentials())
+        user = auth.authenticate(request=self.request, **self.user_credentials())
         auth.login(self.request, user)
         self.request.session.set_expiry(0)
 
@@ -48,6 +50,7 @@ class SignupView(account.views.SignupView):
         kwargs.setdefault("redirect_field_name", self.get_redirect_field_name())
         return default_redirect(self.request, fallback_url, **kwargs)
 
+
 class LoginView(account.views.LoginView):
     form_class = users.forms.LoginUsernameForm
 
@@ -55,3 +58,19 @@ class LoginView(account.views.LoginView):
         kw = super(LoginView, self).get_form_kwargs()
         kw['request'] = self.request  # the trick!
         return kw
+
+
+class AccountUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    login_url = '/login/'
+
+    model = User
+    fields = ['email']
+    template_name = 'websites/users/update.html'
+
+    success_url = '/'
+
+    success_message = 'Updated account successfully!'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
