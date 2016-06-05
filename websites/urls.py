@@ -2,8 +2,9 @@ import account.urls
 from django.conf.urls import include, url
 
 import users.views
-from websites.views.videos_views import VideoDetailView, detail, VideoIndexView
+from users.views import AccountUpdateView
 from websites.views.series_views import SeriesView, SeriesDetailView
+from websites.views.videos_views import VideoDetailView, detail, VideoIndexView
 from websites.views.websites_views import WebsiteSignupView, HomeView, SubscribeView, CustomizeView
 
 urlpatterns = [
@@ -47,6 +48,9 @@ urlpatterns = [
     url(r'^customize/', CustomizeView.as_view(), name="customize"),
 
     url(r'^series/$', SeriesView.as_view(), name="series_browse"),
+
+    # Consumer account settings
+    url(r'^settings/', AccountUpdateView.as_view(), name="users_update")
 ]
 
 urlpatterns += account.urls.urlpatterns

@@ -71,12 +71,12 @@ class SeriesView(LoginRequiredMixin, ListView):
         return videos
 
 
-class SeriesEdit(LoginRequiredMixin, UpdateView):
+class SeriesEdit(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Series
 
     fields = ['title', 'description', 'thumbnail']
-
     template_name = 'dashboard/series/editSeries.html'
+    success_message = "%(title)s was updated!"
 
     def get_context_data(self, **kwargs):
         context = super(SeriesEdit, self).get_context_data(**kwargs)
@@ -94,12 +94,20 @@ class SeriesEdit(LoginRequiredMixin, UpdateView):
 class SeriesDelete(LoginRequiredMixin, DeleteView):
     model = Series
 
-    success_url = reverse_lazy('dashboard')
-
     template_name = 'dashboard/series/deleteSeries.html'
+    success_message = '%(title)s has been deleted.'
 
     def get_context_data(self, **kwargs):
         context = super(SeriesDelete, self).get_context_data(**kwargs)
         context['website_id'] = self.kwargs.get('website_id')
         context['pk'] = self.kwargs.get('pk')
         return context
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(SeriesDelete, self).delete(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('websites_dashboard', kwargs={
+            'website_id': self.kwargs.get('website_id')
+        })
