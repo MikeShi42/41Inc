@@ -1,12 +1,11 @@
 import account.urls
 from django.conf.urls import include, url
-from django.views.generic import ListView
 
 import users.views
 import websites.views
-from dashboard.views import VideoIndexView, VideoDetailView, detail
-from series.models import Series
-from websites.views import HomeView, SubscribeView, SeriesDetailView, CustomizeView, SeriesView
+from websites.views import HomeView, SubscribeView, SeriesDetailView, CustomizeView, SeriesView, VideoDetailView, \
+    detail, \
+    VideoIndexView
 
 urlpatterns = [
     # Root URL for client sites /
