@@ -15,6 +15,7 @@ from series.models import Series
 from subscriptions.models import Settings as SubscriptionSettings, Subscription
 from websites.forms import SignupForm
 from websites.mixins import PremiumEnabledMixin, SubscriptionMixin
+from websites.models import Info
 
 
 class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, TemplateView):
