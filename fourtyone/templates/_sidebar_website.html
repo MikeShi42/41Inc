@@ -9,8 +9,8 @@
         {% for site in websites %}
             <li>
                 <a href="{% url 'websites_dashboard' site.id %}">
-                    <div style="background-color: white;height:60px;min-width:60px;">
-                        <h2 style="padding: 0;margin: 0;text-align:center;line-height:60px">
+                    <div class="sidebar-website-item">
+                        <h2>
                             {{ site.name|make_list|first }}
                         </h2>
                     </div>

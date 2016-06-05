@@ -1,5 +1,6 @@
 {% extends "site_base.html" %}
 
+{% block body_class %}sidebar-wrapper{% endblock %}
 
 {% block body_base %}
 
@@ -7,7 +8,7 @@
         {% include "_sidebar_website.html" %}
     {% endblock %}
 
-    <section class="dash with-sidebar">
+    <section class="dash">
         <div class="container dash-upper">
             {% include "_messages.html" %}
             {% block body %}{% endblock %}
