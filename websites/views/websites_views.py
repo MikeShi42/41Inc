@@ -112,7 +112,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         site = get_current_site(self.request)
-        site = list(Site.objects.filter(id=site.id))[0]
+        site = Site.objects.get(id=site.id)
 
         context['series_for_site'] = Series.objects.filter(site=site)
         context['main_color'] = site.info.main_color
