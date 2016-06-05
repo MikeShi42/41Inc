@@ -1,0 +1,47 @@
+[
+    {
+        "pk": 1,
+        "model": "sites.site",
+        "fields": {
+            "domain": "localhost:8000",
+            "name": "Deo"
+        }
+    },
+
+    {
+        "pk": 1,
+        "model": "websites.info",
+        "fields": {
+            "site": 1,
+            "creator": 1,
+            "description": "Main site that all website creators are part of.",
+            "main_color": "#fff",
+            "main_bg_color": "#e57f7f",
+            "logo": "",
+            "header": "Django is the best",
+            "sub_header": "Learn Django, Python and more. GoDjango is the best resource for getting started",
+            "subscribe_pitch": "Join the best Django and Python community today"
+        }
+    },
+
+    {
+        "pk": 1,
+        "model": "auth.user",
+        "fields": {
+            "first_name": "Joseph",
+            "last_name": "Le",
+            "username": "josephle",
+            "password": "pbkdf2_sha256$24000$4h0o67lLujdu$rYNGsXw8rt/Pq7tIOVoJVbXcPyT+E2l4fL5BIOj1Cyg="
+        }
+    },
+
+    {
+        "pk": 1,
+        "model": "users.profile",
+        "fields": {
+            "user": 1,
+            "company": "UCSD",
+            "site": 1
+        }
+    }
+]
