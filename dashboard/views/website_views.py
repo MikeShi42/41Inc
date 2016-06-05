@@ -175,6 +175,10 @@ class WebsiteCustomize(SuccessMessageMixin, LoginRequiredMixin, SiteIdMixin, Upd
             'website_id': self.kwargs.get('pk')
         })
 
+    def form_valid(self, form):
+        Site.objects.clear_cache()
+        return super(WebsiteCustomize, self).form_valid(form)
+
 
 class WebsiteDelete(LoginRequiredMixin, DeleteView):
     model = Site

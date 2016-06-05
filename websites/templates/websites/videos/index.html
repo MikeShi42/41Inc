@@ -31,7 +31,9 @@
                                         <img src="{{ video.thumbnail.url }}" class="img-center img-responsive" alt="Series thumbnail image">
                                         <h3>{{ video.title }}</h3>
                                         <p class="text-muted">{{ video.description }}</p>
-                                        <button class="btn btn-default" type="submit">Watch</button>
+                                        <p class="text-center">
+                                            <a href="{% url 'videos:detail' video.id %}" class="btn btn-primary btn-lg">Watch</a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
