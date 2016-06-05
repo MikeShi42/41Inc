@@ -17,7 +17,7 @@ from videos.forms import VideoForm
 from videos.models import Video, Listing
 
 
-class VideoCreate(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMixin, CreateView):
+class VideoCreate(PermissionRequiredMixin,CreateView):
     """Renders video upload form and defines form submission behavior.
 
     First, validates request by redirecting to login page if user isn't logged
@@ -31,7 +31,7 @@ class VideoCreate(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMix
     form_class = VideoForm
     template_name = 'dashboard/videos/create.html'
 
-    success_message = "%(title)s was created successfully."
+    success_message = "%(title)s was created successfully!"
 
     def has_permission(self):
         """Renders view only if logged-in user is site creator, or 403s."""
@@ -60,6 +60,8 @@ class VideoCreate(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMix
         video.site = Site.objects.get(pk=self.kwargs['website_id'])
         video.creator = self.request.user
         video.save()
+
+        messages.success(self.request, self.success_message % video.title)
 
         if form.cleaned_data['series']:
             max_order = Listing.objects.filter(series=form.cleaned_data['series']).aggregate(Max('order'))['order__max']
@@ -112,8 +114,6 @@ class VideoEdit(SuccessMessageMixin, UpdateView, LoginRequiredMixin, PermissionR
         return redirect(self.get_success_url())
 
     def get_success_url(self):
-        # site = Site.objects.get(pk=self.kwargs['website_id'])
-        # uri = reverse_lazy('videos:index', urlconf='websites.urls')
         return reverse('websites_dashboard', kwargs={
             'website_id': self.kwargs.get('website_id')
         })

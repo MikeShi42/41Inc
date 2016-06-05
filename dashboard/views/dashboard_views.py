@@ -41,13 +41,15 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
         total_views = self.get_view_count(site) or 0
         total_rating = self.get_site_rating(site) or 0.0
         total_subscribers = self.get_subscriber_count(site) or 0
+        videos = self.get_site_videos(site)
         context = {
             'user': user,
             'series': series,
             'views': total_views,
             'subscribers': total_subscribers,
             'rating': total_rating,
-            'site': site
+            'site': site,
+            'videos': videos
         }
 
         return context
@@ -66,3 +68,6 @@ class DashboardView(LoginRequiredMixin, WebsiteCreatedMixin, TemplateView):
 
     def get_site_rating(self, site):
         return Video.objects.filter(site=site).aggregate(Avg('rating'))['rating__avg']
+
+    def get_site_videos(self, site):
+        return Video.objects.filter(site=site)[:5]

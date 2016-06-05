@@ -10,7 +10,18 @@
     {% if video_list %}
         <ul>
         {% for video in video_list %}
-            <p><strong>{{ video.title }}</strong>: {{ video.description }}</p>
+            <div class="row">
+              <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                  <img src="http://media.istockphoto.com/photos/photographic-camera-lens-with-bokeh-light-picture-id499201764" alt="Video Image">
+                  <div class="caption">
+                    <h3>Video</h3>
+                    <p>Some description goes here.<p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
         {% endfor %}
         </ul>
     {% else %}

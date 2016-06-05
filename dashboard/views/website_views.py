@@ -163,10 +163,14 @@ def to_cents(amount):
     return int(amount * 100)
 
 
-class WebsiteCustomize(LoginRequiredMixin, SiteIdMixin, UpdateView):
+class WebsiteCustomize(SuccessMessageMixin, LoginRequiredMixin, SiteIdMixin, UpdateView):
     model = Info
     fields = ['main_color', 'main_bg_color', 'logo', 'header', 'sub_header', 'subscribe_pitch']
     template_name = 'dashboard/websites/settings/customize.html'
 
+    success_message = "Site was successfully updated!"
+
     def get_success_url(self):
-        return reverse('websites_customize', args=(self.kwargs['pk']))
+        return reverse('websites_dashboard', kwargs={
+            'website_id': self.kwargs.get('pk')
+        })
