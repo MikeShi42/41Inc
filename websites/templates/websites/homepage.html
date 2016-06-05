@@ -37,8 +37,11 @@
                             <div class="col-md-4">
                                 <div class="panel panel-default">
                                     <div class="panel-body">
-                                        <img src="http://media.istockphoto.com/photos/photographic-camera-lens-with-bokeh-light-picture-id499201764"
-                                             class="img-responsive" alt="Series thumbnail image">
+                                        {% if series.thumbnail %}
+                                            <img src="{{ series.thumbnail.url }}" class="img-responsive" alt="Series thumbnail image">
+                                        {% else %}
+                                            <img src="http://bit.ly/VideoStockImage" class="img-responsive" alt="Series thumbnail image">
+                                        {% endif %}
                                         <h3>{{ series.title }}</h3>
                                         <p class="text-muted">{{ series.listings.count }} videos</p>
                                     </div>
