@@ -25,6 +25,7 @@ ADMIN_URLCONF = 'fourtyone.urls'
 HOST_MIDDLEWARE_URLCONF_MAP = {
     "localhost": "fourtyone.urls",      # 41Inc Site
     "deo.dev:8000": "fourtyone.urls",      # 41Inc Site
+    "deoapp.tk": "fourtyone.urls",      # 41Inc Site
     "tesc.app:8000": "websites.urls",   # DjangoDragon and other client websites
 }
 
