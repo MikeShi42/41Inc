@@ -18,6 +18,9 @@
             <a class="list-group-item" href="{% url "websites_customize" site_id %}">
                 {% trans "Customize" %}
             </a>
+            <a class="list-group-item list-group-item-danger" href="{% url "websites_delete" site_id %}">
+                {% trans "Delete Website" %}
+            </a>
         </div>
     </div>
 {% endblock %}

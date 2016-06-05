@@ -4,19 +4,17 @@ import account.views
 import stripe
 from account.mixins import LoginRequiredMixin
 from django.contrib import auth
+from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 from django.utils import timezone
-from django.views.generic import TemplateView, FormView, DetailView
-from django.contrib.sites.models import Site
+from django.views.generic import TemplateView, FormView
 
-import websites.forms
 from fourtyone import settings
 from series.models import Series
 from subscriptions.models import Settings as SubscriptionSettings, Subscription
-from videos.models import Listing
+from websites.forms import SignupForm
 from websites.mixins import PremiumEnabledMixin, SubscriptionMixin
-from websites.models import Info
 
 
 class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, TemplateView):
@@ -75,7 +73,7 @@ class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, 
 
 
 class WebsiteSignupView(account.views.SignupView):
-    form_class = websites.forms.SignupForm
+    form_class = SignupForm
 
     def after_signup(self, form):
         # Update first/last name
@@ -104,6 +102,7 @@ class WebsiteSignupView(account.views.SignupView):
         kw['request'] = self.request  # the trick!
         return kw
 
+
 class HomeView(TemplateView):
     template_name = 'websites/homepage.html'
 
@@ -122,23 +121,6 @@ class HomeView(TemplateView):
 
         return context
 
+
 class CustomizeView(FormView):
     template_name = 'websites/customize.html'
-
-class SeriesView(TemplateView):
-    template_name = 'websites/series/index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(SeriesView, self).get_context_data(**kwargs)
-        context['series_for_site'] = Series.objects.filter(site=get_current_site(self.request))
-        return context
-
-class SeriesDetailView(DetailView):
-    template_name = 'websites/series/detail.html'
-    model = Series
-
-    def get_context_data(self, **kwargs):
-        context = super(SeriesDetailView, self).get_context_data(**kwargs)
-        listings = Listing.objects.filter(series=self.kwargs['pk'])
-        context['videos'] = [listing.video for listing in listings]
-        return context
