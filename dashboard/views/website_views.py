@@ -6,11 +6,11 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.models import Site
 from django.core import signing
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.http import HttpResponseRedirect, HttpResponse
-from django.views.generic import FormView, UpdateView
+from django.views.generic import FormView, UpdateView, DeleteView
 
 from dashboard.mixins import SiteIdMixin
 from dashboard.oauth2 import stripe_connect_service
@@ -170,3 +170,11 @@ class WebsiteCustomize(LoginRequiredMixin, SiteIdMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('websites_customize', args=(self.kwargs['pk']))
+
+
+class WebsiteDelete(LoginRequiredMixin, DeleteView):
+    model = Site
+
+    success_url = reverse_lazy('dashboard')
+
+    template_name = 'dashboard/websites/delete.html'

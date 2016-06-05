@@ -1,0 +1,29 @@
+{% extends "dashboard/base.html" %}
+
+{% load i18n %}
+{% load bootstrap %}
+
+{% block head_title %}{% trans "Delete Website" %}{% endblock %}
+
+{% block body %}
+    <div class="container dash-upper">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="page-header">
+                    <h2>Confirm Delete Website</h2>
+                </div>
+
+                <p class="lead">Are you sure you want to delete <strong>{{ object.name }}</strong>?</p>
+
+                <form method="POST" action="">
+
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        {% trans "Delete Website" %}
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
