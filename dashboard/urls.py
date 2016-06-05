@@ -1,3 +1,5 @@
+""" Defines routes for all of admin dashboard """
+
 from django.conf.urls import include, url
 
 from dashboard.views import (
@@ -17,7 +19,6 @@ from dashboard.views import (
     VideoDelete, WebsiteCustomize, WebsiteDelete)
 
 urlpatterns = [
-    # url(r"^$", TemplateView.as_view(template_name="dashboard/dashboard.html"), name="dashboard"),
 
     url(r"^$", DashboardView.as_view(), name="dashboard"),
 

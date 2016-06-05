@@ -5,13 +5,12 @@ from django.views.generic import TemplateView
 
 from django.contrib import admin
 
+"""Defines basic routes for admin website"""
 
 urlpatterns = [
     url(r"^$", TemplateView.as_view(template_name="homepage.html"), name="home"),
-    # url(r"^admin/", include(admin.site.urls)),
     url(r"^account/", include("users.urls")),
     url(r"^dashboard/", include("dashboard.urls")),
-    # url(r"^sites/", include("websites.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

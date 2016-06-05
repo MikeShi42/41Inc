@@ -2,7 +2,7 @@ import stripe
 
 from fourtyone import settings
 
-
+"""Handles a subscription request from subscriber"""
 def process_subscription(request, pk):
     # Import API key
     stripe.api_key = settings.STRIPE_CLIENT_SECRET

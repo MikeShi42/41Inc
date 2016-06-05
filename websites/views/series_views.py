@@ -5,6 +5,7 @@ from series.models import Series
 from videos.models import Listing
 
 
+"""Overview of all the series"""
 class SeriesView(TemplateView):
     template_name = 'websites/series/index.html'
 
@@ -14,6 +15,7 @@ class SeriesView(TemplateView):
         return context
 
 
+"""Specific series view"""
 class SeriesDetailView(DetailView):
     template_name = 'websites/series/detail.html'
     model = Series

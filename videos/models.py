@@ -1,3 +1,4 @@
+"""Defines models related to videos"""
 from __future__ import unicode_literals
 
 
@@ -9,6 +10,7 @@ from series.models import Series
 from validators import validate_video_file
 
 
+"""Defines an actual video object and relations"""
 class Video(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='videos', null=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='videos')
@@ -42,6 +44,7 @@ class Video(models.Model):
         return "%s - %s" % (self.title, self.description)
 
 
+"""Defines the actual rating a user gives a video"""
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
@@ -52,6 +55,7 @@ class Rating(models.Model):
         return "%s by %s on %s" % (str(self.rating), self.user, self.video)
 
 
+"""Defines a video's relation with series and its order in the series"""
 class Listing(models.Model):
     series = models.ForeignKey(Series, on_delete=models.CASCADE, related_name='listings')
     video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name='listings')

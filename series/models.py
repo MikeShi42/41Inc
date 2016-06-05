@@ -1,9 +1,10 @@
+"""Defines the models related to series management"""
+
 from __future__ import unicode_literals
 
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 from django.db import models
-
 
 class Series(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='series')
