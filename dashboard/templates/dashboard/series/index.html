@@ -26,7 +26,6 @@
                         <th>Ratings</th>
                         <th>Views</th>
                         <th></th>
-                        <th></th>
                     </tr>
                     </thead>
 
@@ -36,7 +35,6 @@
                             <td>{{ video.title }}</td>
                             <td>{{ video.rating }}</td>
                             <td>{{ video.views }}</td>
-                            <td><a class="btn btn-primary">Manage</a></td>
                             <td><a href="{% url 'videos:delete' video.site_id video.id %}" class="btn btn-danger">Delete</a></td>
                         </tr>
                     {% endfor %}
