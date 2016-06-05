@@ -18,8 +18,12 @@ class WebsiteForm(forms.Form):
 
     def clean_domain(self):
         domain = self.cleaned_data['domain']
+        if not domain.startswith('www.'):
+            raise ValidationError('Domain must start with www.')
+
         if Site.objects.filter(domain=domain).count() > 0:
             raise ValidationError('This domain is already in use.')
+
         return domain
 
 

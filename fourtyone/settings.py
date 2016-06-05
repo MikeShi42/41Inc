@@ -231,6 +231,7 @@ VIDEO_MIME_TYPES = [
 # Plan IDs
 PLAN_ID_MONTHLY = '41_premium_month'
 PLAN_ID_YEARLY = '41_premium_year'
+PREPEND_WWW = False
 
 try:
     from local_settings import *
