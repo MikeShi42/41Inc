@@ -2,17 +2,16 @@ import account.urls
 from django.conf.urls import include, url
 
 import users.views
-import websites.views
-from websites.views import HomeView, SubscribeView, SeriesDetailView, CustomizeView, SeriesView, VideoDetailView, \
-    detail, \
-    VideoIndexView
+from websites.views.videos_views import VideoDetailView, detail, VideoIndexView
+from websites.views.series_views import SeriesView, SeriesDetailView
+from websites.views.websites_views import WebsiteSignupView, HomeView, SubscribeView, CustomizeView
 
 urlpatterns = [
     # Root URL for client sites /
     url(r"^$", HomeView.as_view(), name="home"),
 
     # Authentication URLs, /signup and /login
-    url(r"^signup/$", websites.views.WebsiteSignupView.as_view(), name="account_signup"),
+    url(r"^signup/$", WebsiteSignupView.as_view(), name="account_signup"),
     url(r"^login/$", users.views.LoginView.as_view(), name="account_login"),
 
     # /videos

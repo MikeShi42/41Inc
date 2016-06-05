@@ -4,20 +4,17 @@ import account.views
 import stripe
 from account.mixins import LoginRequiredMixin
 from django.contrib import auth
-from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponse, JsonResponse
-from django.utils import timezone
-from django.views.generic import TemplateView, FormView, DetailView, ListView
 from django.contrib.sites.models import Site
-from django.views.generic.detail import SingleObjectTemplateResponseMixin
+from django.contrib.sites.shortcuts import get_current_site
+from django.http import HttpResponse
+from django.utils import timezone
+from django.views.generic import TemplateView, FormView
 
-import websites.forms
 from fourtyone import settings
 from series.models import Series
 from subscriptions.models import Settings as SubscriptionSettings, Subscription
-from videos.models import Listing, Video
+from websites.forms import SignupForm
 from websites.mixins import PremiumEnabledMixin, SubscriptionMixin
-from websites.models import Info
 
 
 class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, TemplateView):
@@ -76,7 +73,7 @@ class SubscribeView(SubscriptionMixin, LoginRequiredMixin, PremiumEnabledMixin, 
 
 
 class WebsiteSignupView(account.views.SignupView):
-    form_class = websites.forms.SignupForm
+    form_class = SignupForm
 
     def after_signup(self, form):
         # Update first/last name
@@ -127,83 +124,3 @@ class HomeView(TemplateView):
 
 class CustomizeView(FormView):
     template_name = 'websites/customize.html'
-
-
-class SeriesView(TemplateView):
-    template_name = 'websites/series/index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(SeriesView, self).get_context_data(**kwargs)
-        context['series_for_site'] = Series.objects.filter(site=get_current_site(self.request))
-        return context
-
-
-class SeriesDetailView(DetailView):
-    template_name = 'websites/series/detail.html'
-    model = Series
-
-    def get_context_data(self, **kwargs):
-        context = super(SeriesDetailView, self).get_context_data(**kwargs)
-        listings = Listing.objects.filter(series=self.kwargs['pk'])
-        context['videos'] = [listing.video for listing in listings]
-        return context
-
-
-class VideoDetailView(DetailView, SingleObjectTemplateResponseMixin):
-    model = Video
-    template_name = 'websites/videos/detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(VideoDetailView, self).get_context_data(**kwargs)
-        return context
-
-
-def detail(request, video_id):
-    video_info = _format_video_response(Video.objects.get(pk=video_id))
-    site_videos = Video.objects.filter(site=get_current_site(request)).exclude(pk=video_id)
-
-    playlist_videos = []
-    for video in site_videos:
-        info = _format_video_response(video)
-        playlist_videos += [info]
-
-    response = [video_info] + playlist_videos
-
-    print(response)
-    return JsonResponse(response, safe=False)
-
-
-def _format_video_response(video):
-    video_info = {'name': video.title,
-                  'description': video.description,
-                  'duration': 45,
-                  'sources': [
-                      {'src': video.url, 'type': 'video/mp4'}
-                  ],
-                  'thumbnail': [
-                      {'srcset': video.thumbnail.url, 'type': 'image/jpeg'}
-                  ],
-                  }
-    return video_info
-
-
-class VideoIndexView(ListView):
-    """Renders videos list view.
-
-    Passes video_list iterable to template, which is set up by get_queryset.
-    Also passes website_id URL parameter for link to site's upload form.
-    """
-
-    template_name = 'websites/videos/index.html'
-    context_object_name = 'video_list'
-
-    def get_context_data(self, **kwargs):
-        """Provides the website_id context to the videos:index view."""
-        context = super(VideoIndexView, self).get_context_data(**kwargs)
-        context['website_id'] = get_current_site(self.request).id
-        return context
-
-    def get_queryset(self):
-        """Gets videos belonging to current site and logged in user."""
-        site = get_current_site(self.request)
-        return Video.objects.filter(site=site)
