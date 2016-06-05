@@ -36,7 +36,7 @@ def __create_or_update_plan(stripe_account, plan_name, plan_id, plan_price, plan
 
     try:
         # Get plan
-        plan = stripe.Plan.retrieve(plan_id)
+        plan = stripe.Plan.retrieve(plan_id, stripe_account=stripe_account)
 
         # Delete if there is a difference in existing and new plan
         if plan.amount != plan_price:
