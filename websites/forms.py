@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.sites.models import Site
 from django.core.exceptions import ValidationError
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import auth
 
@@ -13,13 +14,15 @@ import fourtyone.validators as f_validators
 
 class WebsiteForm(forms.Form):
     name = forms.CharField()
-    domain = forms.CharField(validators=[f_validators.validate_domain_name])
+    domain = forms.CharField(validators=[f_validators.validate_domain_name],
+                             help_text=mark_safe(
+                                 'Website will only be accessible on the domain configured.<br />Note: Domains must have an CNAME-record configured with <strong>deoapp.tk</strong> as the value.'))
     description = forms.CharField(widget=forms.Textarea())
 
     def clean_domain(self):
         domain = self.cleaned_data['domain']
-        if not domain.startswith('www.'):
-            raise ValidationError('Domain must start with www.')
+        # if not domain.startswith('www.'):
+        #     raise ValidationError('Domain must start with www.')
 
         if Site.objects.filter(domain=domain).count() > 0:
             raise ValidationError('This domain is already in use.')
